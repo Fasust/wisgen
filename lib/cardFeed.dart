@@ -28,7 +28,6 @@ class CardFeedState extends State<CardFeed> {
   void initState() {
     _fetchImageList().then((list) {
       setState(() {
-        log("State Set " + _stockImgList.length.toString());
         _stockImgList.addAll(list);
       });
     });
