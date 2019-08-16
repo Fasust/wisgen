@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:developer' as developer;
-import 'dart:math';
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -24,7 +23,6 @@ class CardFeedState extends State<CardFeed> {
 
   final _wisdomList = <Wisdom>[];
 
-  final _random = new Random();
 
 
   @override
@@ -44,35 +42,34 @@ class CardFeedState extends State<CardFeed> {
               });
         });
   }
+  Future<Wisdom> _createWisdom() async{
+    final advice = await _fetchAdvice();
+    final img = await _fetchImage(stringToQuery(advice.text));
+    return Wisdom(advice,img);
+  }
 
   Future<Advice> _fetchAdvice() async {
     final response = await http.get(_adviceURI);
     return Advice.fromJson(json.decode(response.body));
   }
 
-  Future<StockImg> _fetchImage(String keyword) async {
-    final String url = _imagesURI + keyword;
+  Future<StockImg> _fetchImage(String query) async {
+    final String url = _imagesURI + query;
     final response = await http.get(url);
     final Uint8List imgBytes = response.bodyBytes;
-    return StockImg(url, imgBytes);
+    return StockImg(url: url);
   }
 
-  Future<Wisdom> _createWisdom() async{
-    final advice = await _fetchAdvice();
-
-    //Calculating key word
-    final List<String> dirtyWords = advice.text.split(new RegExp("[^a-zA-Z0-9]"));
-    final List<String> words = new List();
-    dirtyWords.forEach((s){
-      if(s.isNotEmpty){
-        words.add(s);
+  String stringToQuery(String input){
+    final List<String> dirtyWords = input.split(new RegExp("[^a-zA-Z0-9]"));
+    String query = "";
+    dirtyWords.forEach((w){
+      if(w.isNotEmpty && w.length > 3){
+        query += w +",";
       }
     });
-    final String keyword = words[next(0, words.length -1)];
-
-    final img = await _fetchImage(keyword);
-    return Wisdom(advice,img);
+    log("LOG: " + input + " | " + query);
+    return query;
   }
 
-  int next(int min, int max) => min + _random.nextInt(max - min);
 }
