@@ -25,15 +25,17 @@ class AdviceCard extends StatelessWidget {
             imageUrl: img.url,
             fit: BoxFit.cover,
             height: 300,
-            placeholder: (context, url) => Container(
-              padding: EdgeInsets.all(8.0),
-              child: CircularProgressIndicator(),
-            ),
             errorWidget: (context, url, error) => new Icon(Icons.error),
           ),
           ListTile(
-            title: Text(adviceText),
-            subtitle: Text('Advice #'+id,textAlign: TextAlign.right),
+            title: Container(
+              padding: EdgeInsets.only(top: 4),
+              child: Text(adviceText),
+            ),
+            subtitle: Container(
+                padding: EdgeInsets.only(top: 8, bottom: 4),
+                child: Text('Advice #' + id, textAlign: TextAlign.left)),
+            trailing: Icon(Icons.favorite_border)
           ),
         ],
       ),
