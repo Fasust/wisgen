@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'data/advice.dart';
+
 class CardFeed extends StatelessWidget {
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imageURI = 'https://picsum.photos/200';
@@ -30,18 +32,6 @@ class CardFeed extends StatelessWidget {
     final response = await http.get(_adviceURI);
     return Advice.fromJson(json.decode(response.body));
   }
-
 }
-class Advice{
-  final String id;
-  final String text;
 
-  Advice(this.id, this.text);
-  factory Advice.fromJson(Map<String, dynamic> json) {
-    return Advice(
-      json['slip']['slip_id'],
-      json['slip']['advice']
-    );
-  }
 
-}
