@@ -17,13 +17,10 @@ class CardFeed extends StatefulWidget {
 }
 
 class CardFeedState extends State<CardFeed> {
-
-  final _adviceURI = 'https://api.adviceslip.com/advice';
-  final _imagesURI = 'https://source.unsplash.com/800x600/?';
+  static const _adviceURI = 'https://api.adviceslip.com/advice';
+  static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
   final _wisdomList = <Wisdom>[];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +39,28 @@ class CardFeedState extends State<CardFeed> {
               });
         });
   }
+
+  //Async Data Fetchers to get Data from external APIs ------
   Future<Wisdom> _createWisdom() async{
     final advice = await _fetchAdvice();
     final img = await _fetchImage(stringToQuery(advice.text));
     return Wisdom(advice,img);
   }
-
   Future<Advice> _fetchAdvice() async {
     final response = await http.get(_adviceURI);
     return Advice.fromJson(json.decode(response.body));
   }
-
   Future<StockImg> _fetchImage(String query) async {
     final String url = _imagesURI + query;
     final response = await http.get(url);
+
+    //Optional
     final Uint8List imgBytes = response.bodyBytes;
+
     return StockImg(url: url);
   }
 
+  //Helper Functions ------
   String stringToQuery(String input){
     final List<String> dirtyWords = input.split(new RegExp("[^a-zA-Z0-9]"));
     String query = "";
@@ -68,7 +69,6 @@ class CardFeedState extends State<CardFeed> {
         query += w +",";
       }
     });
-    log("LOG: " + input + " | " + query);
     return query;
   }
 

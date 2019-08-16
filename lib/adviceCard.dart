@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
-import 'data/stockImg.dart';
 
 class AdviceCard extends StatelessWidget {
   final Wisdom wisdom;
@@ -22,7 +21,8 @@ class AdviceCard extends StatelessWidget {
             errorWidget: (context, url, error) => new Icon(Icons.error),
           ),
           /**Image.memory(wisdom.stockImg.imgBytes,
-              height: 300, fit: BoxFit.cover), **/
+              height: 300, fit: BoxFit.cover),
+           Alternative Approach using Cashed data**/
           ListTile(
               title: Container(
                 padding: EdgeInsets.only(top: 4),
