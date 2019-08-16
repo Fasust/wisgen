@@ -1,8 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:developer' as developer;
+import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:wisgen/data/wisdoms.dart';
 
 import 'adviceCard.dart';
 import 'data/advice.dart';
@@ -15,39 +18,26 @@ class CardFeed extends StatefulWidget {
 }
 
 class CardFeedState extends State<CardFeed> {
-  static const _stockImgListLenght = 100;
+
   final _adviceURI = 'https://api.adviceslip.com/advice';
-  final _imagesURI = 'https://picsum.photos/v2/list?page=1&limit=' +
-      _stockImgListLenght.toString();
+  final _imagesURI = 'https://source.unsplash.com/800x600/?';
 
-  final _adviveList = <Advice>[];
-  final _stockImgList = <StockImg>[];
-  int _stockImgIndex = 0;
+  final _wisdomList = <Wisdom>[];
 
-  @override
-  void initState() {
-    _fetchImageList().then((list) {
-      setState(() {
-        _stockImgList.addAll(list);
-      });
-    });
+  final _random = new Random();
 
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
-          log("Index: " + i.toString());
           return FutureBuilder(
-              future: _fetchAdvice(),
-              builder: (context, advice) {
-                if (advice.connectionState == ConnectionState.done) {
-                  _adviveList.add(advice.data);
-                  return _buildCard(advice.data,
-                      _stockImgList[_stockImgIndex++ % _stockImgListLenght]);
+              future: _createWisdom(),
+              builder: (context, wisdom) {
+                if (wisdom.connectionState == ConnectionState.done) {
+                  _wisdomList.add(wisdom.data);
+                  return AdviceCard(wisdom: wisdom.data);
                 } else {
                   return LoadingCard();
                 }
@@ -60,22 +50,29 @@ class CardFeedState extends State<CardFeed> {
     return Advice.fromJson(json.decode(response.body));
   }
 
-  Future<List<StockImg>> _fetchImageList() async {
-    final response = await http.get(_imagesURI);
-    List<dynamic> parsedJson = json.decode(response.body);
-    List<StockImg> stockImgList = new List();
+  Future<StockImg> _fetchImage(String keyword) async {
+    final String url = _imagesURI + keyword;
+    final response = await http.get(url);
+    final Uint8List imgBytes = response.bodyBytes;
+    return StockImg(url, imgBytes);
+  }
 
-    parsedJson.forEach((e) {
-      stockImgList.add(StockImg.fromJson(e));
+  Future<Wisdom> _createWisdom() async{
+    final advice = await _fetchAdvice();
+
+    //Calculating key word
+    final List<String> dirtyWords = advice.text.split(new RegExp("[^a-zA-Z0-9]"));
+    final List<String> words = new List();
+    dirtyWords.forEach((s){
+      if(s.isNotEmpty){
+        words.add(s);
+      }
     });
-    return stockImgList;
+    final String keyword = words[next(0, words.length -1)];
+
+    final img = await _fetchImage(keyword);
+    return Wisdom(advice,img);
   }
 
-  AdviceCard _buildCard(Advice a, StockImg img) {
-    return AdviceCard(
-      id: a.id,
-      adviceText: a.text,
-      img: img,
-    );
-  }
+  int next(int min, int max) => min + _random.nextInt(max - min);
 }
