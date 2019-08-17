@@ -20,6 +20,15 @@
 # is commented out by default.
 #.vscode/
 
+### VisualStudioCode ###
+.vscode
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/visualstudiocode
+
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
