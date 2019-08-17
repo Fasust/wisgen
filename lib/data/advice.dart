@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 class Advice {
   final String id;
   final String text;
 
-  Advice(this.id, this.text);
+  Advice({@required this.id,@required this.text});
   factory Advice.fromJson(Map<String, dynamic> json) {
-    return Advice(json['slip']['slip_id'], json['slip']['advice']);
+    return Advice(id: json['slip']['slip_id'], text: json['slip']['advice']);
   }
 }

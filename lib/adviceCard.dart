@@ -11,16 +11,18 @@ class AdviceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-        return Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              CachedNetworkImage(
-                imageUrl: wisdom.stockImg.url,
-                fit: BoxFit.cover,
-                height: imageHeight,
-            errorWidget: (context, url, error) => new Icon(Icons.error),
+    return Card(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          CachedNetworkImage(
+            imageUrl: wisdom.stockImg.url,
+            fit: BoxFit.cover,
+            height: imageHeight,
+            errorWidget: (context, url, error) => Container(
+              child: Icon(Icons.error),
+              height: imageHeight,
+            ),
           ),
           // Image.memory(wisdom.stockImg.imgBytes,
           //     height: 300, fit: BoxFit.cover),
