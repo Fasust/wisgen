@@ -26,6 +26,7 @@ class CardFeedState extends State<CardFeed> {
   final RegExp nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
   StreamSubscription networkSubscription;
   final _wisdomList = <Wisdom>[];
+  final _favoriteList = <Wisdom>[];
 
   @override
   void initState() {
