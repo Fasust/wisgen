@@ -19,7 +19,8 @@ class CardFeed extends StatefulWidget {
 class CardFeedState extends State<CardFeed> {
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
-
+  static const minQueryWordLenght = 3;
+  final RegExp nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
   final _wisdomList = <Wisdom>[];
 
   @override
@@ -41,35 +42,31 @@ class CardFeedState extends State<CardFeed> {
   }
 
   //Async Data Fetchers to get Data from external APIs ------
-  Future<Wisdom> _createWisdom() async{
+  Future<Wisdom> _createWisdom() async {
     final advice = await _fetchAdvice();
     final img = await _fetchImage(stringToQuery(advice.text));
-    return Wisdom(advice,img);
+    return Wisdom(advice, img);
   }
+
   Future<Advice> _fetchAdvice() async {
     final response = await http.get(_adviceURI);
     return Advice.fromJson(json.decode(response.body));
   }
+
   Future<StockImg> _fetchImage(String query) async {
     final String url = _imagesURI + query;
-    final response = await http.get(url);
-
-    //Optional
-    final Uint8List imgBytes = response.bodyBytes;
-
     return StockImg(url: url);
   }
 
   //Helper Functions ------
-  String stringToQuery(String input){
-    final List<String> dirtyWords = input.split(new RegExp("[^a-zA-Z0-9]"));
+  String stringToQuery(String input) {
+    final List<String> dirtyWords = input.split(nonLetterPattern);
     String query = "";
-    dirtyWords.forEach((w){
-      if(w.isNotEmpty && w.length > 3){
-        query += w +",";
+    dirtyWords.forEach((w) {
+      if (w.isNotEmpty && w.length > minQueryWordLenght) {
+        query += w + ",";
       }
     });
     return query;
   }
-
 }
