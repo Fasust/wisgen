@@ -34,7 +34,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/002-fortune-teller.png"
+  image_path: "assets/ball-col-3.png"
 
 #flutter pub get
 #flutter pub pub run flutter_launcher_icons:main

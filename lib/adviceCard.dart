@@ -14,11 +14,18 @@ class AdviceCard extends StatefulWidget {
 class _AdviceCardState extends State<AdviceCard> {
   static const double smallPadding = 4;
   static const double imageHeight = 300;
+  static const cardBorderRadius = 7.0;
+  static const double cardElevation = 3.5;
   bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(cardBorderRadius),
+      ),
+      clipBehavior: Clip.antiAlias,
+      elevation: cardElevation,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -31,8 +38,6 @@ class _AdviceCardState extends State<AdviceCard> {
               height: imageHeight,
             ),
           ),
-          // Image.memory(wisdom.stockImg.imgBytes,
-          //     height: 300, fit: BoxFit.cover),
           ListTile(
             title: Container(
               padding: EdgeInsets.only(top: smallPadding, bottom: smallPadding),
@@ -45,10 +50,11 @@ class _AdviceCardState extends State<AdviceCard> {
                     textAlign: TextAlign.left)),
             trailing: IconButton(
               icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-              color: isFavorite? Colors.red : Colors.grey,
-              onPressed: (){
+              color: isFavorite ? Colors.red : Colors.grey,
+              padding: EdgeInsets.all(smallPadding),
+              onPressed: () {
                 setState(() {
-                 isFavorite = !isFavorite; 
+                  isFavorite = !isFavorite;
                 });
               },
             ),
