@@ -15,7 +15,7 @@ class _AdviceCardState extends State<AdviceCard> {
   static const double smallPadding = 4;
   static const double imageHeight = 300;
   static const cardBorderRadius = 7.0;
-  static const double cardElevation = 3.5;
+  static const double cardElevation = 2;
   bool isFavorite = false;
 
   @override
