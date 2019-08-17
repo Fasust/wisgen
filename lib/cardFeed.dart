@@ -6,7 +6,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:wisgen/data/wisdoms.dart';
-import 'package:connectivity/connectivity.dart';
 
 import 'adviceCard.dart';
 import 'data/advice.dart';
@@ -24,23 +23,8 @@ class CardFeedState extends State<CardFeed> {
 
   static const minQueryWordLenght = 3;
   final RegExp nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
-  StreamSubscription networkSubscription;
   final _wisdomList = <Wisdom>[];
   final _favoriteList = <Wisdom>[];
-
-  @override
-  void initState() {
-    super.initState();
-
-    networkSubscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result == ConnectivityResult.none) {
-        _showDialog("You don’t have an Internet Connection",
-            "Sadly we can't provide Wisdom without the Power of the Internet :(");
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +50,6 @@ class CardFeedState extends State<CardFeed> {
                 }
               });
         });
-  }
-
-  @override
-  dispose() {
-    super.dispose();
-    networkSubscription.cancel();
   }
 
   //Async Data Fetchers to get Data from external APIs ------
