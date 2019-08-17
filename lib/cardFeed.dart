@@ -48,13 +48,20 @@ class CardFeedState extends State<CardFeed> {
         itemBuilder: (context, i) {
           return FutureBuilder(
               future: _createWisdom(),
-              builder: (context, wisdom) {
-                switch (wisdom.connectionState) {
-                  case ConnectionState.done:
-                    _wisdomList.add(wisdom.data);
-                    return AdviceCard(wisdom: wisdom.data);
-                  default:
-                    return LoadingCard();
+              builder: (context, snapshot) {
+                if(snapshot.connectionState == ConnectionState.done){
+                  if(!snapshot.hasError){
+                    return AdviceCard(wisdom: snapshot.data,);
+                  }else{
+                    	return InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.all(32.0),
+                        child: Text("No Network Connection, Tap the Screem to retry!"),
+                      ),
+                      onTap: () => setState(() {}));
+                  }
+                }else{
+                  return LoadingCard();
                 }
               });
         });
@@ -68,15 +75,9 @@ class CardFeedState extends State<CardFeed> {
 
   //Async Data Fetchers to get Data from external APIs ------
   Future<Wisdom> _createWisdom() async {
-    try {
-      final advice = await _fetchAdvice();
-      final img = await _fetchImage(stringToQuery(advice.text));
-      return Wisdom(advice, img);
-    } catch (err) {
-      return Wisdom(
-          Advice(text: "Try using the internet once in a while", id: "0000"),
-          StockImg(url: ""));
-    }
+    final advice = await _fetchAdvice();
+    final img = await _fetchImage(stringToQuery(advice.text));
+    return Wisdom(advice, img);
   }
 
   Future<Advice> _fetchAdvice() async {
