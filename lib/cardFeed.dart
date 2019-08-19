@@ -23,15 +23,14 @@ class CardFeed extends StatefulWidget {
 }
 
 class CardFeedState extends State<CardFeed> {
-  //API End-Poitns
+  //API End-Points
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
   static const minQueryWordLenght = 3;
-  final RegExp nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
+  final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
-  //cashing of Wisodms
-  final _wisdomList = <Wisdom>[];
+  //cashing of Wisdoms
   final _favoriteList = <Wisdom>[];
 
   @override
@@ -49,7 +48,7 @@ class CardFeedState extends State<CardFeed> {
                     	return InkWell(
                       child: Padding(
                         padding: const EdgeInsets.all(32.0),
-                        child: Text("No Network Connection, Tap the Screem to retry!"),
+                        child: Text("No Network Connection, Tap the Screen to retry!"),
                       ),
                       onTap: () => setState(() {}));
                   }
@@ -63,7 +62,7 @@ class CardFeedState extends State<CardFeed> {
   //Async Data Fetchers to get Data from external APIs ------
   Future<Wisdom> _createWisdom() async {
     final advice = await _fetchAdvice();
-    final img = await _fetchImage(stringToQuery(advice.text));
+    final img = await _fetchImage(_stringToQuery(advice.text));
     return Wisdom(advice, img);
   }
 
@@ -78,8 +77,8 @@ class CardFeedState extends State<CardFeed> {
   }
 
   //Helper Functions ------
-  String stringToQuery(String input) {
-    final List<String> dirtyWords = input.split(nonLetterPattern);
+  String _stringToQuery(String input) {
+    final List<String> dirtyWords = input.split(_nonLetterPattern);
     String query = "";
     dirtyWords.forEach((w) {
       if (w.isNotEmpty && w.length > minQueryWordLenght) {
@@ -90,7 +89,6 @@ class CardFeedState extends State<CardFeed> {
   }
 
   void _showDialog(String title, String body) {
-    // flutter defined function
     showDialog(
       context: context,
       builder: (BuildContext context) {

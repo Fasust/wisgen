@@ -17,49 +17,49 @@ class AdviceCard extends StatefulWidget {
 }
 
 class _AdviceCardState extends State<AdviceCard> {
-  static const double smallPadding = 4;
-  static const double imageHeight = 300;
-  static const cardBorderRadius = 7.0;
-  static const double cardElevation = 2;
-  bool isFavorite = false;
+  static const double _smallPadding = 4;
+  static const double _imageHeight = 300;
+  static const _cardBorderRadius = 7.0;
+  static const double _cardElevation = 2;
+  bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(cardBorderRadius),
+        borderRadius: BorderRadius.circular(_cardBorderRadius),
       ),
       clipBehavior: Clip.antiAlias,
-      elevation: cardElevation,
+      elevation: _cardElevation,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           CachedNetworkImage(
             imageUrl: widget.wisdom.stockImg.url,
             fit: BoxFit.cover,
-            height: imageHeight,
+            height: _imageHeight,
             errorWidget: (context, url, error) => Container(
               child: Icon(Icons.error),
-              height: imageHeight,
+              height: _imageHeight,
             ),
           ),
           ListTile(
             title: Container(
-              padding: EdgeInsets.only(top: smallPadding, bottom: smallPadding),
+              padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
               child: Text(widget.wisdom.advice.text),
             ),
             subtitle: Container(
                 padding:
-                    EdgeInsets.only(top: smallPadding, bottom: smallPadding),
+                    EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
                 child: Text('Advice #' + widget.wisdom.advice.id,
                     textAlign: TextAlign.left)),
             trailing: IconButton(
-              icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-              color: isFavorite ? Colors.red : Colors.grey,
-              padding: EdgeInsets.all(smallPadding),
+              icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
+              color: _isFavorite ? Colors.red : Colors.grey,
+              padding: EdgeInsets.all(_smallPadding),
               onPressed: () {
                 setState(() {
-                  isFavorite = !isFavorite;
+                  _isFavorite = !_isFavorite;
                 });
               },
             ),
