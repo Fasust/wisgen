@@ -5,7 +5,7 @@ import 'package:wisgen/provider/wisdom_fav_list.dart';
 import 'card_advice.dart';
 
 
-class FavList extends StatelessWidget {
+class PageFavoriteList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class FavList extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           itemBuilder: (context, i) {
             if(favorites.length() > i){
-              return new AdviceCard(wisdom: favorites.getAt(i),onLike: (){
+              return new CardAdvice(wisdom: favorites.getAt(i),onLike: (){
                 favorites.removeAt(i);
               },);
             }else{

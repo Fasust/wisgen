@@ -21,12 +21,12 @@ import 'card_loading.dart';
  * Displays them in Cards (lazy & Asyc)
  * Images as querried by keyword int the related text
  */
-class CardFeed extends StatefulWidget {
+class PageWisdomFeed extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => CardFeedState();
+  State<StatefulWidget> createState() => PageWisdomFeedState();
 }
 
-class CardFeedState extends State<CardFeed> {
+class PageWisdomFeedState extends State<PageWisdomFeed> {
   //API End-Points
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
@@ -116,8 +116,8 @@ class CardFeedState extends State<CardFeed> {
     );
   }
 
-  AdviceCard _createWisdomCard(Wisdom wisdom, BuildContext context) {
-    return AdviceCard(
+  CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
+    return CardAdvice(
         key: UniqueKey(),
         wisdom: wisdom,
         onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
@@ -139,7 +139,7 @@ class CardFeedState extends State<CardFeed> {
         );
       }
     } else {
-      return LoadingCard();
+      return CardLoading();
     }
   }
 

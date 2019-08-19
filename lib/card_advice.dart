@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wisgen/data/wisdoms.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
@@ -9,7 +9,7 @@ import 'package:wisgen/provider/wisdom_fav_list.dart';
  * Images are Loaded from the given URL once and then cashed.
  * Information about Fav-Status are loaded with a Consumer from the CardFeed
  */
-class AdviceCard extends StatelessWidget {
+class CardAdvice extends StatelessWidget {
   final Wisdom wisdom;
   static const double _smallPadding = 4;
   static const double _imageHeight = 300;
@@ -17,7 +17,7 @@ class AdviceCard extends StatelessWidget {
   static const double _cardElevation = 2;
   final VoidCallback onLike;
 
-  AdviceCard({Key key, this.wisdom, this.onLike}) : super(key: key);
+  CardAdvice({Key key, this.wisdom, this.onLike}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
