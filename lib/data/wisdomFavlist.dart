@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
+/**
+ * A List with an Attached ChangeNotifier
+ * I am using this to access State in between different Widgets 
+ * Shown in this Talk by google Engeniers: https://www.youtube.com/watch?v=d_m5csmrf7I
+ */
 class WisdomFavList with ChangeNotifier{
   final List<Wisdom> _entries  = new List();
 
