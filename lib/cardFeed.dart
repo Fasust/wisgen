@@ -1,18 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+
 import 'package:wisgen/data/wisdomFavlist.dart';
 import 'package:wisgen/data/wisdoms.dart';
-
-import 'OnClickInkWell.dart';
-import 'adviceCard.dart';
-import 'data/advice.dart';
-import 'loadingCard.dart';
+import 'package:wisgen/OnClickInkWell.dart';
+import 'package:wisgen/adviceCard.dart';
+import 'package:wisgen/data/advice.dart';
+import 'package:wisgen/loadingCard.dart';
 
 /**
  * A Listview that loads Images and Text from 2 API endpoints and
@@ -28,7 +27,8 @@ class CardFeedState extends State<CardFeed> {
   //API End-Points
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
-  static const _networkErrorText = '"No Network Connection, Tap the Screen to retry!"';
+  static const _networkErrorText =
+      '"No Network Connection, Tap the Screen to retry!"';
 
   static const minQueryWordLength = 3;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
@@ -37,14 +37,24 @@ class CardFeedState extends State<CardFeed> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       builder: (context) => WisdomFavList(),
-      child: ListView.builder(
-          padding: const EdgeInsets.all(16.0),
-          itemBuilder: (context, i) {
-            return FutureBuilder(
-                future: _createWisdom(),
-                builder: (context, snapshot) =>
-                    _wisdomCardBuilder(context, snapshot));
-          }),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Wisdom Feed',
+            style:Theme.of(context).textTheme.headline, 
+          ),
+          backgroundColor: Theme.of(context).primaryColor,
+          
+        ),
+        body: ListView.builder(
+            padding: const EdgeInsets.all(16.0),
+            itemBuilder: (context, i) {
+              return FutureBuilder(
+                  future: _createWisdom(),
+                  builder: (context, snapshot) =>
+                      _wisdomCardBuilder(context, snapshot));
+            }),
+      ),
     );
   }
 
@@ -99,7 +109,8 @@ class CardFeedState extends State<CardFeed> {
   }
 
   //CallBacks ------
-  Widget _wisdomCardBuilder(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+  Widget _wisdomCardBuilder(
+      BuildContext context, AsyncSnapshot<dynamic> snapshot) {
     Wisdom wisdom = snapshot.data;
     if (snapshot.connectionState == ConnectionState.done) {
       if (!snapshot.hasError) {
