@@ -4,33 +4,45 @@ import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 import 'card_advice.dart';
 
-
 class PageFavoriteList extends StatelessWidget {
+  static const double _margin = 16.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Favorite Wisdoms',
-          style: Theme.of(context).textTheme.headline,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
+      appBar: _buildAppBar(context),
       body: Consumer<WisdomFavList>(
-        builder: (context, favorites, _) => 
-        ListView.builder(
-          padding: const EdgeInsets.all(16.0),
-          itemBuilder: (context, i) {
-            if(favorites.length() > i){
-              return new CardAdvice(wisdom: favorites.getAt(i),onLike: (){
-                favorites.removeAt(i);
-              },);
-            }else{
-              return null;
-            }
-          },
-        ),
+        builder: (context, favorites, _) => _buildListView(favorites),
       ),
+    );
+  }
+
+  //UI-Elements -----
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        'Favorite Wisdoms',
+        style: Theme.of(context).textTheme.headline,
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+    );
+  }
+
+  ListView _buildListView(WisdomFavList favorites) {
+    return ListView.builder(
+      padding: EdgeInsets.all(_margin),
+      itemBuilder: (context, i) {
+        if (favorites.length() > i) {
+          return new CardAdvice(
+            wisdom: favorites.getAt(i),
+            onLike: () {
+              favorites.removeAt(i);
+            },
+          );
+        } else {
+          return null;
+        }
+      },
     );
   }
 }

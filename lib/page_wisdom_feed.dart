@@ -15,7 +15,6 @@ import 'package:wisgen/provider/wisdom_fav_list.dart';
 import 'card_advice.dart';
 import 'card_loading.dart';
 
-
 /**
  * A Listview that loads Images and Text from 2 API endpoints and
  * Displays them in Cards (lazy & Asyc)
@@ -33,7 +32,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   static const _networkErrorText =
       '"No Network Connection, Tap the Screen to retry!"';
 
-  static const minQueryWordLength = 3;
+  static const int _minQueryWordLength = 3;
+  static const double _margin = 16.0;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
   //Cash of Previously Loaded Wisdoms
@@ -42,16 +42,9 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Wisdom Feed',
-          style: Theme.of(context).textTheme.headline,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        actions: <Widget>[new _FavListButton()],
-      ),
+      appBar: _buildAppBar(context),
       body: ListView.builder(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(_margin),
           itemBuilder: (context, i) {
             //Decide if you need to lad new advice or if your need to load from Cash
             if (i < _wisdoms.length) {
@@ -64,6 +57,55 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             }
           }),
     );
+  }
+
+  //UI-Elements ------
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text(
+        'Wisdom Feed',
+        style: Theme.of(context).textTheme.headline,
+      ),
+      backgroundColor: Theme.of(context).primaryColor,
+      actions: <Widget>[
+        IconButton(
+          iconSize: 40,
+          icon: Icon(
+            Icons.list,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pushNamed("/favorites");
+          },
+        )
+      ],
+    );
+  }
+
+  Widget _buildNewWisdomFromFetched(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+    Wisdom wisdom = snapshot.data;
+    if (snapshot.connectionState == ConnectionState.done) {
+      if (!snapshot.hasError) {
+        _wisdoms.add(wisdom);
+        return _createWisdomCard(wisdom, context);
+      } else {
+        return new OnClickInkWell(
+          text: _networkErrorText,
+          onClick: () {
+            setState(() {});
+          },
+        );
+      }
+    } else {
+      return CardLoading();
+    }
+  }
+
+  CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
+    return CardAdvice(
+        key: UniqueKey(),
+        wisdom: wisdom,
+        onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
   }
 
   //Async Data Fetchers to get Data from external APIs ------
@@ -87,7 +129,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     final List<String> dirtyWords = input.split(_nonLetterPattern);
     String query = "";
     dirtyWords.forEach((w) {
-      if (w.isNotEmpty && w.length > minQueryWordLength) {
+      if (w.isNotEmpty && w.length > _minQueryWordLength) {
         query += w + ",";
       }
     });
@@ -116,33 +158,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     );
   }
 
-  CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
-    return CardAdvice(
-        key: UniqueKey(),
-        wisdom: wisdom,
-        onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
-  }
-
-  //CallBacks ------
-  Widget _buildNewWisdomFromFetched(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-    Wisdom wisdom = snapshot.data;
-    if (snapshot.connectionState == ConnectionState.done) {
-      if (!snapshot.hasError) {
-         _wisdoms.add(wisdom);
-        return _createWisdomCard(wisdom, context);
-      } else {
-        return new OnClickInkWell(
-          text: _networkErrorText,
-          onClick: () {
-            setState(() {});
-          },
-        );
-      }
-    } else {
-      return CardLoading();
-    }
-  }
-
+  //CallBack ------
   void _onLike(WisdomFavList favList, Wisdom wisdom) {
     bool isFav = favList.contains(wisdom);
     if (isFav) {
@@ -150,26 +166,5 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     } else {
       favList.add(wisdom);
     }
-  }
-}
-
-//File-Wide Widgets ----------
-class _FavListButton extends StatelessWidget {
-  const _FavListButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      iconSize: 40,
-      icon: Icon(
-        Icons.list,
-        color: Colors.white,
-      ),
-      onPressed: () {
-        Navigator.of(context).pushNamed("/favorites");
-      },
-    );
   }
 }

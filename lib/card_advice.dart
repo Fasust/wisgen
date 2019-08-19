@@ -10,11 +10,12 @@ import 'package:wisgen/provider/wisdom_fav_list.dart';
  * Information about Fav-Status are loaded with a Consumer from the CardFeed
  */
 class CardAdvice extends StatelessWidget {
-  final Wisdom wisdom;
   static const double _smallPadding = 4;
   static const double _imageHeight = 300;
-  static const _cardBorderRadius = 7.0;
   static const double _cardElevation = 2;
+  static const double _cardBorderRadius = 7.0;
+
+  final Wisdom wisdom;
   final VoidCallback onLike;
 
   CardAdvice({Key key, this.wisdom, this.onLike}) : super(key: key);
@@ -32,7 +33,12 @@ class CardAdvice extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             new _Image(wisdom: wisdom, imageHeight: _imageHeight),
-            new _Content(smallPadding: _smallPadding, wisdom: wisdom, onLike: onLike, favorites: favorites,)
+            new _Content(
+              smallPadding: _smallPadding,
+              wisdom: wisdom,
+              onLike: onLike,
+              favorites: favorites,
+            )
           ],
         ),
       ),
@@ -46,9 +52,10 @@ class _Content extends StatelessWidget {
     Key key,
     @required double smallPadding,
     @required this.wisdom,
-    @required this.onLike, 
+    @required this.onLike,
     @required this.favorites,
-  }) : _smallPadding = smallPadding, super(key: key);
+  })  : _smallPadding = smallPadding,
+        super(key: key);
 
   final double _smallPadding;
   final Wisdom wisdom;
@@ -59,17 +66,17 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Container(
-        padding:
-            EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
+        padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
         child: Text(wisdom.advice.text),
       ),
       subtitle: Container(
-          padding: EdgeInsets.only(
-              top: _smallPadding, bottom: _smallPadding),
-          child: Text('Advice #' + wisdom.advice.id,
-              textAlign: TextAlign.left)),
+          padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
+          child:
+              Text('Advice #' + wisdom.advice.id, textAlign: TextAlign.left)),
       trailing: IconButton(
-        icon: Icon(favorites.contains(wisdom) ? Icons.favorite : Icons.favorite_border),
+        icon: Icon(favorites.contains(wisdom)
+            ? Icons.favorite
+            : Icons.favorite_border),
         color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
         padding: EdgeInsets.all(_smallPadding),
         onPressed: onLike,
@@ -83,7 +90,8 @@ class _Image extends StatelessWidget {
     Key key,
     @required this.wisdom,
     @required double imageHeight,
-  }) : _imageHeight = imageHeight, super(key: key);
+  })  : _imageHeight = imageHeight,
+        super(key: key);
 
   final Wisdom wisdom;
   final double _imageHeight;
@@ -93,7 +101,7 @@ class _Image extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: wisdom.stockImURL,
       fit: BoxFit.cover,
-      height: _imageHeight ,
+      height: _imageHeight,
       errorWidget: (context, url, error) => Container(
         child: Icon(Icons.error),
         height: _imageHeight,
