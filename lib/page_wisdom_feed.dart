@@ -7,13 +7,13 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import 'package:wisgen/data/wisdoms.dart';
-import 'package:wisgen/OnClickInkWell.dart';
 
 import 'package:wisgen/data/advice.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 import 'card_advice.dart';
 import 'card_loading.dart';
+import 'on_click_inkwell.dart';
 
 /**
  * A Listview that loads Images and Text from 2 API endpoints and
