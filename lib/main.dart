@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wisgen/favList.dart';
-import 'cardFeed.dart';
-import 'data/wisdomFavlist.dart';
+import 'package:wisgen/page_favorites.dart';
+import 'package:wisgen/page_wisdom_feed.dart';
+import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 void main() => runApp(ChangeNotifierProvider(
     builder: (context) => WisdomFavList(), child: MyApp()));

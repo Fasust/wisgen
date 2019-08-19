@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'package:wisgen/data/wisdomFavlist.dart';
 import 'package:wisgen/data/wisdoms.dart';
 import 'package:wisgen/OnClickInkWell.dart';
-import 'package:wisgen/adviceCard.dart';
+
 import 'package:wisgen/data/advice.dart';
-import 'package:wisgen/loadingCard.dart';
+import 'package:wisgen/provider/wisdom_fav_list.dart';
+
+import 'card_advice.dart';
+import 'card_loading.dart';
+
 
 /**
  * A Listview that loads Images and Text from 2 API endpoints and

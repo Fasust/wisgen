@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wisgen/adviceCard.dart';
-import 'package:wisgen/data/wisdomFavlist.dart';
+import 'package:wisgen/provider/wisdom_fav_list.dart';
+
+import 'card_advice.dart';
+
 
 class FavList extends StatelessWidget {
   @override
