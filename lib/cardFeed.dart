@@ -5,6 +5,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:wisgen/data/wisdomFavlist.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
 import 'adviceCard.dart';
@@ -26,38 +28,45 @@ class CardFeedState extends State<CardFeed> {
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
-  static const minQueryWordLenght = 3;
+  static const minQueryWordLength = 3;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
-
-  //cashing of Wisdoms
-  final favoriteList = <Wisdom>[];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          return FutureBuilder(
-              future: _createWisdom(),
-              builder: (context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.done){
-                  if(!snapshot.hasError){
-                    return AdviceCard(wisdom: snapshot.data,onLike:(){
-                      favoriteList.add(snapshot.data);
-                    });
-                  }else{
-                    	return InkWell(
-                      child: Padding(
-                        padding: const EdgeInsets.all(32.0),
-                        child: Text("No Network Connection, Tap the Screen to retry!"),
-                      ),
-                      onTap: () => setState(() {}));
+    return ChangeNotifierProvider(
+      builder: (context) => WisdomFavList(),
+      child: ListView.builder(
+          padding: const EdgeInsets.all(16.0),
+          itemBuilder: (context, i) {
+            return FutureBuilder(
+                future: _createWisdom(),
+                builder: (context, snapshot) {
+                  Wisdom wisdom = snapshot.data;
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (!snapshot.hasError) {
+                      return AdviceCard(wisdom: wisdom, onLike: () {
+                        final bool isFav = Provider.of<WisdomFavList>(context).contains(wisdom);
+                        if(isFav){
+                          Provider.of<WisdomFavList>(context).remove(wisdom);
+                        }else{
+                          Provider.of<WisdomFavList>(context).add(wisdom);
+                        }
+                      });
+                    } else {
+                      return InkWell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(32.0),
+                            child: Text(
+                                "No Network Connection, Tap the Screen to retry!"),
+                          ),
+                          onTap: () => setState(() {}));
+                    }
+                  } else {
+                    return LoadingCard();
                   }
-                }else{
-                  return LoadingCard();
-                }
-              });
-        });
+                });
+          }),
+    );
   }
 
   //Async Data Fetchers to get Data from external APIs ------
@@ -81,7 +90,7 @@ class CardFeedState extends State<CardFeed> {
     final List<String> dirtyWords = input.split(_nonLetterPattern);
     String query = "";
     dirtyWords.forEach((w) {
-      if (w.isNotEmpty && w.length > minQueryWordLenght) {
+      if (w.isNotEmpty && w.length > minQueryWordLength) {
         query += w + ",";
       }
     });
