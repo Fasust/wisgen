@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:wisgen/data/wisdomFavlist.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
+import 'OnClickInkWell.dart';
 import 'adviceCard.dart';
 import 'data/advice.dart';
 import 'loadingCard.dart';
@@ -40,31 +41,8 @@ class CardFeedState extends State<CardFeed> {
           itemBuilder: (context, i) {
             return FutureBuilder(
                 future: _createWisdom(),
-                builder: (context, snapshot) {
-                  Wisdom wisdom = snapshot.data;
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (!snapshot.hasError) {
-                      return AdviceCard(wisdom: wisdom, onLike: () {
-                        final bool isFav = Provider.of<WisdomFavList>(context).contains(wisdom);
-                        if(isFav){
-                          Provider.of<WisdomFavList>(context).remove(wisdom);
-                        }else{
-                          Provider.of<WisdomFavList>(context).add(wisdom);
-                        }
-                      });
-                    } else {
-                      return InkWell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(32.0),
-                            child: Text(
-                                "No Network Connection, Tap the Screen to retry!"),
-                          ),
-                          onTap: () => setState(() {}));
-                    }
-                  } else {
-                    return LoadingCard();
-                  }
-                });
+                builder: (context, snapshot) =>
+                    _wisdomCardBuilder(context, snapshot));
           }),
     );
   }
@@ -117,5 +95,35 @@ class CardFeedState extends State<CardFeed> {
         );
       },
     );
+  }
+
+  //CallBacks ------
+  Widget _wisdomCardBuilder(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+    Wisdom wisdom = snapshot.data;
+    if (snapshot.connectionState == ConnectionState.done) {
+      if (!snapshot.hasError) {
+        return AdviceCard(
+            wisdom: wisdom,
+            onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
+      } else {
+        return new OnClickInkWell(
+          text: "No Network Connection, Tap the Screen to retry!",
+          onClick: () {
+            setState(() {});
+          },
+        );
+      }
+    } else {
+      return LoadingCard();
+    }
+  }
+
+  void _onLike(WisdomFavList favList, Wisdom wisdom) {
+    bool isFav = favList.contains(wisdom);
+    if (isFav) {
+      favList.remove(wisdom);
+    } else {
+      favList.add(wisdom);
+    }
   }
 }

@@ -8,7 +8,7 @@ import 'data/wisdomFavlist.dart';
 /**
  * Card View That displays a given Wisdom.
  * Images are Loaded from the given URL once and then cashed.
- * The Card Tracks weather it is a "favorite" or not
+ * Information about Fav-Status are loaded with a Consumer from the CardFeed
  */
 class AdviceCard extends StatelessWidget {
   final Wisdom wisdom;
