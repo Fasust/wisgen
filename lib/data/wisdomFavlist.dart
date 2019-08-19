@@ -10,6 +10,8 @@ class WisdomFavList with ChangeNotifier{
   final List<Wisdom> _entries  = new List();
 
   List<Wisdom> get() => _entries;
+  int length() => _entries.length;
+  Wisdom getAt(int i) => _entries[i];
   bool contains(Wisdom wisdom) => _entries.contains(wisdom);
 
   void add(Wisdom wisdom){
@@ -20,4 +22,8 @@ class WisdomFavList with ChangeNotifier{
     _entries.remove(wisdom);
     notifyListeners();
   } 
+  void removeAt(int i){
+    _entries.removeAt(i);
+    notifyListeners();
+  }
 }

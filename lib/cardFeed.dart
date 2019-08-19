@@ -35,26 +35,23 @@ class CardFeedState extends State<CardFeed> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (context) => WisdomFavList(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Wisdom Feed',
-            style:Theme.of(context).textTheme.headline, 
-          ),
-          backgroundColor: Theme.of(context).primaryColor,
-          
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Wisdom Feed',
+          style: Theme.of(context).textTheme.headline,
         ),
-        body: ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemBuilder: (context, i) {
-              return FutureBuilder(
-                  future: _createWisdom(),
-                  builder: (context, snapshot) =>
-                      _wisdomCardBuilder(context, snapshot));
-            }),
+        backgroundColor: Theme.of(context).primaryColor,
+        actions: <Widget>[new _FavListButton()],
       ),
+      body: ListView.builder(
+          padding: const EdgeInsets.all(16.0),
+          itemBuilder: (context, i) {
+            return FutureBuilder(
+                future: _createWisdom(),
+                builder: (context, snapshot) =>
+                    _wisdomCardBuilder(context, snapshot));
+          }),
     );
   }
 
@@ -137,5 +134,26 @@ class CardFeedState extends State<CardFeed> {
     } else {
       favList.add(wisdom);
     }
+  }
+}
+
+//File-Wide Widgets ----------
+class _FavListButton extends StatelessWidget {
+  const _FavListButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      iconSize: 40,
+      icon: Icon(
+        Icons.list,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        Navigator.of(context).pushNamed("/favorites");
+      },
+    );
   }
 }
