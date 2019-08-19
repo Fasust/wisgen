@@ -12,17 +12,25 @@ import 'data/advice.dart';
 import 'data/stockImg.dart';
 import 'loadingCard.dart';
 
+/**
+ * A Listview that loads Images and Text from 2 API endpoints and
+ * Displays them in Cards (lazy & Asyc)
+ * Images as querried by keyword int the related text
+ */
 class CardFeed extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => CardFeedState();
 }
 
 class CardFeedState extends State<CardFeed> {
+  //API End-Poitns
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
   static const minQueryWordLenght = 3;
   final RegExp nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
+
+  //cashing of Wisodms
   final _wisdomList = <Wisdom>[];
   final _favoriteList = <Wisdom>[];
 

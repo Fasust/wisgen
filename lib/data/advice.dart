@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+/**
+ * An Advice consist of a text and an non unique ID
+ */
 class Advice {
   final String id;
   final String text;

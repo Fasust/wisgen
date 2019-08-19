@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/**
+ * A Loading animation with Padding that can be loaded into a list
+ */
 class LoadingCard extends StatelessWidget {
   static const double edges = 170;
 

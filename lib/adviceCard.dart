@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
+/**
+ * Card View That displays a given Wisdom.
+ * Images are Loaded from the given URL once and then cashed.
+ * The Card Tracks weather it is a "favorite" or not
+ */
 class AdviceCard extends StatefulWidget {
   final Wisdom wisdom;
 

@@ -3,6 +3,10 @@ import 'cardFeed.dart';
 
 void main() => runApp(MyApp());
 
+/**
+ * Material App Frame
+ * Loads CardFeed
+ */
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
