@@ -94,7 +94,7 @@ class _Image extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: wisdom.stockImURL,
       fit: BoxFit.cover,
-      height: _imageHeight,
+      height: _imageHeight ,
       errorWidget: (context, url, error) => Container(
         child: Icon(Icons.error),
         height: _imageHeight,

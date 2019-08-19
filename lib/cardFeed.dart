@@ -33,6 +33,9 @@ class CardFeedState extends State<CardFeed> {
   static const minQueryWordLength = 3;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
+  //Cash of Previously Loaded Wisdoms
+  final List<Wisdom> _wisdoms = new List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +50,15 @@ class CardFeedState extends State<CardFeed> {
       body: ListView.builder(
           padding: const EdgeInsets.all(16.0),
           itemBuilder: (context, i) {
-            return FutureBuilder(
-                future: _createWisdom(),
-                builder: (context, snapshot) =>
-                    _wisdomCardBuilder(context, snapshot));
+            //Decide if you need to lad new advice or if your need to load from Cash
+            if (i < _wisdoms.length) {
+              return _createWisdomCard(_wisdoms[i], context);
+            } else {
+              return FutureBuilder(
+                  future: _createWisdom(),
+                  builder: (context, snapshot) =>
+                      _buildNewWisdomFromFetched(context, snapshot));
+            }
           }),
     );
   }
@@ -105,15 +113,20 @@ class CardFeedState extends State<CardFeed> {
     );
   }
 
+  AdviceCard _createWisdomCard(Wisdom wisdom, BuildContext context) {
+    return AdviceCard(
+        key: UniqueKey(),
+        wisdom: wisdom,
+        onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
+  }
+
   //CallBacks ------
-  Widget _wisdomCardBuilder(
-      BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+  Widget _buildNewWisdomFromFetched(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
     Wisdom wisdom = snapshot.data;
     if (snapshot.connectionState == ConnectionState.done) {
       if (!snapshot.hasError) {
-        return AdviceCard(
-            wisdom: wisdom,
-            onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
+         _wisdoms.add(wisdom);
+        return _createWisdomCard(wisdom, context);
       } else {
         return new OnClickInkWell(
           text: _networkErrorText,
