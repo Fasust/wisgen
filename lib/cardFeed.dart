@@ -9,7 +9,6 @@ import 'package:wisgen/data/wisdoms.dart';
 
 import 'adviceCard.dart';
 import 'data/advice.dart';
-import 'data/stockImg.dart';
 import 'loadingCard.dart';
 
 /**
@@ -31,7 +30,7 @@ class CardFeedState extends State<CardFeed> {
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
   //cashing of Wisdoms
-  final _favoriteList = <Wisdom>[];
+  final favoriteList = <Wisdom>[];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,9 @@ class CardFeedState extends State<CardFeed> {
               builder: (context, snapshot) {
                 if(snapshot.connectionState == ConnectionState.done){
                   if(!snapshot.hasError){
-                    return AdviceCard(wisdom: snapshot.data,);
+                    return AdviceCard(wisdom: snapshot.data,onLike:(){
+                      favoriteList.add(snapshot.data);
+                    });
                   }else{
                     	return InkWell(
                       child: Padding(
@@ -62,7 +63,7 @@ class CardFeedState extends State<CardFeed> {
   //Async Data Fetchers to get Data from external APIs ------
   Future<Wisdom> _createWisdom() async {
     final advice = await _fetchAdvice();
-    final img = await _fetchImage(_stringToQuery(advice.text));
+    final img = await _fetchImage(advice.text);
     return Wisdom(advice, img);
   }
 
@@ -71,9 +72,8 @@ class CardFeedState extends State<CardFeed> {
     return Advice.fromJson(json.decode(response.body));
   }
 
-  Future<StockImg> _fetchImage(String query) async {
-    final String url = _imagesURI + query;
-    return StockImg(url: url);
+  Future<String> _fetchImage(String adviceText) async {
+    return _imagesURI + _stringToQuery(adviceText);
   }
 
   //Helper Functions ------

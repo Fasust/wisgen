@@ -7,24 +7,19 @@ import 'package:wisgen/data/wisdoms.dart';
  * Images are Loaded from the given URL once and then cashed.
  * The Card Tracks weather it is a "favorite" or not
  */
-class AdviceCard extends StatefulWidget {
+class AdviceCard extends StatelessWidget {
   final Wisdom wisdom;
-
-  const AdviceCard({Key key, this.wisdom}) : super(key: key);
-
-  @override
-  _AdviceCardState createState() => _AdviceCardState();
-}
-
-class _AdviceCardState extends State<AdviceCard> {
   static const double _smallPadding = 4;
   static const double _imageHeight = 300;
   static const _cardBorderRadius = 7.0;
   static const double _cardElevation = 2;
-  bool _isFavorite = false;
+  final VoidCallback onLike;
+
+  AdviceCard({Key key, this.wisdom, this.onLike}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool _isFavorite = false;
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_cardBorderRadius),
@@ -35,7 +30,7 @@ class _AdviceCardState extends State<AdviceCard> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           CachedNetworkImage(
-            imageUrl: widget.wisdom.stockImg.url,
+            imageUrl: wisdom.stockImURL,
             fit: BoxFit.cover,
             height: _imageHeight,
             errorWidget: (context, url, error) => Container(
@@ -45,23 +40,20 @@ class _AdviceCardState extends State<AdviceCard> {
           ),
           ListTile(
             title: Container(
-              padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
-              child: Text(widget.wisdom.advice.text),
+              padding:
+                  EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
+              child: Text(wisdom.advice.text),
             ),
             subtitle: Container(
                 padding:
                     EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
-                child: Text('Advice #' + widget.wisdom.advice.id,
+                child: Text('Advice #' + wisdom.advice.id,
                     textAlign: TextAlign.left)),
             trailing: IconButton(
               icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
               color: _isFavorite ? Colors.red : Colors.grey,
               padding: EdgeInsets.all(_smallPadding),
-              onPressed: () {
-                setState(() {
-                  _isFavorite = !_isFavorite;
-                });
-              },
+              onPressed: onLike,
             ),
           )
         ],
