@@ -32,35 +32,72 @@ class AdviceCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            CachedNetworkImage(
-              imageUrl: wisdom.stockImURL,
-              fit: BoxFit.cover,
-              height: _imageHeight,
-              errorWidget: (context, url, error) => Container(
-                child: Icon(Icons.error),
-                height: _imageHeight,
-              ),
-            ),
-            ListTile(
-              title: Container(
-                padding:
-                    EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
-                child: Text(wisdom.advice.text),
-              ),
-              subtitle: Container(
-                  padding: EdgeInsets.only(
-                      top: _smallPadding, bottom: _smallPadding),
-                  child: Text('Advice #' + wisdom.advice.id,
-                      textAlign: TextAlign.left)),
-              trailing: IconButton(
-                icon: Icon(favorites.contains(wisdom) ? Icons.favorite : Icons.favorite_border),
-                color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-                padding: EdgeInsets.all(_smallPadding),
-                onPressed: onLike,
-              ),
-            )
+            new _Image(wisdom: wisdom, imageHeight: _imageHeight),
+            new _Content(smallPadding: _smallPadding, wisdom: wisdom, onLike: onLike, favorites: favorites,)
           ],
         ),
+      ),
+    );
+  }
+}
+
+//File-wide Widgets -----------------
+class _Content extends StatelessWidget {
+  const _Content({
+    Key key,
+    @required double smallPadding,
+    @required this.wisdom,
+    @required this.onLike, 
+    @required this.favorites,
+  }) : _smallPadding = smallPadding, super(key: key);
+
+  final double _smallPadding;
+  final Wisdom wisdom;
+  final WisdomFavList favorites;
+  final VoidCallback onLike;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Container(
+        padding:
+            EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
+        child: Text(wisdom.advice.text),
+      ),
+      subtitle: Container(
+          padding: EdgeInsets.only(
+              top: _smallPadding, bottom: _smallPadding),
+          child: Text('Advice #' + wisdom.advice.id,
+              textAlign: TextAlign.left)),
+      trailing: IconButton(
+        icon: Icon(favorites.contains(wisdom) ? Icons.favorite : Icons.favorite_border),
+        color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
+        padding: EdgeInsets.all(_smallPadding),
+        onPressed: onLike,
+      ),
+    );
+  }
+}
+
+class _Image extends StatelessWidget {
+  const _Image({
+    Key key,
+    @required this.wisdom,
+    @required double imageHeight,
+  }) : _imageHeight = imageHeight, super(key: key);
+
+  final Wisdom wisdom;
+  final double _imageHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return CachedNetworkImage(
+      imageUrl: wisdom.stockImURL,
+      fit: BoxFit.cover,
+      height: _imageHeight,
+      errorWidget: (context, url, error) => Container(
+        child: Icon(Icons.error),
+        height: _imageHeight,
       ),
     );
   }

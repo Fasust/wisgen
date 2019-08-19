@@ -28,6 +28,7 @@ class CardFeedState extends State<CardFeed> {
   //API End-Points
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
+  static const _networkErrorText = '"No Network Connection, Tap the Screen to retry!"';
 
   static const minQueryWordLength = 3;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
@@ -107,7 +108,7 @@ class CardFeedState extends State<CardFeed> {
             onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
       } else {
         return new OnClickInkWell(
-          text: "No Network Connection, Tap the Screen to retry!",
+          text: _networkErrorText,
           onClick: () {
             setState(() {});
           },
