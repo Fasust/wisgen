@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
 import 'package:wisgen/data/advice.dart';
+import 'package:wisgen/page_favorites.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 import 'card_advice.dart';
@@ -46,7 +48,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
       body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
           if (details.primaryVelocity.compareTo(0) == -1)
-            Navigator.of(context).pushNamed("/favorites"); //right to left
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => PageFavoriteList())); //right to left
         },
         child: ListView.builder(
             padding: const EdgeInsets.all(_margin),
@@ -81,7 +83,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed("/favorites");
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => PageFavoriteList()));
           },
         )
       ],
