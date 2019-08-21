@@ -46,10 +46,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails details) {
-          if (details.primaryVelocity.compareTo(0) == -1)
-            Navigator.push(context, CupertinoPageRoute(builder: (context) => PageFavoriteList())); //right to left
-        },
+        onHorizontalDragEnd: (DragEndDetails details) {_swipeNavigtion(context, details);},
         child: ListView.builder(
             padding: const EdgeInsets.all(_margin),
             itemBuilder: (context, i) {
@@ -83,7 +80,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.push(context, CupertinoPageRoute(builder: (context) => PageFavoriteList()));
+            Navigator.push(context,
+                CupertinoPageRoute(builder: (context) => PageFavoriteList()));
           },
         )
       ],
@@ -166,6 +164,14 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
         );
       },
     );
+  }
+
+  void _swipeNavigtion(BuildContext context, DragEndDetails details) {
+    if (details.primaryVelocity.compareTo(0) == -1) //right to left
+      Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => PageFavoriteList())); 
   }
 
   //CallBack ------

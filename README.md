@@ -20,6 +20,7 @@ I used this project to understand how Flutter handles communication with the web
 - http
 - cached_network_image
 - flutter_launcher_icons
+- shared_preferences
  
 ### Some of Sources I can recommend 
 - [State handling in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)

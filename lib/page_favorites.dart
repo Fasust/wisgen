@@ -12,10 +12,7 @@ class PageFavoriteList extends StatelessWidget {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails details) {
-          if (details.primaryVelocity.compareTo(0) == 1)
-            Navigator.of(context).pop(); //left to right
-        },
+        onHorizontalDragEnd: (DragEndDetails details) {_swpipeNavigation(context, details);},
         child: Consumer<WisdomFavList>(
           builder: (context, favorites, _) => _buildListView(favorites),
         ),
@@ -51,4 +48,10 @@ class PageFavoriteList extends StatelessWidget {
       },
     );
   }
+}
+
+//Helper Functions
+void _swpipeNavigation(BuildContext context, DragEndDetails details) {
+  if (details.primaryVelocity.compareTo(0) == 1) //left to right
+    Navigator.of(context).pop();
 }
