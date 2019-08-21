@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:wisgen/data/wisdoms.dart';
 
@@ -34,6 +35,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   static const _networkErrorText =
       '"No Network Connection, Tap the Screen to retry!"';
 
+  static const _sharedPrefKey = 'wisdom_favs';
   static const int _minQueryWordLength = 3;
   static const double _margin = 16.0;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
@@ -42,11 +44,19 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   final List<Wisdom> _wisdoms = new List();
 
   @override
+  void initState() {
+    _readFavsFromPreferences();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails details) {_swipeNavigtion(context, details);},
+        onHorizontalDragEnd: (DragEndDetails details) {
+          _swipeNavigtion(context, details);
+        },
         child: ListView.builder(
             padding: const EdgeInsets.all(_margin),
             itemBuilder: (context, i) {
@@ -132,6 +142,27 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     return _imagesURI + _stringToQuery(adviceText);
   }
 
+  //Shared Prefs ------
+  void _readFavsFromPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> strings = prefs.getStringList(_sharedPrefKey);
+    if(strings == null){return;}
+
+    for (int i = 0; i > strings.length; i++) {
+      Provider.of<WisdomFavList>(context).add(Wisdom.fromString(strings[i]));
+    }
+  }
+
+  void _writeFavsToPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    WisdomFavList favs = Provider.of<WisdomFavList>(context);
+    List<String> strings;
+    for (int i = favs.length(); i > -1; i--) {
+      strings.add(favs.getAt(i).toString());
+    }
+    prefs.setStringList(_sharedPrefKey, strings);
+  }
+
   //Helper Functions ------
   String _stringToQuery(String input) {
     final List<String> dirtyWords = input.split(_nonLetterPattern);
@@ -168,10 +199,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   void _swipeNavigtion(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
-      Navigator.push(
-          context,
-          CupertinoPageRoute(
-              builder: (context) => PageFavoriteList())); 
+      Navigator.push(context,
+          CupertinoPageRoute(builder: (context) => PageFavoriteList()));
   }
 
   //CallBack ------
