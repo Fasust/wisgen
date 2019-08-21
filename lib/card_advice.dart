@@ -22,25 +22,22 @@ class CardAdvice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WisdomFavList>(
-      builder: (context, favorites, _) => Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(_cardBorderRadius),
-        ),
-        clipBehavior: Clip.antiAlias,
-        elevation: _cardElevation,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            new _Image(wisdom: wisdom, imageHeight: _imageHeight),
-            new _Content(
-              smallPadding: _smallPadding,
-              wisdom: wisdom,
-              onLike: onLike,
-              favorites: favorites,
-            )
-          ],
-        ),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_cardBorderRadius),
+      ),
+      clipBehavior: Clip.antiAlias,
+      elevation: _cardElevation,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new _Image(wisdom: wisdom, imageHeight: _imageHeight),
+          new _Content(
+            smallPadding: _smallPadding,
+            wisdom: wisdom,
+            onLike: onLike,
+          )
+        ],
       ),
     );
   }
@@ -53,13 +50,11 @@ class _Content extends StatelessWidget {
     @required double smallPadding,
     @required this.wisdom,
     @required this.onLike,
-    @required this.favorites,
   })  : _smallPadding = smallPadding,
         super(key: key);
 
   final double _smallPadding;
   final Wisdom wisdom;
-  final WisdomFavList favorites;
   final VoidCallback onLike;
 
   @override
@@ -73,13 +68,15 @@ class _Content extends StatelessWidget {
           padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
           child:
               Text('Advice #' + wisdom.advice.id, textAlign: TextAlign.left)),
-      trailing: IconButton(
-        icon: Icon(favorites.contains(wisdom)
-            ? Icons.favorite
-            : Icons.favorite_border),
-        color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-        padding: EdgeInsets.all(_smallPadding),
-        onPressed: onLike,
+      trailing: Consumer<WisdomFavList>(
+        builder: (context, favorites, _) => IconButton(
+          icon: Icon(favorites.contains(wisdom)
+              ? Icons.favorite
+              : Icons.favorite_border),
+          color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
+          padding: EdgeInsets.all(_smallPadding),
+          onPressed: onLike,
+        ),
       ),
     );
   }

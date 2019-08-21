@@ -103,7 +103,6 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
     return CardAdvice(
-        key: UniqueKey(),
         wisdom: wisdom,
         onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
   }
