@@ -11,8 +11,14 @@ class PageFavoriteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: Consumer<WisdomFavList>(
-        builder: (context, favorites, _) => _buildListView(favorites),
+      body: GestureDetector(
+        onHorizontalDragEnd: (DragEndDetails details) {
+          if (details.primaryVelocity.compareTo(0) == 1)
+            Navigator.of(context).pop(); //left to right
+        },
+        child: Consumer<WisdomFavList>(
+          builder: (context, favorites, _) => _buildListView(favorites),
+        ),
       ),
     );
   }

@@ -43,19 +43,25 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: ListView.builder(
-          padding: const EdgeInsets.all(_margin),
-          itemBuilder: (context, i) {
-            //Decide if you need to lad new advice or if your need to load from Cash
-            if (i < _wisdoms.length) {
-              return _createWisdomCard(_wisdoms[i], context);
-            } else {
-              return FutureBuilder(
-                  future: _createWisdom(),
-                  builder: (context, snapshot) =>
-                      _buildNewWisdomFromFetched(context, snapshot));
-            }
-          }),
+      body: GestureDetector(
+        onHorizontalDragEnd: (DragEndDetails details) {
+          if (details.primaryVelocity.compareTo(0) == -1)
+            Navigator.of(context).pushNamed("/favorites"); //right to left
+        },
+        child: ListView.builder(
+            padding: const EdgeInsets.all(_margin),
+            itemBuilder: (context, i) {
+              //Decide if you need to lad new advice or if your need to load from Cash
+              if (i < _wisdoms.length) {
+                return _createWisdomCard(_wisdoms[i], context);
+              } else {
+                return FutureBuilder(
+                    future: _createWisdom(),
+                    builder: (context, snapshot) =>
+                        _buildNewWisdomFromFetched(context, snapshot));
+              }
+            }),
+      ),
     );
   }
 
@@ -87,7 +93,9 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     Wisdom wisdom = snapshot.data;
     if (snapshot.connectionState == ConnectionState.done) {
       if (!snapshot.hasError) {
-        if(!_wisdoms.contains(wisdom)){_wisdoms.add(wisdom);} //The If block keeps the Future fro re-adding the exact same entry again when re-fiering after a rebuild
+        if (!_wisdoms.contains(wisdom)) {
+          _wisdoms.add(wisdom);
+        } //The If block keeps the Future fro re-adding the exact same entry again when re-fiering after a rebuild
         return _createWisdomCard(wisdom, context);
       } else {
         return new OnClickInkWell(
