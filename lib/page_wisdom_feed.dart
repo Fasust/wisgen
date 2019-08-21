@@ -55,7 +55,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
       appBar: _buildAppBar(context),
       body: GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
-          _swipeNavigtion(context, details);
+          _swipeNavigation(context, details);
         },
         child: ListView.builder(
             padding: const EdgeInsets.all(_margin),
@@ -72,6 +72,12 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             }),
       ),
     );
+  }
+
+  @override
+  void dispose(){
+    _writeFavsToPreferences();
+    super.dispose();
   }
 
   //UI-Elements ------
@@ -197,7 +203,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     );
   }
 
-  void _swipeNavigtion(BuildContext context, DragEndDetails details) {
+  void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(context,
           CupertinoPageRoute(builder: (context) => PageFavoriteList()));
