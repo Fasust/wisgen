@@ -82,11 +82,12 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     );
   }
 
-  Widget _buildNewWisdomFromFetched(BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+  Widget _buildNewWisdomFromFetched(
+      BuildContext context, AsyncSnapshot<dynamic> snapshot) {
     Wisdom wisdom = snapshot.data;
     if (snapshot.connectionState == ConnectionState.done) {
       if (!snapshot.hasError) {
-        _wisdoms.add(wisdom);
+        if(!_wisdoms.contains(wisdom)){_wisdoms.add(wisdom);} //The If block keeps the Future fro re-adding the exact same entry again when re-fiering after a rebuild
         return _createWisdomCard(wisdom, context);
       } else {
         return new OnClickInkWell(
