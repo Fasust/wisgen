@@ -132,7 +132,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
     return CardAdvice(
         wisdom: wisdom,
-        onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
+        onLike: () => onLike(context, wisdom));
   }
 
   //Async Data Fetchers to get Data from external APIs ------
@@ -192,7 +192,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   //CallBack ------
-  void _onLike(WisdomFavList favList, Wisdom wisdom) {
+  static void onLike(BuildContext context, Wisdom wisdom) {
+    WisdomFavList favList = Provider.of<WisdomFavList>(context);
     bool isFav = favList.contains(wisdom);
     if (isFav) {
       favList.remove(wisdom);
