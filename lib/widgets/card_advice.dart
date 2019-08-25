@@ -12,6 +12,7 @@ import 'package:wisgen/provider/wisdom_fav_list.dart';
  */
 class CardAdvice extends StatelessWidget {
   static const double _smallPadding = 4;
+  static const double _largePadding = 8;
   static const double _imageHeight = 300;
   static const double _cardElevation = 2;
   static const double _cardBorderRadius = 7.0;
@@ -35,6 +36,7 @@ class CardAdvice extends StatelessWidget {
           new _Image(wisdom: wisdom, imageHeight: _imageHeight),
           new _Content(
             smallPadding: _smallPadding,
+            largePadding: _largePadding,
             wisdom: wisdom,
             onLike: onLike,
           )
@@ -46,27 +48,63 @@ class CardAdvice extends StatelessWidget {
 
 //File-wide Widgets -----------------
 class _Content extends StatelessWidget {
-  const _Content({
-    Key key,
-    @required double smallPadding,
-    @required this.wisdom,
-    @required this.onLike,
-  })  : _smallPadding = smallPadding,
-        super(key: key);
-
-  final double _smallPadding;
+  final double smallPadding;
+  final double largePadding;
   final Wisdom wisdom;
   final VoidCallback onLike;
 
+  const _Content(
+      {Key key, this.smallPadding, this.largePadding, this.wisdom, this.onLike})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: largePadding, bottom: largePadding),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+              flex: 5,
+              child: ListTile(
+                title: Text(wisdom.advice.text),
+                subtitle: Container(
+                    padding: EdgeInsets.only(top: smallPadding),
+                    child: Text('Wisdom #' + wisdom.advice.id,
+                        textAlign: TextAlign.left)),
+              )),
+          Expanded(
+            flex: 1,
+            child: IconButton(
+              icon: Icon(Icons.share),
+              color: Colors.grey,
+              onPressed: () {
+                onShare();
+              },
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Consumer<WisdomFavList>(
+              builder: (context, favorites, _) => IconButton(
+                icon: Icon(favorites.contains(wisdom)
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
+                onPressed: onLike,
+                padding: EdgeInsets.only(right: smallPadding),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
     return ListTile(
       title: Container(
-        padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
+        padding: EdgeInsets.only(top: smallPadding, bottom: smallPadding),
         child: Text(wisdom.advice.text),
       ),
       subtitle: Container(
-          padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
+          padding: EdgeInsets.only(top: smallPadding, bottom: smallPadding),
           child:
               Text('Wisdom #' + wisdom.advice.id, textAlign: TextAlign.left)),
       leading: Consumer<WisdomFavList>(
@@ -75,15 +113,17 @@ class _Content extends StatelessWidget {
               ? Icons.favorite
               : Icons.favorite_border),
           color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-          padding: EdgeInsets.all(_smallPadding),
+          padding: EdgeInsets.all(smallPadding),
           onPressed: onLike,
         ),
       ),
       trailing: IconButton(
         icon: Icon(Icons.share),
         color: Colors.grey,
-        padding: EdgeInsets.all(_smallPadding),
-        onPressed: () {onShare();},
+        padding: EdgeInsets.all(smallPadding),
+        onPressed: () {
+          onShare();
+        },
       ),
     );
   }
