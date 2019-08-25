@@ -1,17 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:wisgen/data/wisdoms.dart';
 
 import 'package:wisgen/data/advice.dart';
-import 'package:wisgen/widget/page_favorites.dart';
+import 'package:wisgen/tools/preference_provider_link.dart';
+import 'package:wisgen/widgets/page_favorites.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 import 'card_advice.dart';
@@ -22,6 +21,7 @@ import 'on_click_inkwell.dart';
  * A Listview that loads Images and Text from 2 API endpoints and
  * Displays them in Cards (lazy & Asyc)
  * Images as querried by keyword int the related text
+ * The Favorite Wisdoms are saved on the Phone using a PreferenceProviderLink
  */
 class PageWisdomFeed extends StatefulWidget {
   @override
@@ -29,23 +29,28 @@ class PageWisdomFeed extends StatefulWidget {
 }
 
 class PageWisdomFeedState extends State<PageWisdomFeed> {
-  //API End-Points
+  //API
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
   static const _networkErrorText =
-      '"No Network Connection, Tap the Screen to retry!"';
+      'No Network Connection, Tap the Screen to retry!';
+  final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
-  static const _sharedPrefKey = 'wisdom_favs';
+  //UI
   static const int _minQueryWordLength = 3;
   static const double _margin = 16.0;
-  final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
   //Cash of Previously Loaded Wisdoms
   final List<Wisdom> _wisdoms = new List();
 
+  //Storage on Device
+  static final PreferenceProviderLink _prefLink =
+      new PreferenceProviderLink<WisdomFavList>(
+          'wisdom_favs', new Wisdom(null, null));
+
   @override
   void initState() {
-    _readFavsFromPreferences(context);
+    _prefLink.readPrefs(context);
     super.initState();
   }
 
@@ -72,11 +77,6 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             }),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   //UI-Elements ------
@@ -126,9 +126,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
-    return CardAdvice(
-        wisdom: wisdom,
-        onLike: () => _onLike(Provider.of<WisdomFavList>(context), wisdom));
+    return CardAdvice(wisdom: wisdom, onLike: () => onLike(context, wisdom));
   }
 
   //Async Data Fetchers to get Data from external APIs ------
@@ -145,33 +143,6 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   Future<String> _fetchImage(String adviceText) async {
     return _imagesURI + _stringToQuery(adviceText);
-  }
-
-  //Shared Prefs ------
-  void _readFavsFromPreferences(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String> strings = prefs.getStringList(_sharedPrefKey);
-
-    if (strings == null || strings.isEmpty || strings.length == 0) {return;}
-
-    for (int i = 0; i < strings.length; i++) {
-      Provider.of<WisdomFavList>(context).add(Wisdom.fromString(strings[i]));
-    }
-  }
-
-  void _writeFavsToPreferences(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    WisdomFavList favs = Provider.of<WisdomFavList>(context);
-    List<String> strings = new List();
-    for (int i = 0; i < favs.length(); i++) {
-      strings.add(favs.getAt(i).toString());
-    }
-    prefs.setStringList(_sharedPrefKey, strings);
-  }
-
-  void _deletePreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove(_sharedPrefKey);
   }
 
   //Helper Functions ------
@@ -215,14 +186,15 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   //CallBack ------
-  void _onLike(WisdomFavList favList, Wisdom wisdom) {
-    _writeFavsToPreferences(context);
-
+  static void onLike(BuildContext context, Wisdom wisdom) {
+    WisdomFavList favList = Provider.of<WisdomFavList>(context);
     bool isFav = favList.contains(wisdom);
     if (isFav) {
       favList.remove(wisdom);
     } else {
       favList.add(wisdom);
     }
+
+    _prefLink.writePrefs(context);
   }
 }

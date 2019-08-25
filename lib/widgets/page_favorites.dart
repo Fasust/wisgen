@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wisgen/data/wisdoms.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
+import 'package:wisgen/widgets/page_wisdom_feed.dart';
 
 import 'card_advice.dart';
 
+/**
+ * Displays Favorites Loaded from Consumer
+ */
 class PageFavoriteList extends StatelessWidget {
   static const double _margin = 16.0;
 
@@ -36,10 +41,11 @@ class PageFavoriteList extends StatelessWidget {
       padding: EdgeInsets.all(_margin),
       itemBuilder: (context, i) {
         if (favorites.length() > i) {
+          Wisdom wisdom = favorites.getAt(i);
           return new CardAdvice(
-            wisdom: favorites.getAt(i),
+            wisdom: wisdom,
             onLike: () {
-              favorites.removeAt(i);
+              PageWisdomFeedState.onLike(context, wisdom);
             },
           );
         } else {

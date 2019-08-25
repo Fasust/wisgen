@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wisgen/widget/page_favorites.dart';
-import 'package:wisgen/widget/page_wisdom_feed.dart';
+import 'package:wisgen/widgets/page_favorites.dart';
+import 'package:wisgen/widgets/page_wisdom_feed.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 void main() => runApp(ChangeNotifierProvider(
@@ -9,7 +9,9 @@ void main() => runApp(ChangeNotifierProvider(
 
 /**
  * Material App Frame
- * Loads CardFeed
+ * Loads CardFeed (main app)
+ * Sets Theme Data
+ * Sets Routes
  */
 class MyApp extends StatelessWidget {
   @override
