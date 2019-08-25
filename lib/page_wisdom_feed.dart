@@ -45,7 +45,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   @override
   void initState() {
-    _readFavsFromPreferences();
+    _readFavsFromPreferences(context);
     super.initState();
   }
 
@@ -75,8 +75,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   @override
-  void dispose(){
-    _writeFavsToPreferences();
+  void dispose() {
     super.dispose();
   }
 
@@ -149,24 +148,30 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   //Shared Prefs ------
-  void _readFavsFromPreferences() async {
+  void _readFavsFromPreferences(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     List<String> strings = prefs.getStringList(_sharedPrefKey);
-    if(strings == null){return;}
 
-    for (int i = 0; i > strings.length; i++) {
+    if (strings == null || strings.isEmpty || strings.length == 0) {return;}
+
+    for (int i = 0; i < strings.length; i++) {
       Provider.of<WisdomFavList>(context).add(Wisdom.fromString(strings[i]));
     }
   }
 
-  void _writeFavsToPreferences() async {
+  void _writeFavsToPreferences(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
     WisdomFavList favs = Provider.of<WisdomFavList>(context);
-    List<String> strings;
-    for (int i = favs.length(); i > -1; i--) {
+    List<String> strings = new List();
+    for (int i = 0; i < favs.length(); i++) {
       strings.add(favs.getAt(i).toString());
     }
     prefs.setStringList(_sharedPrefKey, strings);
+  }
+
+  void _deletePreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove(_sharedPrefKey);
   }
 
   //Helper Functions ------
@@ -211,6 +216,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   //CallBack ------
   void _onLike(WisdomFavList favList, Wisdom wisdom) {
+    _writeFavsToPreferences(context);
+
     bool isFav = favList.contains(wisdom);
     if (isFav) {
       favList.remove(wisdom);

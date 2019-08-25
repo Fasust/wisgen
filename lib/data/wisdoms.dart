@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:wisgen/data/advice.dart';
@@ -13,7 +14,9 @@ class Wisdom {
   Wisdom(this.advice, this.stockImURL);
 
   @override
-  String toString() => this.toJson().toString();
+  String toString(){
+    return jsonEncode(this.toJson());
+  }
 
   Map<String, dynamic> toJson() => {
         'advice': {'text': advice.text, 'id': advice.id},
