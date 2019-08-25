@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:wisgen/data/advice.dart';
-import 'package:wisgen/jsonable.dart';
+import 'package:wisgen/tools/jsonable.dart';
 
 /**
  * Data Structure that combines an shockImg and and an Advice to form a "Wisdom"

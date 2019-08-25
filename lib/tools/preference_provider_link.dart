@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wisgen/jsonable.dart';
+import 'package:wisgen/tools/jsonable.dart';
 import 'package:wisgen/provider/providable.dart';
 
 class PreferenceProviderLink<ProviderClass extends Providable>{

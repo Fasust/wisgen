@@ -11,8 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
 import 'package:wisgen/data/advice.dart';
-import 'package:wisgen/preference_provider_link.dart';
-import 'package:wisgen/widget/page_favorites.dart';
+import 'package:wisgen/tools/preference_provider_link.dart';
+import 'package:wisgen/widgets/page_favorites.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
 import 'card_advice.dart';
