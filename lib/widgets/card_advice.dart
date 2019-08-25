@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 import 'package:wisgen/data/wisdoms.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
@@ -67,8 +68,8 @@ class _Content extends StatelessWidget {
       subtitle: Container(
           padding: EdgeInsets.only(top: _smallPadding, bottom: _smallPadding),
           child:
-              Text('Advice #' + wisdom.advice.id, textAlign: TextAlign.left)),
-      trailing: Consumer<WisdomFavList>(
+              Text('Wisdom #' + wisdom.advice.id, textAlign: TextAlign.left)),
+      leading: Consumer<WisdomFavList>(
         builder: (context, favorites, _) => IconButton(
           icon: Icon(favorites.contains(wisdom)
               ? Icons.favorite
@@ -78,7 +79,25 @@ class _Content extends StatelessWidget {
           onPressed: onLike,
         ),
       ),
+      trailing: IconButton(
+        icon: Icon(Icons.share),
+        color: Colors.grey,
+        padding: EdgeInsets.all(_smallPadding),
+        onPressed: () {onShare();},
+      ),
     );
+  }
+
+  void onShare() {
+    String shareText =
+        "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
+            "\"" +
+            wisdom.advice.text +
+            "\"\n" +
+            "Related Image: " +
+            wisdom.stockImURL +
+            "\n\n... Pretty Deep 🤔";
+    Share.share(shareText);
   }
 }
 

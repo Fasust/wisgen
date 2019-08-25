@@ -22,6 +22,7 @@ dependencies:
   cached_network_image: ^1.1.1
   provider: ^3.0.0+1
   shared_preferences: ^0.5.3+4
+  share: ^0.6.2+1
   flutter:
     sdk: flutter
 
