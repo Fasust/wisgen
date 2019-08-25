@@ -2,7 +2,8 @@
 
 A small Cross-Platform Wisdom Generator using [Flutter](https://flutter.dev/) and a combination of external APIs
 
-This Wisdom Generator combines random advice from the [Advice Slip API](https://api.adviceslip.com) with vaguely fitting and vaguely thought provoking stock images from the [Unsplash Source API](https://source.unsplash.com/). You can also save bits of Wisdom you like in your _Favorites_.
+This Wisdom Generator combines random advice from the [Advice Slip API](https://api.adviceslip.com) with vaguely fitting and vaguely thought provoking stock images from the [Unsplash Source API](https://source.unsplash.com/). 
+You can also save bits of Wisdom you like in your _Favorites_ or share them with your friends.
 
 
 
@@ -17,10 +18,11 @@ I used this project to understand how Flutter handles communication with the web
 
 ### Used Packages
 - provider (for state handeling)
-- http
-- cached_network_image
-- flutter_launcher_icons
-- shared_preferences
+- http (for API calls)
+- cached_network_image (for cashing images)
+- flutter_launcher_icons (for easily setting the launcher icon)
+- shared_preferences (for accessing shared preferences as offline storage)
+- share (for sending _share-intents_)
  
 ### Some of Sources I can recommend 
 - [State handling in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)
