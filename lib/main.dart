@@ -9,7 +9,9 @@ void main() => runApp(ChangeNotifierProvider(
 
 /**
  * Material App Frame
- * Loads CardFeed
+ * Loads CardFeed (main app)
+ * Sets Theme Data
+ * Sets Routes
  */
 class MyApp extends StatelessWidget {
   @override

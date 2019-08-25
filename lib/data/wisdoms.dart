@@ -7,6 +7,7 @@ import 'package:wisgen/tools/jsonable.dart';
 
 /**
  * Data Structure that combines an shockImg and and an Advice to form a "Wisdom"
+ * It can be read from a JSON or returned as a JSON
  */
 class Wisdom extends Jsonable {
   final Advice advice;

@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:wisgen/data/wisdoms.dart';
 
@@ -23,6 +21,7 @@ import 'on_click_inkwell.dart';
  * A Listview that loads Images and Text from 2 API endpoints and
  * Displays them in Cards (lazy & Asyc)
  * Images as querried by keyword int the related text
+ * The Favorite Wisdoms are saved on the Phone using a PreferenceProviderLink
  */
 class PageWisdomFeed extends StatefulWidget {
   @override
@@ -30,19 +29,21 @@ class PageWisdomFeed extends StatefulWidget {
 }
 
 class PageWisdomFeedState extends State<PageWisdomFeed> {
-  //API End-Points
+  //API
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
   static const _networkErrorText =
-      '"No Network Connection, Tap the Screen to retry!"';
+      'No Network Connection, Tap the Screen to retry!';
+  final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
+  //UI
   static const int _minQueryWordLength = 3;
   static const double _margin = 16.0;
-  final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
 
   //Cash of Previously Loaded Wisdoms
   final List<Wisdom> _wisdoms = new List();
 
+  //Storage on Device
   static final PreferenceProviderLink _prefLink =
       new PreferenceProviderLink<WisdomFavList>(
           'wisdom_favs', new Wisdom(null, null));
@@ -76,11 +77,6 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             }),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   //UI-Elements ------
@@ -130,9 +126,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   CardAdvice _createWisdomCard(Wisdom wisdom, BuildContext context) {
-    return CardAdvice(
-        wisdom: wisdom,
-        onLike: () => onLike(context, wisdom));
+    return CardAdvice(wisdom: wisdom, onLike: () => onLike(context, wisdom));
   }
 
   //Async Data Fetchers to get Data from external APIs ------
@@ -200,7 +194,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     } else {
       favList.add(wisdom);
     }
-    
+
     _prefLink.writePrefs(context);
   }
 }
