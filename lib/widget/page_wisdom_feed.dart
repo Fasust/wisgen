@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisgen/data/wisdoms.dart';
 
 import 'package:wisgen/data/advice.dart';
+import 'package:wisgen/preference_provider_link.dart';
 import 'package:wisgen/widget/page_favorites.dart';
 import 'package:wisgen/provider/wisdom_fav_list.dart';
 
@@ -35,7 +36,6 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   static const _networkErrorText =
       '"No Network Connection, Tap the Screen to retry!"';
 
-  static const _sharedPrefKey = 'wisdom_favs';
   static const int _minQueryWordLength = 3;
   static const double _margin = 16.0;
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
@@ -43,9 +43,13 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   //Cash of Previously Loaded Wisdoms
   final List<Wisdom> _wisdoms = new List();
 
+  static final PreferenceProviderLink _prefLink =
+      new PreferenceProviderLink<WisdomFavList>(
+          'wisdom_favs', new Wisdom(null, null));
+
   @override
   void initState() {
-    _readFavsFromPreferences(context);
+    _prefLink.readPrefs(context);
     super.initState();
   }
 
@@ -147,33 +151,6 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     return _imagesURI + _stringToQuery(adviceText);
   }
 
-  //Shared Prefs ------
-  void _readFavsFromPreferences(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    List<String> strings = prefs.getStringList(_sharedPrefKey);
-
-    if (strings == null || strings.isEmpty || strings.length == 0) {return;}
-
-    for (int i = 0; i < strings.length; i++) {
-      Provider.of<WisdomFavList>(context).add(Wisdom.fromString(strings[i]));
-    }
-  }
-
-  void _writeFavsToPreferences(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    WisdomFavList favs = Provider.of<WisdomFavList>(context);
-    List<String> strings = new List();
-    for (int i = 0; i < favs.length(); i++) {
-      strings.add(favs.getAt(i).toString());
-    }
-    prefs.setStringList(_sharedPrefKey, strings);
-  }
-
-  void _deletePreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove(_sharedPrefKey);
-  }
-
   //Helper Functions ------
   String _stringToQuery(String input) {
     final List<String> dirtyWords = input.split(_nonLetterPattern);
@@ -216,13 +193,13 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   //CallBack ------
   void _onLike(WisdomFavList favList, Wisdom wisdom) {
-    _writeFavsToPreferences(context);
-
     bool isFav = favList.contains(wisdom);
     if (isFav) {
       favList.remove(wisdom);
     } else {
       favList.add(wisdom);
     }
+    
+    _prefLink.writePrefs(context);
   }
 }
