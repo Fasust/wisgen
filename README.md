@@ -1,6 +1,6 @@
 # Wisgen 🔮
 
-A small Cross-Platform Wisdom Generator using [Flutter](https://flutter.dev/) and a combination of external APIs
+A small Cross-Platform Wisdom Generato, built using [Flutter](https://flutter.dev/) and a combination of external APIs
 
 This Wisdom Generator combines random advice from the [Advice Slip API](https://api.adviceslip.com) with vaguely fitting and vaguely thought provoking stock images from the [Unsplash Source API](https://source.unsplash.com/). 
 You can also save bits of Wisdom you like in your _Favorites_ or share them with your friends.
@@ -24,7 +24,7 @@ I used this project to understand how Flutter handles communication with the web
 - shared_preferences (for accessing shared preferences as offline storage)
 - share (for sending _share-intents_)
  
-### Some of Sources I can recommend 
+### Some Sources I can recommend 
 - [State handling in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)
 - [Naming Conventions](https://dart.dev/guides/language/effective-dart/style)
 - [Code Readability](https://iirokrankka.com/2018/06/18/putting-build-methods-on-a-diet/)
