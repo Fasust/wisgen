@@ -165,13 +165,16 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     List<String> buffer = localAdvice.split('\n');
     List<Advice> wisBuffer = new List();
     String currentType;
+    int relativeIndex;
     for(int i = 0; i< buffer.length; i++){
       if(buffer[i].startsWith('#')){
         buffer[i] = buffer[i].substring(2);
         currentType = buffer[i];
+        relativeIndex = 1;
         continue;
       }
-      wisBuffer.add(new Advice(id:'$i',text: buffer[i],type: currentType));
+      wisBuffer.add(new Advice(id:'$relativeIndex',text: buffer[i],type: currentType));
+      relativeIndex++;
     }
     return wisBuffer;
   }
