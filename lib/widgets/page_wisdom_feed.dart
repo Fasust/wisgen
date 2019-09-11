@@ -41,7 +41,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   final random = new Random();
 
   //UI
-  static const int _minQueryWordLength = 3;
+  static const int _minQueryWordLength = 4;
   static const double _margin = 16.0;
 
   //Cash of Previously Loaded Wisdoms
@@ -188,7 +188,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     final List<String> dirtyWords = input.split(_nonLetterPattern);
     String query = "";
     dirtyWords.forEach((w) {
-      if (w.isNotEmpty && w.length > _minQueryWordLength) {
+      if (w.isNotEmpty && w.length >= _minQueryWordLength) {
         query += w + ",";
       }
     });

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 import 'package:wisgen/data/wisdoms.dart';
@@ -134,6 +135,13 @@ class _Image extends StatelessWidget {
         child: Icon(Icons.error),
         height: _imageHeight,
       ),
+      placeholder: (context, url) => Container(
+          alignment: Alignment(0.0, 0.0),
+          height: _imageHeight,
+          child: new SpinKitCircle(
+            color: Theme.of(context).accentColor,
+            size: 75.0,
+          )),
     );
   }
 }

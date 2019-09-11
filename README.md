@@ -33,6 +33,7 @@ I used this project to understand how Flutter handles communication with the web
 - cached_network_image (for cashing images)
 - flutter_launcher_icons (for easily setting the launcher icon)
 - shared_preferences (for accessing shared preferences as offline storage)
+- flutter_spinkit (loading animation)
 - share (for sending _share-intents_)
  
 ## Some Sources I can recommend 📚
