@@ -32,12 +32,13 @@ class PageWisdomFeed extends StatefulWidget {
 }
 
 class PageWisdomFeedState extends State<PageWisdomFeed> {
-  //API
   static const _adviceURI = 'https://api.adviceslip.com/advice';
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
+  static const _localAdvicePath = './assets/advice.txt';
   static const _networkErrorText =
       'No Network Connection, Tap the Screen to retry!';
   final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
+  final random = new Random();
 
   //UI
   static const int _minQueryWordLength = 3;
@@ -148,35 +149,38 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   Future<Advice> _fetchLocalAdvice(BuildContext context) async {
-    if(_localAdvice == null){
+    if (_localAdvice == null) {
       _localAdvice = await _bufferLocalAdvice(context);
-    } 
-    
-    var rng = new Random();
-    return _localAdvice[rng.nextInt(_localAdvice.length)];
+    }
+    return _localAdvice[random.nextInt(_localAdvice.length)];
   }
 
   Future<String> _fetchImage(String adviceText) async {
     return _imagesURI + _stringToQuery(adviceText);
   }
 
-  Future<List<Advice>> _bufferLocalAdvice(BuildContext context) async{
-    String localAdvice = await DefaultAssetBundle.of(context).loadString('./assets/advice.txt');
-    List<String> buffer = localAdvice.split('\n');
-    List<Advice> wisBuffer = new List();
+  Future<List<Advice>> _bufferLocalAdvice(BuildContext context) async {
+    String localAdvice =
+        await DefaultAssetBundle.of(context).loadString(_localAdvicePath);
+    List<String> adviceStrings = localAdvice.split('\n');
+    List<Advice> wisdoms = new List();
+
     String currentType;
     int relativeIndex;
-    for(int i = 0; i< buffer.length; i++){
-      if(buffer[i].startsWith('#')){
-        buffer[i] = buffer[i].substring(2);
-        currentType = buffer[i];
+
+    for (int i = 0; i < adviceStrings.length; i++) {
+      if (adviceStrings[i].startsWith('#')) {
+        //new type of advice
+        adviceStrings[i] = adviceStrings[i].substring(2);
+        currentType = adviceStrings[i];
         relativeIndex = 1;
-        continue;
+        continue; //do not add type header
       }
-      wisBuffer.add(new Advice(id:'$relativeIndex',text: buffer[i],type: currentType));
+      wisdoms.add(new Advice(
+          id: '$relativeIndex', text: adviceStrings[i], type: currentType));
       relativeIndex++;
     }
-    return wisBuffer;
+    return wisdoms;
   }
 
   //Helper Functions ------

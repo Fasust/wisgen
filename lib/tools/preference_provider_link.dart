@@ -38,7 +38,7 @@ class PreferenceProviderLink<ProviderClass extends Providable> {
     ProviderClass provider = Provider.of<ProviderClass>(context);
     List<String> strings = new List();
     for (int i = 0; i < provider.length(); i++) {
-      strings.add(provider.getAt(i).toString());
+      strings.add('$provider.getAt(i)');
     }
     prefs.setStringList(_sharedPrefKey, strings);
   }
