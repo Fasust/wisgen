@@ -1,4 +1,4 @@
-# Grandparent Advice
+# Grandma's Advice
 Don’t look at the calendar. Just keep celebrating every day. 
 Invest in quality pieces, they never go out of style. 
 I make myself go out every day, even if it’s only to walk around the block. The key to staying young is to keep moving. 
@@ -172,3 +172,50 @@ You are the only person with the power and ability to control your own level of 
 Do more of what you love, less of what you don’t.
 Inspiration is everything, yet nothing if you don’t act on it
 Be present here and now. You are lucky. Your life is a gift. Realize it.
+# Mum's Advice
+You are not your job. You are not the amount of cash you have in the bank. You are not your possessions.
+Find your passion. Look for what inspires you. Find what you love to do and pursue it with all your heart. You may well find a way how to make money from doing it.
+Love hurts. But it is so much better than closing yourself off for fear of being hurt and not experiencing love.
+Communication and respect are the foundations for a lasting relationship.
+Three things are needed in a relationship — lust, love, and shared values.
+Never compare yourself to others. It’s a waste of energy. You are unique and have your own gifts to offer the world.
+Look after your health — physical, mental, and spiritual.
+Don’t complain. Decide what you will tolerate and get on with life.
+Set boundaries — work, family, and friendships.
+Little stuff matters — manners get you a long way.
+Be grateful. List the things you are grateful for everyday.
+Expect to fail. Failure is not fatal. Learn the lessons, then get back up and try again.
+Have outrageous dreams. You’ll be amazed at what comes true.
+Act with integrity at all times.
+Call your parents. They may well have screwed up but they raised you to the best of their abilities.
+Know your values. Let no one violate what you hold as important be that a boss or your partner.
+You don’t need to have it all worked out. Tomorrow is another day.
+Lighten up on yourself. Breathe deeply and slowly.
+Listen to your inner dialogue. Would you speak to someone you love in the same way?
+Take risks, take leaps of faith. You’ll grow wings.
+Be of service to others. Be interested in others. People will always remember what you did for them.
+“No” is a complete sentence.
+Don’t stress so much over decisions. Decisions needn’t be forever.
+Cultivate and nurture friendships. With love and care they can last a lifetime. At the same time don’t be afraid to edit friendships.
+You are enough just as you are. Perfect in your imperfection.
+Learn to accept compliments. Simply say ‘thank you’.
+Be willing to show that you are vulnerable. It is in fact the greatest act of courage.
+You are never alone.
+Forgive. Yourself first and then others. We are all in this together.
+Your attitude is always a choice.
+Laugh a lot. Have fun.
+Magic happens outside your comfort zone.
+Learn to love yourself now. It gets harder if you leave it until you’re older.
+Don’t worry about what other people think. They think about you a lot less than you imagine.
+Follow your intuition. Your guts have the answer. Every time.
+Happiness starts within. Do not expect anyone else to make you happy.
+Be financially savvy right from the off. Save 10%. Debt is not pretty. Make your own lunch for work. A cappuccino and a sandwich a day soon add up.
+Life isn’t a race. Stop and smell the roses. Really.
+When overwhelmed ask yourself, “Will this even be an issue in 5 years time?”
+Change happens. It’s one of the great certainties in life. Learn to roll with it.
+# Faustregel 
+Every respectable household should always have some emergency duct tape available.
+Don't open up your computer and start "fixing" it yourself if you don't know what yo are doing.
+Don't cheap out on your PCs power-supply.
+Back-up your Pictures.
+Visit Iceland.
