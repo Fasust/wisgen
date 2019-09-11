@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,7 @@ class PreferenceProviderLink<ProviderClass extends Providable> {
     if (strings == null || strings.isEmpty) {
       return;
     }
-
+    
     for (int i = 0; i < strings.length; i++) {
       Provider.of<ProviderClass>(context).add(_jsonable.fromString(strings[i]));
     }
@@ -38,7 +40,7 @@ class PreferenceProviderLink<ProviderClass extends Providable> {
     ProviderClass provider = Provider.of<ProviderClass>(context);
     List<String> strings = new List();
     for (int i = 0; i < provider.length(); i++) {
-      strings.add('$provider.getAt(i)');
+      strings.add('${provider.getAt(i)}');
     }
     prefs.setStringList(_sharedPrefKey, strings);
   }
