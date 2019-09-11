@@ -69,7 +69,7 @@ class _Content extends StatelessWidget {
                 title: Text(wisdom.advice.text),
                 subtitle: Container(
                     padding: EdgeInsets.only(top: smallPadding),
-                    child: Text('Wisdom #' + wisdom.advice.id,
+                    child: Text(wisdom.advice.type + ' #' + wisdom.advice.id,
                         textAlign: TextAlign.left)),
               )),
           Expanded(
@@ -96,34 +96,6 @@ class _Content extends StatelessWidget {
             ),
           )
         ],
-      ),
-    );
-    return ListTile(
-      title: Container(
-        padding: EdgeInsets.only(top: smallPadding, bottom: smallPadding),
-        child: Text(wisdom.advice.text),
-      ),
-      subtitle: Container(
-          padding: EdgeInsets.only(top: smallPadding, bottom: smallPadding),
-          child:
-              Text('Wisdom #' + wisdom.advice.id, textAlign: TextAlign.left)),
-      leading: Consumer<WisdomFavList>(
-        builder: (context, favorites, _) => IconButton(
-          icon: Icon(favorites.contains(wisdom)
-              ? Icons.favorite
-              : Icons.favorite_border),
-          color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-          padding: EdgeInsets.all(smallPadding),
-          onPressed: onLike,
-        ),
-      ),
-      trailing: IconButton(
-        icon: Icon(Icons.share),
-        color: Colors.grey,
-        padding: EdgeInsets.all(smallPadding),
-        onPressed: () {
-          onShare();
-        },
       ),
     );
   }

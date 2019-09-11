@@ -164,9 +164,14 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     String localAdvice = await DefaultAssetBundle.of(context).loadString('./assets/advice.md');
     List<String> buffer = localAdvice.split('\n');
     List<Advice> wisBuffer = new List();
-    buffer.removeAt(0);
+    String currentType;
     for(int i = 0; i< buffer.length; i++){
-      wisBuffer.add(new Advice(id:'$i',text: buffer[i]));
+      if(buffer[i].startsWith('#')){
+        buffer[i] = buffer[i].substring(2);
+        currentType = buffer[i];
+        continue;
+      }
+      wisBuffer.add(new Advice(id:'$i',text: buffer[i],type: currentType));
     }
     return wisBuffer;
   }

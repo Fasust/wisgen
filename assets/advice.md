@@ -1,4 +1,4 @@
-# 100 Pieces of Advice from 100-Year-Olds [ref](http://mentalfloss.com/article/54286/100-pieces-advice-100-year-olds)
+# Grandparent Advice
 Don’t look at the calendar. Just keep celebrating every day. 
 Invest in quality pieces, they never go out of style. 
 I make myself go out every day, even if it’s only to walk around the block. The key to staying young is to keep moving. 
@@ -42,14 +42,12 @@ Have lots of people in the house and lots of different kinds of people—young, 
 Just keep going. 
 I attribute my longevity to a great extent to walking, not being in the back of the car strapped down. 
 I put my health down to whiskey and cigarettes. I only drink when I’m out, but my doctor said I wouldn’t be alive without them. I’m still alive, and I can lift my elbows—it’s great. 
-We all remember how as children, when we were having fun, we often forgot to eat or sleep. I believe that we can keep that attitude as adults, too. It’s best not to tire the body with too many rules such as lunchtime and bedtime. 
 There is no need to ever retire, but if one must, it should be a lot later than 65.  
 To stay healthy always, take the stairs and carry your own stuff. I take two stairs at a time, to get my muscles moving.  
 Pain is mysterious, and having fun is the best way to forget it. 
 Don’t be crazy about amassing material things. Remember: you don’t know when your number is up, and you can’t take it with you to the next place. 
 Science alone can’t help or cure people. 
 Find a role model and aim to achieve even more than they could ever do. 
-It’s wonderful to live long. Until one is 60 years old, it is easy to work for one’s family and to achieve one’s goals. But in our later years, we should strive to contribute to society. Since the age of 65, I have worked as a volunteer. I still put in 18 hours seven days a week and love every minute of it. 
 This is some advice for the ladies. Don’t marry an older man, marry a younger one. 
 I try not to worry. I just try to live. 
 I try to have enough trust and confidence in myself to deal with things as they come. 
@@ -63,7 +61,6 @@ Quit while you’re ahead.
 It’s just as important to take care of your mind. I take two classes… and I’ve studied everything from anti-Semitism to current events. 
 [Humor is] a life force, a way of surviving the difficulties of living. 
 When you laugh at yourself, you prevent others from laughing at you. 
-I think [people] have to be curious. They have to be interested in life outside their little aches and pains. They have to be excited about seeing new things, meeting new people, watching a new play—just passionate about life. 
 I don’t care what you’re passionate about: maybe saving Dixie cup covers. But if you do it passionately, you’re alive. 
 Age is not a disease. 
 Don’t get hurt. 
@@ -77,7 +74,6 @@ I try to take the time to look at and appreciate the smaller things that make th
 Do something interesting every day; otherwise you disintegrate. 
 Learning new things makes you happy and keeps your mind active. 
 Sleep well, try not to worry, and enjoy good dreams. 
-I participate in lots of activities. I play Bingo, do meditation and crafts, and attend fitness classes, like Zumba Gold for seniors, chair yoga, and sittercise… I don’t miss happy hour either! I drop in three times a week. 
 Be lovable. I’ve lived a long life because there are so many people who love me. 
 I take a drink of Scotch every day. And I feel great afterward. 
 Keep kosher. 
@@ -96,3 +92,83 @@ Take one day at a time, and go along with the tide.
 You have to be lucky, but I made the best of things when bad things happened. I also ate prunes every single day. 
 Do what you have to do. Don’t analyze it, just do it. 
 Take it easy, enjoy life, what will be will be. Sleep well, have a Bailey’s Irish Cream before bed if you have a cold—you will wake up fine the next morning. 
+# InkTank
+Have the courage to live a life true to yourself, not the life others expect of you.
+Never attribute to malice that which can be adequately explained by stupidity.
+“There is nothing noble in being superior to your fellow man; true nobility is being superior to your former self.” Ernest Hemingway
+Don’t make decisions when you’re angry. Don’t make promises when you’re happy.
+“Never argue with a stupid person, they’ll drag you down to their level and beat you with experience.” Mark twain
+Only pack what you can carry yourself.
+Remember you’ll always regret what you didn’t do rather than what you did.
+“You’d worry less about what people think about you if you knew how seldom they do.” David Foster Wallace
+If you blame it on someone else, don’t expect it to get better.
+“You can be the ripest, juiciest peach in the world, but there will always be someone who hates peaches.” Dita von Teese
+If the grass is greener on the other side, there’s probably more manure there.
+Don’t give up what you want most for what you want now.
+With regards to the opposite sex: If you look hungry, you’ll starve.
+“Never let your sense of morals prevent you from doing what is right.” Isaac Asimov
+Strive to be the man you want your daughter to marry.
+“Remember only enemies speak the truth. Friends and lovers lie endlessly, caught in the web of duty.” Stephen King
+Never forget your car keys will change your car from one tonne of inert metal into one of the most deadly killing machines that has been invented.
+Wait 24 hours before getting mad and reacting about anything. If it doesn’t bother you in 24 hours time, it probably isn’t important enough to get mad over.
+Never make someone a priority who only makes you an option.
+Try not to take anything personally. No one thinks about you as much as you do.
+“If you want to know what a man’s like, take a good look at how he treats his inferiors, not his equals.” Sirius Black
+Figure out what you love to do, and then figure out how to get someone to pay you to do it.
+If you treat a woman like a queen, and she treats you like a jester, your princess is in another castle.
+Whenever something happens that makes you sad, ask yourself whether you’d still care about it when you’re ninety.
+Be persistent. When knowledge and ability aren’t enough, be persistent.
+“Life is scary. Get used to it. There are no magical fixes. It’s all up to you. So get up off your keister, get out of here, and go start doin’ the work. Nothing in this world that’s worth having comes easy.” Bob Kelso
+Smart girls like to hear they’re pretty, pretty girls like to hear that they’re smart.
+Happiness is a choice and everything else is a matter of perspective.
+# Life Hack
+Marry your best friend: If the person you’re the most comfortable with isn’t your spouse, make them! (Assuming this person is not your family member)
+Don’t stop learning: If you start coasting through life, you’re gonna lose. Always stretch your intellect.
+Forgive as much as possible. Grudges achieve little.
+Do something that’s not for money.
+Time passes by a lot faster than you’d think. This effect accelerates with age.
+Some things can’t be learned; they can only be experienced.
+Wealth is relatively unimportant.
+Don’t lie to yourself.
+The past is something you learn from.  It is not something you live in.
+Wealth is measured by your happiness and not by your financial statement.
+Do things for yourself in everything you do; don’t live for other people.
+Learn to handle criticism.
+Value the people in your life.
+Be happy for other people who are happy.
+Embrace vulnerability.
+Challenge yourself a little bit everyday.
+Quality beats quantity.
+Don’t get too attached to material things.
+Seek out people with different beliefs and views of the world to yours and get to know their side of the story.
+Living a good life is the best way possible to convince people.
+Nobody has it all figured out.
+There’s no shame in saying “I don’t know”.
+Possessions own you.
+Get outside and do something with other people.
+Take your time.
+You can’t please everyone.
+Make mistakes – and LOTS of them!
+Wear sunscreen.
+Stop thinking so much and act.
+Dance and sing whenever possible.
+You don’t know what you’ve got ’till its gone.
+Swallow your pride and apologies.
+People are not alone in being alone.
+Love isn’t “all” you need, but if you don’t have it in some form, your life will be very empty.
+Life is a million times easier when you focus on the great things in people and not the bad.
+The grass is only greener where you water it.
+Money isn’t an end, it’s a means.
+Nobody can fix you. You have to fix your own problems or adapt to them. Other people can be helpful, but only so much.
+Being a “genius,” in IQ terms, means nothing if you don’t contribute anything important to society.
+People are your greatest resource.
+Repetition is the father of learning.
+Honesty is the best policy.
+Listening > Talking.
+Determination and motivation trump all else.
+Remember your humanity.
+Take time out to practice humility.
+You are the only person with the power and ability to control your own level of happiness. You and you alone control how happy you allow yourself to be.
+Do more of what you love, less of what you don’t.
+Inspiration is everything, yet nothing if you don’t act on it
+Be present here and now. You are lucky. Your life is a gift. Realize it.
