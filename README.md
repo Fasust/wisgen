@@ -10,7 +10,7 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/additional_material/mock-feed-3.png)    | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/additional_material/mock-feed-2.png)  | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/additional_material/mock-feed-1.png)  |
 | ------------- |:-------------:| -----:|
 
-### Where are the Wisdoms from?
+## Where are the Wisdoms from?
 - [Advice Slip API](https://api.adviceslip.com) (Currently Broken)
 - [Advice from 100-Year-Olds](http://mentalfloss.com/article/54286/100-pieces-advice-100-year-olds)
 - [InkTank](https://inktank.fi/28-of-the-best-pieces-of-advice-about-life-youll-ever-read/)
@@ -21,13 +21,13 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 ### Wanna Contribute?
 You can suggest your own peaces of Wisdom through Pull Request if you want. [This](https://github.com/Fasust/wisgen/blob/master/assets/advice.txt) is where all the offline wisdoms are saved.
 
-### Purpose
+## Purpose of Wisgen
 I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handels _state_ and how to transfer that _state_ over multiple classes withing the Widget Tree.
 
-### Download
+## Download
 [Android APK 📲](https://github.com/Fasust/wisgen/blob/master/app-release.apk)
 
-### Used Packages
+## Used Packages
 - provider (for state handeling)
 - http (for API calls)
 - cached_network_image (for cashing images)
@@ -35,7 +35,7 @@ I used this project to understand how Flutter handles communication with the web
 - shared_preferences (for accessing shared preferences as offline storage)
 - share (for sending _share-intents_)
  
-### Some Sources I can recommend 
+## Some Sources I can recommend 
 - [State handling in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)
 - [Naming Conventions](https://dart.dev/guides/language/effective-dart/style)
 - [Code Readability](https://iirokrankka.com/2018/06/18/putting-build-methods-on-a-diet/)
