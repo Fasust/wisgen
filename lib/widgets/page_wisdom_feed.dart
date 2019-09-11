@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +46,9 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   //Cash of Previously Loaded Wisdoms
   final List<Wisdom> _wisdoms = new List();
 
+  //Cash of local Wisdoms
+  List<Advice> _localAdvice;
+
   //Storage on Device
   static final PreferenceProviderLink _prefLink =
       new PreferenceProviderLink<WisdomFavList>(
@@ -70,7 +76,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
                 return _createWisdomCard(_wisdoms[i], context);
               } else {
                 return FutureBuilder(
-                    future: _createWisdom(),
+                    future: _createWisdom(context),
                     builder: (context, snapshot) =>
                         _buildNewWisdomFromFetched(context, snapshot));
               }
@@ -130,8 +136,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   //Async Data Fetchers to get Data from external APIs ------
-  Future<Wisdom> _createWisdom() async {
-    final advice = await _fetchAdvice();
+  Future<Wisdom> _createWisdom(BuildContext context) async {
+    final advice = await _fetchLocalAdvice(context);
     final img = await _fetchImage(advice.text);
     return Wisdom(advice, img);
   }
@@ -141,8 +147,28 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     return Advice.fromJson(json.decode(response.body));
   }
 
+  Future<Advice> _fetchLocalAdvice(BuildContext context) async {
+    if(_localAdvice == null){
+      _localAdvice = await _bufferLocalAdvice(context);
+    } 
+    
+    var rng = new Random();
+    return _localAdvice[rng.nextInt(_localAdvice.length)];
+  }
+
   Future<String> _fetchImage(String adviceText) async {
     return _imagesURI + _stringToQuery(adviceText);
+  }
+
+  Future<List<Advice>> _bufferLocalAdvice(BuildContext context) async{
+    String localAdvice = await DefaultAssetBundle.of(context).loadString('./assets/advice.md');
+    List<String> buffer = localAdvice.split('\n');
+    List<Advice> wisBuffer = new List();
+    buffer.removeAt(0);
+    for(int i = 0; i< buffer.length; i++){
+      wisBuffer.add(new Advice(id:'$i',text: buffer[i]));
+    }
+    return wisBuffer;
   }
 
   //Helper Functions ------
