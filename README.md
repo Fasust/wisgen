@@ -19,7 +19,7 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 - And a few Bits of my own Wisdom
 
 ### Wanna Contribute? 👪
-You can suggest your own peaces of Wisdom through Pull Request if you want. [This](https://github.com/Fasust/wisgen/blob/master/assets/advice.txt) is where all the offline wisdoms are saved.
+You can suggest your own peaces of Wisdom through Pull Request if you want. [This](https://github.com/Fasust/wisgen/blob/master/assets/advice.txt) is where all the offline wisdoms are saved. The "#" markes the beginning of new _type_ of Wisdom.
 
 ## Purpose of Wisgen
 I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handels _state_ and how to transfer that _state_ over multiple classes withing the Widget Tree.
