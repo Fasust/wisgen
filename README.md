@@ -11,7 +11,7 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 | -------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
 
 ## Where do I get the Wisdoms from?
-- [Advice Slip API](https://api.adviceslip.com) (Currently Broken)
+- [Advice Slip API](https://api.adviceslip.com)
 - [Advice from 100-Year-Olds](http://mentalfloss.com/article/54286/100-pieces-advice-100-year-olds)
 - [InkTank](https://inktank.fi/28-of-the-best-pieces-of-advice-about-life-youll-ever-read/)
 - [Life Hacks](https://www.lifehack.org/articles/lifestyle/50-life-lessons-that-people-arent-told-about.html)
