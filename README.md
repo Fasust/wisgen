@@ -7,7 +7,7 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 
 
 
-| ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-3.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-2.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-1.png) |
+| ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-1.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-2.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-3.png) |
 | -------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
 
 ## Where do I get the Wisdoms from?
