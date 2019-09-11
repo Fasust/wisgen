@@ -10,7 +10,7 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/additional_material/mock-feed-3.png)    | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/additional_material/mock-feed-2.png)  | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/additional_material/mock-feed-1.png)  |
 | ------------- |:-------------:| -----:|
 
-### Where is the Wisdom from?
+### Where are the Wisdoms from?
 - [Advice Slip API](https://api.adviceslip.com) (Currently Broken)
 - [Advice from 100-Year-Olds](http://mentalfloss.com/article/54286/100-pieces-advice-100-year-olds)
 - [InkTank](https://inktank.fi/28-of-the-best-pieces-of-advice-about-life-youll-ever-read/)
@@ -19,7 +19,7 @@ You can also save bits of Wisdom you like in your _Favorites_ or share them with
 - And a few Bits of my own Wisdom
 
 ### Wanna Contribute?
-You can suggest your own peaces of Wisdom through Pull Request if you want. This is where all the offline wisdoms are saved.
+You can suggest your own peaces of Wisdom through Pull Request if you want. [This](https://github.com/Fasust/wisgen/blob/master/assets/advice.txt) is where all the offline wisdoms are saved.
 
 ### Purpose
 I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handels _state_ and how to transfer that _state_ over multiple classes withing the Widget Tree.
