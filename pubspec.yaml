@@ -2,7 +2,7 @@ name: wisgen
 description: A Wisdom Generator
 #for release:       flutter build apk --release
 #for listing AVDs:  ~/AppData/Local/Android/Sdk/emulator/emulator.exe -list-avds
-#for starting AVD:  ~/AppData/Local/Android/Sdk/emulator/emulator.exe -avd Pixel_2_API_28_2
+#for starting AVD:  ~/AppData/Local/Android/Sdk/emulator/emulator.exe -avd Pixel_2_API_28
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
