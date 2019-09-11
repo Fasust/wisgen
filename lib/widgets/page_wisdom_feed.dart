@@ -161,7 +161,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   Future<List<Advice>> _bufferLocalAdvice(BuildContext context) async{
-    String localAdvice = await DefaultAssetBundle.of(context).loadString('./assets/advice.md');
+    String localAdvice = await DefaultAssetBundle.of(context).loadString('./assets/advice.txt');
     List<String> buffer = localAdvice.split('\n');
     List<Advice> wisBuffer = new List();
     String currentType;
