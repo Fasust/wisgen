@@ -44,6 +44,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
         child: BlocBuilder(
           bloc: _wisdomBloc,
           builder: (context, WisdomState state) {
+            log('state: ' +state.toString());
+            
             //This is where we determine the State of the Wisdom BLoC
             if (state is ErrorWisdomState) return _error(state);
 
@@ -98,6 +100,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   Widget _listView(BuildContext context, LoadedWisdomState state) {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
+        log("list index: " + "$index");
+        log("Wisdom Length: " + "${state.wisdoms.length}");
         return index >= state.wisdoms.length
         //This is where the Loading Inference is made. 
         //We don't have more List items so the BLoC must be loading

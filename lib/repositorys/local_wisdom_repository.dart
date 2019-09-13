@@ -4,26 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositorys/repository.dart';
 
-class LocalWisdomRepository implements Repository<Wisdom>{
+class LocalWisdomRepository implements Repository<Wisdom> {
   static const _path = './assets/advice.txt';
-  final Random _random = new Random();
-  List<Wisdom> _wisdoms;
-
+  List<Wisdom> _buffer;
+  Random _random = new Random();
 
   @override
   Future<List<Wisdom>> fetch(int amount, BuildContext context) async {
-    if(_wisdoms == null) _wisdoms = await _loadWisdom(context);
+    if (_buffer == null) _buffer = await loadDataToBuffer(context);
 
     List<Wisdom> res = new List();
-    for(int i = 0; i< amount; i++){
-      res.add(_wisdoms[_random.nextInt(_wisdoms.length)]);
+    for (int i = 0; i < amount; i++) {
+      res.add(_buffer[_random.nextInt(_buffer.length)]);
     }
     return res;
   }
 
-  Future<List<Wisdom>> _loadWisdom(BuildContext context) async {
-    String localAdvice =
-        await DefaultAssetBundle.of(context).loadString(_path);
+  Future<List<Wisdom>> loadDataToBuffer(BuildContext context) async {
+    String localAdvice = await DefaultAssetBundle.of(context).loadString(_path);
     List<String> strings = localAdvice.split('\n');
     List<Wisdom> wisdoms = new List();
 
@@ -38,8 +36,8 @@ class LocalWisdomRepository implements Repository<Wisdom>{
         relativeIndex = 1;
         continue; //do not add type header
       }
-      wisdoms.add(new Wisdom(
-          id: relativeIndex, text: strings[i], type: currentType));
+      wisdoms.add(
+          new Wisdom(id: relativeIndex, text: strings[i], type: currentType));
       relativeIndex++;
     }
     return wisdoms;
