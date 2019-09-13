@@ -42,12 +42,6 @@ class PageFavoriteList extends StatelessWidget {
             Wisdom wisdom = favorites[i];
             return CardWisdom(
               wisdom: wisdom,
-              onLike: () {
-                //Calling the FavoriteProvider form Context to 
-                //remove current Wisdom on like btn press
-                BlocProvider.of<FavoriteBloc>(context)
-                    .dispatch(RemoveFavoriteEvent(wisdom));
-              },
             );
           } else {
             return null;

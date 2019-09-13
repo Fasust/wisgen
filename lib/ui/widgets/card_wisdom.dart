@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:wisgen/blocs/favorite_bloc.dart';
+import 'package:wisgen/blocs/favorite_event.dart';
 import 'package:wisgen/models/wisdom.dart';
 
 import '../ui_helper.dart';
@@ -19,11 +22,9 @@ class CardWisdom extends StatelessWidget {
   static const double _cardElevation = 2;
   static const double _cardBorderRadius = 7;
 
-
   final Wisdom wisdom;
-  final VoidCallback onLike;
 
-  CardWisdom({Key key, this.wisdom, this.onLike}) : super(key: key);
+  CardWisdom({Key key, this.wisdom}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,25 +87,25 @@ class CardWisdom extends StatelessWidget {
               },
             ),
           ),
-          // Expanded(
-          //   flex: 1,
-          //   child: Consumer<WisdomFavList>(
-          //     builder: (context, favorites, _) => IconButton(
-          //       icon: Icon(favorites.contains(wisdom)
-          //           ? Icons.favorite
-          //           : Icons.favorite_border),
-          //       color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-          //       onPressed: onLike,
-          //       padding: EdgeInsets.only(right: _smallPadding),
-          //     ),
-          //   ),
-          // )
+          Expanded(
+            flex: 1,
+            child: BlocBuilder<FavoriteBloc, List<Wisdom>>(
+              builder: (context, favorites) => IconButton(
+                icon: Icon(favorites.contains(wisdom)
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
+                onPressed: onLike(context, favorites),
+                padding: EdgeInsets.only(right: _smallPadding),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
-  void onShare() {
+  onShare() {
     String shareText =
         "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
             "\"" +
@@ -114,5 +115,15 @@ class CardWisdom extends StatelessWidget {
             wisdom.imgURL +
             "\n\n... Pretty Deep 🤔";
     Share.share(shareText);
+  }
+
+  onLike(BuildContext context, List<Wisdom> favorites) {
+    final FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
+
+    if (favorites.contains(wisdom)) {
+      favoriteBloc.dispatch(RemoveFavoriteEvent(wisdom));
+    } else {
+      favoriteBloc.dispatch(AddFavoriteEvent(wisdom));
+    }
   }
 }
