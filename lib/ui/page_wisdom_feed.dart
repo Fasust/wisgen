@@ -17,6 +17,7 @@ class PageWisdomFeed extends StatefulWidget {
 }
 
 class PageWisdomFeedState extends State<PageWisdomFeed> {
+  //We keep the Wisdom BLoC local because we only need it in this View
   final WisdomBloc _wisdomBloc = new WisdomBloc();
   final _scrollController = ScrollController();
   static const _scrollThreshold = 200.0;
@@ -39,10 +40,12 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
         child: BlocBuilder(
           bloc: _wisdomBloc,
           builder: (context, WisdomState state) {
+            //This is where we determine the State of the Wisdom BLoC
             if (state is ErrorWisdomState) return _error(state);
 
             if (state is LoadedWisdomState) return _listView(context, state);
-
+            
+            log(state.toString());
             return _loading(context);
           },
         ),
@@ -57,7 +60,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     super.dispose();
   }
 
-  //UI-Elements ------
+  //UI-Elements ----
   AppBar _appBar(BuildContext context) {
     return AppBar(
       title: Text(
@@ -92,7 +95,9 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         return index >= state.wisdoms.length
-            ? CardLoading()
+        //This is where the Loading Inference is made. 
+        //We don't have more List items so the BLoC must be loading
+            ? CardLoading() 
             : CardWisdom(wisdom: state.wisdoms[index]);
       },
       itemCount: state.wisdoms.length + 1,
@@ -108,7 +113,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     ));
   }
 
-  //Navigation -----
+  //Navigation ----
   void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(context,
@@ -116,7 +121,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   }
 
   //Helpers ----
-  //Fetching Data on scroll
+  //Dispatching fetch events to the BLoC when we reach the end of the List
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
