@@ -82,7 +82,7 @@ class CardWisdom extends StatelessWidget {
               icon: Icon(Icons.share),
               color: Colors.grey,
               onPressed: () {
-                onShare();
+                _onShare();
               },
             ),
           ),
@@ -94,7 +94,7 @@ class CardWisdom extends StatelessWidget {
                     ? Icons.favorite
                     : Icons.favorite_border),
                 color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-                onPressed: onLike(context, favorites),
+                onPressed: () {_onLike(context,favorites);},
                 padding: EdgeInsets.only(right: _smallPadding),
               ),
             ),
@@ -104,7 +104,7 @@ class CardWisdom extends StatelessWidget {
     );
   }
 
-  onShare() {
+  void _onShare() {
     String shareText =
         "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
             "\"" +
@@ -116,7 +116,7 @@ class CardWisdom extends StatelessWidget {
     Share.share(shareText);
   }
 
-  onLike(BuildContext context, List<Wisdom> favorites) {
+  void _onLike(BuildContext context, List<Wisdom> favorites) {
     final FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
 
     if (favorites.contains(wisdom)) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:wisgen/models/wisdom.dart';
 
@@ -17,7 +18,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
     if (event is AddFavoriteEvent) newState.add(event.favorite);
 
     if (event is RemoveFavoriteEvent) newState.remove(event.favorite);
-
+    log("Fav Length: ${newState.length}");
     yield newState;
   }
 }

@@ -35,7 +35,13 @@ class PageFavoriteList extends StatelessWidget {
     //Subscribing the ListView to the Favorite BLoC
     return BlocBuilder<FavoriteBloc, List<Wisdom>>(
         builder: (context, favorites) {
-      ListView.builder(
+      if (favorites.length == 0) {
+        return Container(
+          alignment: Alignment(0.0, 0.0),
+          child: Text("You don't have and Favorites jet"),
+        );
+      }
+      return ListView.builder(
         padding: EdgeInsets.all(UIHelper.listPadding),
         itemBuilder: (context, i) {
           if (favorites.length > i) {
@@ -43,8 +49,6 @@ class PageFavoriteList extends StatelessWidget {
             return CardWisdom(
               wisdom: wisdom,
             );
-          } else {
-            return null;
           }
         },
       );
