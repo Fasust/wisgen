@@ -99,6 +99,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   Widget _listView(BuildContext context, LoadedWisdomState state) {
     return ListView.builder(
+      padding: const EdgeInsets.all(UIHelper.listPadding),
       itemBuilder: (BuildContext context, int index) {
         log("list index: " + "$index");
         log("Wisdom Length: " + "${state.wisdoms.length}");
