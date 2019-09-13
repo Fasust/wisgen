@@ -1,17 +1,23 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:wisgen/models/wisdom.dart';
 
 import 'favorite_event.dart';
-import 'favorite_state.dart';
 
-class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
+class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
   @override
-  FavoriteState get initialState => InitialFavoriteState();
+  List<Wisdom> get initialState => new List();
 
   @override
-  Stream<FavoriteState> mapEventToState(
+  Stream<List<Wisdom>> mapEventToState(
     FavoriteEvent event,
   ) async* {
-    // TODO: Add Logic
+    List<Wisdom> newState = new List()..addAll(currentState);
+
+    if (event is AddFavoriteEvent) newState.add(event.favorite);
+
+    if (event is RemoveFavoriteEvent) newState.remove(event.favorite);
+
+    yield newState;
   }
 }
