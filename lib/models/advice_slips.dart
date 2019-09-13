@@ -1,5 +1,6 @@
 import 'package:wisgen/models/wisdom.dart';
 
+//Generated Class to Handle JSON Input from AdviceSlip API
 class AdviceSlips {
   String totalResults;
   String query;
