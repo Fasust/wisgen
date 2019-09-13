@@ -26,6 +26,7 @@ dependencies:
   shared_preferences: ^0.5.3+4
   share: ^0.6.2+1
   flutter_spinkit: "^4.0.0"
+  flutter_bloc: ^0.21.0
   flutter:
     sdk: flutter
 

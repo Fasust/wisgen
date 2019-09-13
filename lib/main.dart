@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wisgen/widgets/page_favorites.dart';
-import 'package:wisgen/widgets/page_wisdom_feed.dart';
-import 'package:wisgen/provider/wisdom_fav_list.dart';
+import 'package:wisgen/ui/page_favorites.dart';
+import 'package:wisgen/ui/page_wisdom_feed.dart';
 
-void main() => runApp(ChangeNotifierProvider(
-    builder: (context) => WisdomFavList(), child: MyApp()));
+void main() => runApp(MyApp());
 
-/**
- * Material App Frame
- * Loads CardFeed (main app)
- * Sets Theme Data
- * Sets Routes
- */
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

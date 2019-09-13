@@ -23,6 +23,9 @@
 ### VisualStudioCode ###
 .vscode
 
+#temp whil switching to BLoC
+lib-dep
+
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
