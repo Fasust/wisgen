@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wisgen/blocs/wisdom_bloc.dart';
+import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
 import 'package:wisgen/ui/page_favorites.dart';
 import 'package:wisgen/ui/ui_helper.dart';
@@ -27,7 +28,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
 
   @override
   void initState() {
-    _wisdomBloc.dispatch(WisdomEvent.fetch);
+    _wisdomBloc.dispatch(FetchEvent(context));
     _scrollController.addListener(_onScroll);
     super.initState();
   }
@@ -129,7 +130,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      _wisdomBloc.dispatch(WisdomEvent.fetch);
+      _wisdomBloc.dispatch(FetchEvent(context));
     }
   }
 }

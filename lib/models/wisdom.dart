@@ -6,14 +6,15 @@ import 'package:flutter/widgets.dart';
 class Wisdom {
   final String text;
   final int id;
-  final String imgURL;
   final String type;
+  String imgURL;
 
-  Wisdom(
-      {@required this.text,
-      @required this.id,
-      @required this.imgURL,
-      @required this.type});
+  Wisdom({
+    @required this.text,
+    @required this.id,
+    @required this.type,
+    this.imgURL,
+  });
 
   @override
   String toString() {
