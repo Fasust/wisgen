@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:wisgen/models/advice_slips.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositorys/repository.dart';
+import 'package:wisgen/repositories/repository.dart';
 import 'package:http/http.dart' as http;
 
 class AdviceSlipApi implements Repository<Wisdom> {

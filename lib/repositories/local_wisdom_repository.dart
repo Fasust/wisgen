@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositorys/repository.dart';
+import 'package:wisgen/repositories/repository.dart';
 
 class LocalWisdomRepository implements Repository<Wisdom> {
   static const _path = './assets/advice.txt';

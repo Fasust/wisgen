@@ -3,9 +3,8 @@ import 'package:bloc/bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositorys/advice_slip_api.dart';
-import 'package:wisgen/repositorys/local_wisdom_repository.dart';
-import 'package:wisgen/repositorys/repository.dart';
+import 'package:wisgen/repositories/local_wisdom_repository.dart';
+import 'package:wisgen/repositories/repository.dart';
 
 //This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
 //It then Generates an IMG URL and appends it to the Wisdom
