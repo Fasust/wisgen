@@ -28,7 +28,7 @@ I used this project to understand how Flutter handles communication with the web
 [Android APK 📲](https://github.com/Fasust/wisgen/blob/master/app-release.apk)
 
 ## Used Packages 📦
-- provider (for state handeling)
+- flutter_bloc (for state handeling)
 - http (for API calls)
 - cached_network_image (for cashing images)
 - flutter_launcher_icons (for easily setting the launcher icon)
@@ -37,6 +37,9 @@ I used this project to understand how Flutter handles communication with the web
 - share (for sending _share-intents_)
  
 ## Some Sources I can recommend 📚
+- [The Origin of the BLoC Pattern](https://www.youtube.com/watch?v=PLHln7wHgPE)
+- [Implementing th BLoC Pattern](https://www.didierboelens.com/2018/08/reactive-programming---streams---bloc/)
+- [Infinite Lists with BLoC](https://felangel.github.io/bloc/#/flutterinfinitelisttutorial)
 - [State handling in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)
 - [Naming Conventions](https://dart.dev/guides/language/effective-dart/style)
 - [Code Readability](https://iirokrankka.com/2018/06/18/putting-build-methods-on-a-diet/)

@@ -187,7 +187,7 @@ packages:
     source: hosted
     version: "2.2.1"
   provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: provider
       url: "https://pub.dartlang.org"
