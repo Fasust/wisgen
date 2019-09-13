@@ -1,7 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:wisgen/blocs/wisdom_bloc.dart';
+import 'package:wisgen/blocs/wisdom_state.dart';
 import 'package:wisgen/ui/page_favorites.dart';
 import 'package:wisgen/ui/ui_helper.dart';
+import 'package:wisgen/ui/widgets/card_loading.dart';
+import 'package:wisgen/ui/widgets/card_wisdom.dart';
 
 class PageWisdomFeed extends StatefulWidget {
   @override
@@ -9,8 +17,14 @@ class PageWisdomFeed extends StatefulWidget {
 }
 
 class PageWisdomFeedState extends State<PageWisdomFeed> {
+  final WisdomBloc _wisdomBloc = new WisdomBloc();
+  final _scrollController = ScrollController();
+  static const _scrollThreshold = 200.0;
+
   @override
   void initState() {
+    _wisdomBloc.dispatch(WisdomEvent.fetch);
+    _scrollController.addListener(_onScroll);
     super.initState();
   }
 
@@ -22,11 +36,25 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
         onHorizontalDragEnd: (DragEndDetails details) {
           _swipeNavigation(context, details);
         },
-        child: ListView.builder(
-            padding: const EdgeInsets.all(UIHelper.listPadding),
-            itemBuilder: (context, i) {}),
+        child: BlocBuilder(
+          bloc: _wisdomBloc,
+          builder: (context, WisdomState state) {
+            if (state is ErrorWisdomState) return _error(state);
+
+            if (state is LoadedWisdomState) return _listView(context, state);
+
+            return _loading(context);
+          },
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _wisdomBloc.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 
   //UI-Elements ------
@@ -53,9 +81,47 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
     );
   }
 
+  Widget _error(ErrorWisdomState state) {
+    return Center(
+      child: Text('We Got this Exception when trying to fetch our Wisdom:\n' +
+          state.exception.toString()),
+    );
+  }
+
+  Widget _listView(BuildContext context, LoadedWisdomState state) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return index >= state.wisdoms.length
+            ? CardLoading()
+            : CardWisdom(wisdom: state.wisdoms[index]);
+      },
+      itemCount: state.wisdoms.length + 1,
+      controller: _scrollController,
+    );
+  }
+
+  Widget _loading(BuildContext context) {
+    return Center(
+        child: SpinKitCircle(
+      color: Theme.of(context).accentColor,
+      size: UIHelper.loadingAnimSize,
+    ));
+  }
+
+  //Navigation -----
   void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(context,
           CupertinoPageRoute(builder: (context) => PageFavoriteList()));
+  }
+
+  //Helpers ----
+  //Fetching Data on scroll
+  void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
+    if (maxScroll - currentScroll <= _scrollThreshold) {
+      _wisdomBloc.dispatch(WisdomEvent.fetch);
+    }
   }
 }

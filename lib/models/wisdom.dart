@@ -17,6 +17,6 @@ class Wisdom {
 
   @override
   String toString() {
-    return '#$id' + ": " + text;
+    return '$id' + ": " + text;
   }
 }

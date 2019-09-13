@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
-import 'package:wisgen/models/wisdoms.dart';
+import 'package:wisgen/models/wisdom.dart';
 
 import '../ui_helper.dart';
 
@@ -73,7 +73,7 @@ class CardWisdom extends StatelessWidget {
                 title: Text(wisdom.text),
                 subtitle: Container(
                     padding: EdgeInsets.only(top: _smallPadding),
-                    child: Text(wisdom.type + ' #' + '$wisdom.id',
+                    child: Text(wisdom.type + ' #' + '${wisdom.id}',
                         textAlign: TextAlign.left)),
               )),
           Expanded(
