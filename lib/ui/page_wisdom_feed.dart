@@ -11,6 +11,9 @@ import 'package:wisgen/ui/ui_helper.dart';
 import 'package:wisgen/ui/widgets/card_loading.dart';
 import 'package:wisgen/ui/widgets/card_wisdom.dart';
 
+//View Fre of Business Logic
+//Subscribing to the Wisdom BLoC and displaying the Wisdom it Broadcasts
+//Dispatching Fetch events on the Business BLoC when we reach the end of the List.
 class PageWisdomFeed extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => PageWisdomFeedState();
