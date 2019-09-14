@@ -35,7 +35,7 @@ class FavoriteList extends StatelessWidget {
     //Subscribing the ListView to the Favorite BLoC
     return BlocBuilder<FavoriteBloc, List<Wisdom>>(
         builder: (context, favorites) {
-      if (favorites.length == 0) return _emptyList();
+      if (favorites.length == 0) return _emptyList(context);
       return ListView.builder(
         padding: EdgeInsets.all(UIHelper.listPadding),
         itemBuilder: (context, i) {
@@ -49,17 +49,23 @@ class FavoriteList extends StatelessWidget {
       );
     });
   }
-
-  Widget _emptyList() {
+  
+  Widget _emptyList(BuildContext context) {
     return Container(
-      alignment: Alignment(0.0, 0.0),
-      child: Text("Nothing Here 🤷‍♂️"),
+      child: Center(
+          child: Text(
+        "Nothing Here 🤷‍♂️",
+        style: Theme.of(context).textTheme.subtitle,
+      )),
+      //filling blank space with White background to register as dargable widget
+      constraints: BoxConstraints.expand(),
+      color: Colors.white, 
     );
   }
-}
 
-///Navigation
-void _swipeNavigation(BuildContext context, DragEndDetails details) {
-  if (details.primaryVelocity.compareTo(0) == 1) //left to right
-    Navigator.of(context).pop();
+  ///Navigation
+  void _swipeNavigation(BuildContext context, DragEndDetails details) {
+    if (details.primaryVelocity.compareTo(0) == 1) //left to right
+      Navigator.of(context).pop();
+  }
 }
