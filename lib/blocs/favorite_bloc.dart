@@ -20,7 +20,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
   ) async* {
     List<Wisdom> newFavorites = new List()..addAll(currentState);
 
-    if (event is AddFavoriteEvent) newFavorites.insert(0,event.favorite);
+    if (event is AddFavoriteEvent) newFavorites.add(event.favorite);
     if (event is RemoveFavoriteEvent) newFavorites.remove(event.favorite);
 
     yield newFavorites;
