@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:share/share.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/blocs/favorite_event.dart';
+import 'package:wisgen/blocs/favorite_state.dart';
 import 'package:wisgen/models/wisdom.dart';
 
 import '../ui_helper.dart';
@@ -88,13 +89,13 @@ class CardWisdom extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: BlocBuilder<FavoriteBloc, List<Wisdom>>(
-              builder: (context, favorites) => IconButton(
-                icon: Icon(favorites.contains(wisdom)
+            child: BlocBuilder<FavoriteBloc, FavoriteState>(
+              builder: (context, state) => IconButton(
+                icon: Icon(state.favorites.contains(wisdom)
                     ? Icons.favorite
                     : Icons.favorite_border),
-                color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-                onPressed: () {_onLike(context,favorites);},
+                color: state.favorites.contains(wisdom) ? Colors.red : Colors.grey,
+                onPressed: () {_onLike(context,state.favorites);},
                 padding: EdgeInsets.only(right: _smallPadding),
               ),
             ),

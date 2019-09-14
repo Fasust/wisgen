@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/blocs/favorite_event.dart';
+import 'package:wisgen/blocs/favorite_state.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/ui/ui_helper.dart';
 import 'package:wisgen/ui/widgets/card_wisdom.dart';
@@ -33,9 +34,9 @@ class PageFavoriteList extends StatelessWidget {
 
   Widget _listView(BuildContext context) {
     //Subscribing the ListView to the Favorite BLoC
-    return BlocBuilder<FavoriteBloc, List<Wisdom>>(
-        builder: (context, favorites) {
-      if (favorites.length == 0) {
+    return BlocBuilder<FavoriteBloc, FavoriteState>(
+        builder: (context, state) {
+      if (state.favorites.length == 0) {
         return Container(
           alignment: Alignment(0.0, 0.0),
           child: Text("You don't have and Favorites jet"),
@@ -44,8 +45,8 @@ class PageFavoriteList extends StatelessWidget {
       return ListView.builder(
         padding: EdgeInsets.all(UIHelper.listPadding),
         itemBuilder: (context, i) {
-          if (favorites.length > i) {
-            Wisdom wisdom = favorites[i];
+          if (state.favorites.length > i) {
+            Wisdom wisdom = state.favorites[i];
             return CardWisdom(
               wisdom: wisdom,
             );
