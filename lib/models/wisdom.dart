@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 ///Main Domain Class.
-///Can be converted into JSON & Generated from JSON
+///Can be converted into JSON & Generated from JSON.
 class Wisdom {
   final String text;
   final int id;
@@ -32,4 +32,15 @@ class Wisdom {
         text = json['text'],
         type = json['type'],
         imgURL = json['imgURL'];
+
+  String shareAsString() {
+    return
+        "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
+            "\"" +
+            text +
+            "\"\n\n" +
+            "Related Image: \n\n" +
+            imgURL +
+            "\n\n... Pretty Deep 🤔";
+  }
 }

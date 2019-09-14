@@ -82,7 +82,7 @@ class WisdomCard extends StatelessWidget {
               icon: Icon(Icons.share),
               color: Colors.grey,
               onPressed: () {
-                _onShare();
+                Share.share(wisdom.shareAsString());
               },
             ),
           ),
@@ -103,19 +103,6 @@ class WisdomCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  ///Sending a Text as a ShareIntent
-  void _onShare() {
-    String shareText =
-        "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
-            "\"" +
-            wisdom.text +
-            "\"\n" +
-            "Related Image: " +
-            wisdom.imgURL +
-            "\n\n... Pretty Deep 🤔";
-    Share.share(shareText);
   }
 
   ///Figures out if a Wisdom is already liked or not.
