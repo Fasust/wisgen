@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/blocs/storage_bloc.dart';
-import 'package:wisgen/blocs/storage_event.dart';
 import 'package:wisgen/blocs/wisdom_bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
@@ -36,7 +35,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed>{
     _storageBloc = StorageBloc(BlocProvider.of<FavoriteBloc>(context));
 
     _wisdomBloc.dispatch(FetchEvent(context));
-    _storageBloc.dispatch(LoadEvent());
+    _storageBloc.dispatch(StorageEvent.load);
 
     _scrollController.addListener(_onScroll);
     super.initState();

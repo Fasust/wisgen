@@ -1,22 +1,20 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/blocs/favorite_event.dart';
-import 'package:wisgen/blocs/storage_event.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/shared_preference_storage.dart';
 import 'package:wisgen/repositories/storage.dart';
 
 enum StorageState { idle }
+enum StorageEvent { load, wipe }
 
 class StorageBloc extends Bloc<StorageEvent, StorageState> {
   final Storage _storage = new SharedPreferenceStorage();
-  final FavoriteBloc _favoriteBloc;
+  final Bloc _observedBloc;
 
-  StorageBloc(this._favoriteBloc){
-    _favoriteBloc.state.listen((_){
-      this.dispatch(StoreEvent());
+  StorageBloc(this._observedBloc) {
+    _observedBloc.state.listen((state) async {
+      await _storage.save(state);
     });
   }
 
@@ -27,27 +25,18 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
   Stream<StorageState> mapEventToState(
     StorageEvent event,
   ) async* {
-    log(event.toString());
-    if (event is LoadEvent) yield await _loadStoredFavorites();
-    if (event is StoreEvent) yield await _saveFavorites();
+    if (event == StorageEvent.load) await _load();
+    if (event == StorageEvent.wipe) _storage.wipeStorage();
   }
 
-  Future<StorageState> _loadStoredFavorites() async {
-    List<Wisdom> loadedFavs = await _storage.load();
+  _load() async {
+    List<Wisdom> loaded = await _storage.load();
 
-    if (loadedFavs == null || loadedFavs.isEmpty) return StorageState.idle;
+    if (loaded == null || loaded.isEmpty) return;
 
-    loadedFavs.forEach((f) {
-      _favoriteBloc.dispatch(AddFavoriteEvent(f));
+    loaded.forEach((f) {
+      _observedBloc.dispatch(AddFavoriteEvent(f));
     });
-
-    return StorageState.idle;
   }
 
-  Future<StorageState> _saveFavorites() async {
-    List<Wisdom> favorites = await _favoriteBloc.state.last;
-    await _storage.save(favorites);
-
-    return StorageState.idle;
-  }
 }
