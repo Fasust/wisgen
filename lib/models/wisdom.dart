@@ -4,7 +4,7 @@ class Wisdom {
   final String text;
   final int id;
   final String type;
-  final String imgURL;
+  String imgURL;
 
   Wisdom({
     @required this.text,

@@ -28,7 +28,7 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   ) async* {
     try {
       if (currentState is LoadedWisdomState) {
-        final wisdoms = await _repository.fetch(_fetchAmount, event.context);
+        final List<Wisdom> wisdoms = await _repository.fetch(_fetchAmount, event.context);
 
         wisdoms.forEach((w) {
           w.imgURL = _generateImgURL(w);
