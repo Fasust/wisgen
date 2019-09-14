@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+///Main Domain Class.
+///Can be converted into JSON & Generated from JSON
 class Wisdom {
   final String text;
   final int id;

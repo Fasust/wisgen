@@ -1,6 +1,7 @@
 import 'package:wisgen/models/wisdom.dart';
 
-//Generated Class to Handle JSON Input from AdviceSlip API
+///Generated Class to Handle JSON Input from AdviceSlip API.
+///I used this tool: https://javiercbk.github.io/json_to_dart/.
 class AdviceSlips {
   String totalResults;
   String query;
@@ -30,6 +31,9 @@ class AdviceSlips {
   }
 }
 
+///Generated Class to Handle JSON Input from AdviceSlip API.
+///I used this tool: https://javiercbk.github.io/json_to_dart/.
+///A Slip can be converted directly into a Wisdom.
 class Slips {
   String advice;
   String slipId;
