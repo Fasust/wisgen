@@ -3,7 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/storage.dart';
 
+///A Provider of Shared Preferences, a small, local, persistent key value store
 class SharedPreferenceStorage implements Storage<Wisdom> {
+  ///Key is used to access store
   static const String _sharedPrefKey = "wisgen_storage";
 
   @override
@@ -13,6 +15,7 @@ class SharedPreferenceStorage implements Storage<Wisdom> {
 
     if (strings == null || strings.isEmpty) return null;
 
+    //Decode all JSON Strings we fetched from the Preferences and add them to the Result
     List<Wisdom> wisdoms = new List();
     strings.forEach((s) {
       Wisdom w = Wisdom.fromJson(jsonDecode(s));
@@ -28,11 +31,13 @@ class SharedPreferenceStorage implements Storage<Wisdom> {
 
     final prefs = await SharedPreferences.getInstance();
 
+    //Encode data to JSON Strings
     List<String> strings = new List();
     data.forEach((wisdom) {
       strings.add(json.encode(wisdom.toJson()));
     });
 
+    //Overwrite Preferences with new List
     prefs.setStringList(_sharedPrefKey, strings);
   }
 
