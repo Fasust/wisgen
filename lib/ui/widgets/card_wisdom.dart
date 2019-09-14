@@ -9,11 +9,11 @@ import 'package:wisgen/models/wisdom.dart';
 
 import '../ui_helper.dart';
 
-/**
- * Card View That displays a given Wisdom.
- * Images are Loaded from the given URL once and then cashed.
- * Information about Fav-Status are loaded with a Consumer from the CardFeed
- */
+
+///Card View That displays a given Wisdom.
+///Images are Loaded from the given URL once and then cashed.
+///The Favorite Button Subscribes to the Global FavoriteBLoC to change it's appearance.
+///The Button also Publishes Events to the FavoriteBLoC when it is pressed.
 class CardWisdom extends StatelessWidget {
   static const double _smallPadding = 4;
   static const double _largePadding = 8;
@@ -88,6 +88,7 @@ class CardWisdom extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
+            //This is where we Subscribe to the FavoriteBLoC
             child: BlocBuilder<FavoriteBloc, List<Wisdom>>(
               builder: (context, favorites) => IconButton(
                 icon: Icon(favorites.contains(wisdom)
@@ -104,6 +105,7 @@ class CardWisdom extends StatelessWidget {
     );
   }
 
+  ///Sending a Text as a ShareIntent
   void _onShare() {
     String shareText =
         "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
@@ -116,6 +118,8 @@ class CardWisdom extends StatelessWidget {
     Share.share(shareText);
   }
 
+  ///Figures out if a Wisdom is already liked or not.
+  ///Then send corresponding Event.
   void _onLike(BuildContext context, List<Wisdom> favorites) {
     final FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
 

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/ui/ui_helper.dart';
 import 'package:wisgen/ui/widgets/card_wisdom.dart';
 
+///Subscribes to Global FavoriteBLoC and Displays the Published
+///Favorites as a ListView
 class PageFavoriteList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -34,12 +35,7 @@ class PageFavoriteList extends StatelessWidget {
     //Subscribing the ListView to the Favorite BLoC
     return BlocBuilder<FavoriteBloc, List<Wisdom>>(
         builder: (context, favorites) {
-      if (favorites.length == 0) {
-        return Container(
-          alignment: Alignment(0.0, 0.0),
-          child: Text("You don't have and Favorites jet"),
-        );
-      }
+      if (favorites.length == 0) return _emptyList();
       return ListView.builder(
         padding: EdgeInsets.all(UIHelper.listPadding),
         itemBuilder: (context, i) {
@@ -53,9 +49,16 @@ class PageFavoriteList extends StatelessWidget {
       );
     });
   }
+
+  Widget _emptyList() {
+    return Container(
+      alignment: Alignment(0.0, 0.0),
+      child: Text("You don't have and Favorites jet"),
+    );
+  }
 }
 
-//Navigation ---
+///Navigation
 void _swipeNavigation(BuildContext context, DragEndDetails details) {
   if (details.primaryVelocity.compareTo(0) == 1) //left to right
     Navigator.of(context).pop();

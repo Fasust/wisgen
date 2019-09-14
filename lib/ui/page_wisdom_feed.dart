@@ -14,26 +14,32 @@ import 'package:wisgen/ui/ui_helper.dart';
 import 'package:wisgen/ui/widgets/card_loading.dart';
 import 'package:wisgen/ui/widgets/card_wisdom.dart';
 
-//View Fre of Business Logic
-//Subscribing to the Wisdom BLoC and displaying the Wisdom it Broadcasts
-//Dispatching Fetch events on the Business BLoC when we reach the end of the List.
+///Subscribes to the WisdomBLoC to generate its ListView.
+///Sets of the WisdomBLoC by dispatching an initial FetchEvent.
+///Sets up the StorageBLoC and links it to the Globally Provided FavoritesBLoC.
 class PageWisdomFeed extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => PageWisdomFeedState();
 }
 
 class PageWisdomFeedState extends State<PageWisdomFeed>{
-  //We keep the Wisdom BLoC local because we only need it in this View
+  //Wisdom & Storage BLoC are Local because we only use 
+  //them inside this View
   WisdomBloc _wisdomBloc;
   StorageBloc _storageBloc;
+
+  //We Tell the WisdomBLoC to fetch more data based on how far we have scrolled down 
+  //the list. That is why we need this Controller
   final _scrollController = ScrollController();
   static const _scrollThreshold = 200.0;
 
   @override
   void initState() {
+    //Build Local BLoCs
     _wisdomBloc = new WisdomBloc();
     _storageBloc = StorageBloc(BlocProvider.of<FavoriteBloc>(context));
 
+    //Dispatch Initial Events
     _wisdomBloc.dispatch(FetchEvent(context));
     _storageBloc.dispatch(StorageEvent.load);
 
@@ -65,8 +71,10 @@ class PageWisdomFeedState extends State<PageWisdomFeed>{
 
   @override
   void dispose() {
+    //Dispose all local BLoCs
     _wisdomBloc.dispose();
     _storageBloc.dispose();
+
     _scrollController.dispose();
     super.dispose();
   }
@@ -125,15 +133,14 @@ class PageWisdomFeedState extends State<PageWisdomFeed>{
     ));
   }
 
-  //Navigation ----
+  ///Navigation
   void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(context,
           CupertinoPageRoute(builder: (context) => PageFavoriteList()));
   }
 
-  //Helpers ----
-  //Dispatching fetch events to the BLoC when we reach the end of the List
+  ///Dispatching fetch events to the BLoC when we reach the end of the List
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
