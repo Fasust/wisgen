@@ -27,6 +27,9 @@ I used this project to understand how Flutter handles communication with the web
 ## Download
 [Android APK 📲](https://github.com/Fasust/wisgen/blob/master/app-release.apk)
 
+## BLoC Architecture: Dependencies of Wisgen Components
+![Dependencies](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/depencies_wisgen.png)
+
 ## Used Packages 📦
 - flutter_bloc (for state handeling)
 - http (for API calls)
