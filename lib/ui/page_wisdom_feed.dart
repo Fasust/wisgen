@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:wisgen/blocs/favorite_bloc.dart';
+import 'package:wisgen/blocs/storage_bloc.dart';
+import 'package:wisgen/blocs/storage_event.dart';
 import 'package:wisgen/blocs/wisdom_bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
@@ -20,15 +23,21 @@ class PageWisdomFeed extends StatefulWidget {
   State<StatefulWidget> createState() => PageWisdomFeedState();
 }
 
-class PageWisdomFeedState extends State<PageWisdomFeed> {
+class PageWisdomFeedState extends State<PageWisdomFeed>{
   //We keep the Wisdom BLoC local because we only need it in this View
-  final WisdomBloc _wisdomBloc = new WisdomBloc();
+  WisdomBloc _wisdomBloc;
+  StorageBloc _storageBloc;
   final _scrollController = ScrollController();
   static const _scrollThreshold = 200.0;
 
   @override
   void initState() {
+    _wisdomBloc = new WisdomBloc();
+    _storageBloc = StorageBloc(BlocProvider.of<FavoriteBloc>(context));
+
     _wisdomBloc.dispatch(FetchEvent(context));
+    _storageBloc.dispatch(LoadEvent());
+
     _scrollController.addListener(_onScroll);
     super.initState();
   }
@@ -47,7 +56,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
             //This is where we determine the State of the Wisdom BLoC
             if (state is ErrorWisdomState) return _error(state);
             if (state is LoadedWisdomState) return _listView(context, state);
-            
+
             return _loading(context);
           },
         ),
@@ -58,6 +67,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
   @override
   void dispose() {
     _wisdomBloc.dispose();
+    _storageBloc.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -98,9 +108,9 @@ class PageWisdomFeedState extends State<PageWisdomFeed> {
       padding: const EdgeInsets.all(UIHelper.listPadding),
       itemBuilder: (BuildContext context, int index) {
         return index >= state.wisdoms.length
-        //This is where the Loading Inference is made. 
-        //We don't have more List items so the BLoC must be loading
-            ? CardLoading() 
+            //This is where the Loading Inference is made.
+            //We don't have more List items so the BLoC must be loading
+            ? CardLoading()
             : CardWisdom(wisdom: state.wisdoms[index]);
       },
       itemCount: state.wisdoms.length + 1,

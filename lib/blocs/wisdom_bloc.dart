@@ -8,7 +8,7 @@ import 'package:wisgen/repositories/repository.dart';
 
 //This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
 //It then Generates an IMG URL and appends it to the Wisdom
-//It Fetches Wisdoms in batches of 20 and Broadcasts th complete List
+//It Fetches Wisdoms in batches of 20 and Broadcasts the complete List
 class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   //Fetching Wisdom
   static const int _fetchAmount = 20;
