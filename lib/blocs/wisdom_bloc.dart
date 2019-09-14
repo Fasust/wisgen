@@ -6,9 +6,9 @@ import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/repository.dart';
 import 'package:wisgen/repositories/repository_local.dart';
 
-//This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
-//It then Generates an IMG URL and appends it to the Wisdom
-//It Fetches Wisdoms in batches of 20 and Broadcasts the complete List
+///This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
+///It then Generates an IMG URL and appends it to the Wisdom
+///It Fetches Wisdoms in batches of 20 and Broadcasts the complete List
 class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   //Fetching Wisdom
   static const int _fetchAmount = 20;
@@ -28,8 +28,10 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   ) async* {
     try {
       if (currentState is LoadedWisdomState) {
-        final List<Wisdom> wisdoms = await _repository.fetch(_fetchAmount, event.context);
+        final List<Wisdom> wisdoms =
+            await _repository.fetch(_fetchAmount, event.context);
 
+        //Append the Img URLs
         wisdoms.forEach((w) {
           w.imgURL = _generateImgURL(w);
         });

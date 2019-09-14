@@ -6,8 +6,10 @@ import 'package:wisgen/repositories/storage_shared_preference.dart';
 
 import 'favorite_event.dart';
 
+///The FavoriteBLoC is Responsible for Keeping track of the
+///Favorite List. It receives Events to Add and remove Favorite
+///Wisdoms and Broadcasts the Complete List of Favorites.
 class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
-  Storage _storage = new SharedPreferenceStorage();
 
   @override
   List<Wisdom> get initialState => List<Wisdom>();
@@ -16,18 +18,11 @@ class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
   Stream<List<Wisdom>> mapEventToState(
     FavoriteEvent event,
   ) async* {
-  
-    yield await _updateFavorites(event);
-  }
+    List<Wisdom> newFavorites = new List()..addAll(currentState);
 
-  Future<List<Wisdom>> _updateFavorites(FavoriteEvent event) async {
-    List<Wisdom> newFavs = new List()..addAll(currentState);
+    if (event is AddFavoriteEvent) newFavorites.add(event.favorite);
+    if (event is RemoveFavoriteEvent) newFavorites.remove(event.favorite);
 
-    if (event is AddFavoriteEvent) newFavs.add(event.favorite);
-    if (event is RemoveFavoriteEvent) newFavs.remove(event.favorite);
-
-    _storage.save(newFavs);
-
-    return newFavs;
+    yield newFavorites;
   }
 }
