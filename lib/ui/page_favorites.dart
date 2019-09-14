@@ -53,7 +53,7 @@ class FavoriteList extends StatelessWidget {
   Widget _emptyList() {
     return Container(
       alignment: Alignment(0.0, 0.0),
-      child: Text("You don't have and Favorites jet"),
+      child: Text("Nothing Here 🤷‍♂️"),
     );
   }
 }
