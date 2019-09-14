@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:wisgen/blocs/favorite_event.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositories/shared_preference_storage.dart';
+
 import 'package:wisgen/repositories/storage.dart';
+import 'package:wisgen/repositories/storage_shared_preference.dart';
 
 enum StorageState { idle }
 enum StorageEvent { load, wipe }

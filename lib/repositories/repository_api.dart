@@ -7,7 +7,7 @@ import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/repository.dart';
 import 'package:http/http.dart' as http;
 
-class AdviceSlipApi implements Repository<Wisdom> {
+class Api implements Repository<Wisdom> {
   static const _adviceURI = 'https://api.adviceslip.com/advice/search/%20';
   List<Wisdom> _buffer;
   Random _random = new Random();

@@ -4,9 +4,9 @@ import 'package:wisgen/ui/ui_helper.dart';
 
 
 ///A Loading animation with (around) the same height as a 
-///CardWisdom that can be loaded into a list.
-///CardWisdoms do not have a fixed height, so we have to approximate
-class CardLoading extends StatelessWidget {
+///WisdomCard that can be loaded into a list.
+///WisdomCards do not have a fixed height, so we have to approximate
+class LoadingCard extends StatelessWidget {
   static const double _height = 350;
 
   @override

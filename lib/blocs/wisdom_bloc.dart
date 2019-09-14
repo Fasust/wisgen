@@ -3,8 +3,8 @@ import 'package:bloc/bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositories/local_wisdom_repository.dart';
 import 'package:wisgen/repositories/repository.dart';
+import 'package:wisgen/repositories/repository_local.dart';
 
 //This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
 //It then Generates an IMG URL and appends it to the Wisdom
@@ -12,7 +12,7 @@ import 'package:wisgen/repositories/repository.dart';
 class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   //Fetching Wisdom
   static const int _fetchAmount = 20;
-  final Repository _repository = LocalWisdomRepository();
+  final Repository _repository = LocalRepository();
 
   //URI Generation
   static const int _minQueryWordLength = 4;

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,12 +15,12 @@ import 'package:wisgen/ui/widgets/card_wisdom.dart';
 ///Subscribes to the WisdomBLoC to generate its ListView.
 ///Sets of the WisdomBLoC by dispatching an initial FetchEvent.
 ///Sets up the StorageBLoC and links it to the Globally Provided FavoritesBLoC.
-class PageWisdomFeed extends StatefulWidget {
+class WisdomFeed extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => PageWisdomFeedState();
+  State<StatefulWidget> createState() => WisdomFeedState();
 }
 
-class PageWisdomFeedState extends State<PageWisdomFeed>{
+class WisdomFeedState extends State<WisdomFeed>{
   //Wisdom & Storage BLoC are Local because we only use 
   //them inside this View
   WisdomBloc _wisdomBloc;
@@ -96,7 +94,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed>{
           ),
           onPressed: () {
             Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => PageFavoriteList()));
+                CupertinoPageRoute(builder: (context) => FavoriteList()));
           },
         )
       ],
@@ -117,8 +115,8 @@ class PageWisdomFeedState extends State<PageWisdomFeed>{
         return index >= state.wisdoms.length
             //This is where the Loading Inference is made.
             //We don't have more List items so the BLoC must be loading
-            ? CardLoading()
-            : CardWisdom(wisdom: state.wisdoms[index]);
+            ? LoadingCard()
+            : WisdomCard(wisdom: state.wisdoms[index]);
       },
       itemCount: state.wisdoms.length + 1,
       controller: _scrollController,
@@ -137,7 +135,7 @@ class PageWisdomFeedState extends State<PageWisdomFeed>{
   void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(context,
-          CupertinoPageRoute(builder: (context) => PageFavoriteList()));
+          CupertinoPageRoute(builder: (context) => FavoriteList()));
   }
 
   ///Dispatching fetch events to the BLoC when we reach the end of the List

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositories/shared_preference_storage.dart';
 import 'package:wisgen/repositories/storage.dart';
+import 'package:wisgen/repositories/storage_shared_preference.dart';
 
 import 'favorite_event.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/repository.dart';
 
-class LocalWisdomRepository implements Repository<Wisdom> {
+class LocalRepository implements Repository<Wisdom> {
   static const _path = './assets/advice.txt';
   List<Wisdom> _buffer;
   Random _random = new Random();

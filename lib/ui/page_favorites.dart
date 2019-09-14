@@ -7,7 +7,7 @@ import 'package:wisgen/ui/widgets/card_wisdom.dart';
 
 ///Subscribes to Global FavoriteBLoC and Displays the Published
 ///Favorites as a ListView
-class PageFavoriteList extends StatelessWidget {
+class FavoriteList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +41,7 @@ class PageFavoriteList extends StatelessWidget {
         itemBuilder: (context, i) {
           if (favorites.length > i) {
             Wisdom wisdom = favorites[i];
-            return CardWisdom(
+            return WisdomCard(
               wisdom: wisdom,
             );
           }

@@ -14,7 +14,7 @@ import '../ui_helper.dart';
 ///Images are Loaded from the given URL once and then cashed.
 ///The Favorite Button Subscribes to the Global FavoriteBLoC to change it's appearance.
 ///The Button also Publishes Events to the FavoriteBLoC when it is pressed.
-class CardWisdom extends StatelessWidget {
+class WisdomCard extends StatelessWidget {
   static const double _smallPadding = 4;
   static const double _largePadding = 8;
   static const double _imageHeight = 300;
@@ -23,7 +23,7 @@ class CardWisdom extends StatelessWidget {
 
   final Wisdom wisdom;
 
-  CardWisdom({Key key, this.wisdom}) : super(key: key);
+  WisdomCard({Key key, this.wisdom}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
