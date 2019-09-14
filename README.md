@@ -41,7 +41,7 @@ I used this project to understand how Flutter handles communication with the web
  
 ## Some Sources I can recommend 📚
 - [The Origin of the BLoC Pattern](https://www.youtube.com/watch?v=PLHln7wHgPE)
-- [Implementing th BLoC Pattern](https://www.didierboelens.com/2018/08/reactive-programming---streams---bloc/)
+- [Implementing the BLoC Pattern](https://www.didierboelens.com/2018/08/reactive-programming---streams---bloc/)
 - [Infinite Lists with BLoC](https://felangel.github.io/bloc/#/flutterinfinitelisttutorial)
 - [State handling in Flutter](https://www.youtube.com/watch?v=d_m5csmrf7I)
 - [Naming Conventions](https://dart.dev/guides/language/effective-dart/style)
