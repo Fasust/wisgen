@@ -25,7 +25,7 @@ You can suggest your own peaces of Wisdom a through Pull Request if you want. Th
 I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handels _state_ and how to transfer that _state_ over multiple classes withing the Widget Tree.
 
 ## Download
-[Android APK 📲](https://github.com/Fasust/wisgen/blob/master/app-release.apk)
+[Android APK 📲](https://github.com/Fasust/wisgen/releases)
 
 ## BLoC Architecture: Dependencies of Wisgen Components
 ![Dependencies](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/depencies_wisgen.png)
