@@ -21,7 +21,7 @@ class Api implements Repository<Wisdom> {
   @override
   Future<List<Wisdom>> fetch(int amount, BuildContext context) async {
     //if the Cash is empty, request data from the API
-    if (_cash == null) _cash = await _loadData(context);
+    if (_cash == null) _cash = await _loadData();
 
     List<Wisdom> res = new List();
     for (int i = 0; i < amount; i++) {
@@ -31,7 +31,7 @@ class Api implements Repository<Wisdom> {
   }
 
   ///Fetches Data from API and coverts it to Wisdoms
-  Future<List<Wisdom>> _loadData(BuildContext context) async {
+  Future<List<Wisdom>> _loadData() async {
     http.Response response = await http.get(_adviceURI);
     AdviceSlips adviceSlips = AdviceSlips.fromJson(json.decode(response.body));
 
