@@ -23,9 +23,7 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   WisdomState get initialState => LoadedWisdomState(new List());
 
   @override
-  Stream<WisdomState> mapEventToState(
-    FetchEvent event,
-  ) async* {
+  Stream<WisdomState> mapEventToState(FetchEvent event) async* {
     try {
       if (currentState is LoadedWisdomState) {
         final List<Wisdom> wisdoms =
