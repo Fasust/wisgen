@@ -54,6 +54,6 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
   }
 
   //Injection
-  set storage(Storage storage) => _storage;
-  set observedBloc(FavoriteBloc observedBloc) => _observedBloc;
+  set storage(Storage storage) => _storage = storage;
+  set observedBloc(FavoriteBloc observedBloc) => _observedBloc = observedBloc;
 }

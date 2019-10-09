@@ -20,26 +20,30 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
   @override
-  WisdomState get initialState => LoadedWisdomState(new List());
+  WisdomState get initialState => IdleWisdomState(List());
 
   @override
   Stream<WisdomState> mapEventToState(FetchEvent event) async* {
     try {
-      if (currentState is LoadedWisdomState) {
-        final List<Wisdom> wisdoms =
-            await _repository.fetch(_fetchAmount, event.context);
 
-        //Append the Img URLs
-        wisdoms.forEach((w) {
-          w.imgURL = _generateImgURL(w);
-        });
+      if (currentState is IdleWisdomState)
+        yield IdleWisdomState((currentState as IdleWisdomState).wisdoms + await _getNewWisdoms(event));
 
-        yield LoadedWisdomState((currentState as LoadedWisdomState).wisdoms +
-            wisdoms); //Appending the new Wisdoms to the current state
-      }
     } catch (e) {
       yield ErrorWisdomState(e);
     }
+  }
+
+  Future<List<Wisdom>> _getNewWisdoms(FetchEvent event) async {
+    final List<Wisdom> wisdoms =
+        await _repository.fetch(_fetchAmount, event.context);
+
+    //Append the Img URLs
+    wisdoms.forEach((w) {
+      w.imgURL = _generateImgURL(w);
+    }); 
+    
+    return wisdoms; //Appending the new Wisdoms to the current state
   }
 
   //URI Generation ---
@@ -59,5 +63,5 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   }
 
   //Injection
-  set repository(Repository repository) => _repository;
+  set repository(Repository repository) => _repository = repository;
 }

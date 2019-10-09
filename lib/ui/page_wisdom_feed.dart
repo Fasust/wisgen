@@ -58,7 +58,7 @@ class WisdomFeedState extends State<WisdomFeed>{
           builder: (context, WisdomState state) {
             //This is where we determine the State of the Wisdom BLoC
             if (state is ErrorWisdomState) return _error(state);
-            if (state is LoadedWisdomState) return _listView(context, state);
+            if (state is IdleWisdomState) return _listView(context, state);
 
             return _loading(context);
           },
@@ -108,7 +108,7 @@ class WisdomFeedState extends State<WisdomFeed>{
     );
   }
 
-  Widget _listView(BuildContext context, LoadedWisdomState state) {
+  Widget _listView(BuildContext context, IdleWisdomState state) {
     return ListView.builder(
       padding: const EdgeInsets.all(UIHelper.listPadding),
       itemBuilder: (BuildContext context, int index) {
