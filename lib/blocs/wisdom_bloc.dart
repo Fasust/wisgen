@@ -12,7 +12,7 @@ import 'package:wisgen/repositories/repository_local.dart';
 class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   //Fetching Wisdom
   static const int _fetchAmount = 20;
-  final Repository _repository = LocalRepository();
+  Repository _repository = LocalRepository();
 
   //URI Generation
   static const int _minQueryWordLength = 4;
@@ -57,4 +57,7 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
     });
     return query;
   }
+
+  //Injection
+  set repository(Repository repository) => _repository;
 }

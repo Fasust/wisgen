@@ -7,9 +7,13 @@ import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/storage.dart';
 import 'package:wisgen/repositories/storage_shared_preference.dart';
 
-
-enum StorageState { idle } //Because this BLoC doesn't need to emit Sate, I used a Single Enum
-enum StorageEvent { load, wipe } //Only 2 events that both don't need to carry additional data
+enum StorageState {
+  idle
+} //Because this BLoC doesn't need to emit Sate, I used a Single Enum
+enum StorageEvent {
+  load,
+  wipe
+} //Only 2 events that both don't need to carry additional data
 
 ///The StorageBLoC is injected with a FavoriteBLoC on Creation.
 ///It subscribes to the FavoriteBLoC and writes the Favorite List
@@ -20,8 +24,8 @@ enum StorageEvent { load, wipe } //Only 2 events that both don't need to carry a
 ///
 ///Used to keep a Persistent copy of the Favorite List on the Device
 class StorageBloc extends Bloc<StorageEvent, StorageState> {
-  final Storage _storage = new SharedPreferenceStorage();
-  final FavoriteBloc _observedBloc;
+  Storage _storage = new SharedPreferenceStorage();
+  FavoriteBloc _observedBloc;
 
   StorageBloc(this._observedBloc) {
     //Subscribe to BLoC
@@ -34,9 +38,7 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
   StorageState get initialState => StorageState.idle;
 
   @override
-  Stream<StorageState> mapEventToState(
-    StorageEvent event,
-  ) async* {
+  Stream<StorageState> mapEventToState(StorageEvent event) async* {
     if (event == StorageEvent.load) await _load();
     if (event == StorageEvent.wipe) _storage.wipeStorage();
   }
@@ -51,4 +53,7 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
     });
   }
 
+  //Injection
+  set storage(Storage storage) => _storage;
+  set observedBloc(FavoriteBloc observedBloc) => _observedBloc;
 }
