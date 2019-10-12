@@ -6,23 +6,21 @@ import 'package:wisgen/blocs/storage_bloc.dart';
 import 'package:wisgen/blocs/wisdom_bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
-import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/ui/pages/favorites.dart';
+import 'package:wisgen/ui/pages/favorites_page.dart';
 import 'package:wisgen/ui/ui_helper.dart';
 import 'package:wisgen/ui/widgets/error_text.dart';
-import 'package:wisgen/ui/widgets/loading_card.dart';
 import 'package:wisgen/ui/widgets/loading_spinner.dart';
-import 'package:wisgen/ui/widgets/wisdom_card.dart';
+import 'package:wisgen/ui/widgets/wisdom_list.dart';
 
 ///Subscribes to the WisdomBLoC to generate its ListView.
 ///Sets of the WisdomBLoC by dispatching an initial FetchEvent.
 ///Sets up the StorageBLoC and links it to the Globally Provided FavoritesBLoC.
-class WisdomFeed extends StatefulWidget {
+class WisdomFeedPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => WisdomFeedState();
+  State<StatefulWidget> createState() => WisdomFeedPageState();
 }
 
-class WisdomFeedState extends State<WisdomFeed> {
+class WisdomFeedPageState extends State<WisdomFeedPage> {
   //Wisdom & Storage BLoC are Local because we only use
   //them inside this View
   WisdomBloc _wisdomBloc;
@@ -60,8 +58,7 @@ class WisdomFeedState extends State<WisdomFeed> {
           builder: (context, WisdomState state) {
             //This is where we determine the State of the Wisdom BLoC
             if (state is WisdomStateError) return ErrorText(state.exception);
-            if (state is WisdomStateIdle)
-              return _WisdomList(_scrollController, state.wisdoms);
+            if (state is WisdomStateIdle) return WisdomList(_scrollController, state.wisdoms);
 
             return LoadingSpinner();
           },
@@ -96,7 +93,7 @@ class WisdomFeedState extends State<WisdomFeed> {
           ),
           onPressed: () {
             Navigator.push(
-                context, CupertinoPageRoute(builder: (context) => Favorites()));
+                context, CupertinoPageRoute(builder: (context) => FavoritesPage()));
           },
         )
       ],
@@ -107,7 +104,7 @@ class WisdomFeedState extends State<WisdomFeed> {
   void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(
-          context, CupertinoPageRoute(builder: (context) => Favorites()));
+          context, CupertinoPageRoute(builder: (context) => FavoritesPage()));
   }
 
   ///Dispatching fetch events to the BLoC when we reach the end of the List
@@ -117,29 +114,5 @@ class WisdomFeedState extends State<WisdomFeed> {
     if (maxScroll - currentScroll <= _scrollThreshold) {
       _wisdomBloc.dispatch(WisdomEventFetch(context));
     }
-  }
-}
-
-//Private Widgets -----------
-class _WisdomList extends StatelessWidget {
-  final List<Wisdom> _wisdoms;
-  final ScrollController _scrollController;
-
-  const _WisdomList(this._scrollController, this._wisdoms);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(UiHelper.listPadding),
-      itemBuilder: (BuildContext context, int index) {
-        return index >= _wisdoms.length
-            //This is where the Loading Inference is made.
-            //We don't have more List items so the BLoC must be loading
-            ? LoadingCard()
-            : WisdomCard(_wisdoms[index]);
-      },
-      itemCount: _wisdoms.length + 1,
-      controller: _scrollController,
-    );
   }
 }

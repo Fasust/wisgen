@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
-import 'package:wisgen/ui/pages/favorites.dart';
-import 'package:wisgen/ui/pages/wisdom_feed.dart';
+import 'package:wisgen/ui/pages/favorites_page.dart';
+import 'package:wisgen/ui/pages/wisdom_feed_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,14 +15,14 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context) => FavoriteBloc(),
       child: MaterialApp(
           routes: <String, WidgetBuilder>{
-            "/favorites": (context) => Favorites()
+            "/favorites": (context) => FavoritesPage()
           },
           theme: ThemeData(
               primaryColor: Color.fromRGBO(56, 43, 115, 1),
               accentColor: Colors.grey,
               textTheme: TextTheme(
                   headline: TextStyle(color: Colors.white, fontSize: 23))),
-          home: WisdomFeed()),
+          home: WisdomFeedPage()),
     );
   }
 }
