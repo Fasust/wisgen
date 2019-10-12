@@ -7,7 +7,7 @@ import 'package:wisgen/blocs/storage_bloc.dart';
 import 'package:wisgen/blocs/wisdom_bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
-import 'package:wisgen/ui/page_favorites.dart';
+import 'package:wisgen/ui/pages/page_favorites.dart';
 import 'package:wisgen/ui/ui_helper.dart';
 import 'package:wisgen/ui/widgets/card_loading.dart';
 import 'package:wisgen/ui/widgets/card_wisdom.dart';
