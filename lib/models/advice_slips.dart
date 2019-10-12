@@ -13,15 +13,15 @@ class AdviceSlips {
     totalResults = json['total_results'];
     query = json['query'];
     if (json['slips'] != null) {
-      slips = new List<Slips>();
+      slips = List<Slips>();
       json['slips'].forEach((v) {
-        slips.add(new Slips.fromJson(v));
+        slips.add(Slips.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['total_results'] = this.totalResults;
     data['query'] = this.query;
     if (this.slips != null) {
@@ -46,14 +46,14 @@ class Slips {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['advice'] = this.advice;
     data['slip_id'] = this.slipId;
     return data;
   }
 
   Wisdom toWisdom() {
-    return new Wisdom(
+    return Wisdom(
       id: int.parse(slipId),
       text: advice,
       type: "Advice Slip",

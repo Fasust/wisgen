@@ -13,7 +13,7 @@ class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
 
   @override
   Stream<List<Wisdom>> mapEventToState(FavoriteEvent event) async* {
-    List<Wisdom> newFavorites = new List()..addAll(currentState);
+    List<Wisdom> newFavorites = List()..addAll(currentState);
 
     if (event is FavoriteEventAdd) newFavorites.add(event.favorite);
     if (event is FavoriteEventRemove) newFavorites.remove(event.favorite);

@@ -12,7 +12,7 @@ void main() {
 
     setUp((){
       //Run before each test
-      favoriteBloc = new FavoriteBloc();
+      favoriteBloc = FavoriteBloc();
     });
 
     tearDown((){

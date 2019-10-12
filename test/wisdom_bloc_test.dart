@@ -45,7 +45,7 @@ void main() {
 
       List expectedStates = [
         //BLoC Library BLoCs emit their initial State on creation
-        WisdomStateIdle(new List()),
+        WisdomStateIdle(List()),
         WisdomStateIdle(fetchedWisdom)
       ];
     

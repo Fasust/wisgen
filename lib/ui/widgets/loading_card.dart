@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:wisgen/ui/ui_helper.dart';
+import 'package:wisgen/ui/widgets/loading_spinner.dart';
 
 
 ///A Loading animation with (around) the same height as a 
@@ -16,9 +15,8 @@ class LoadingCard extends StatelessWidget {
         child: Container(
             height: _height,
             alignment: Alignment(0.0, 0.0),
-            child: new SpinKitCircle(
-              color: Theme.of(context).accentColor,
-              size: UiHelper.loadingAnimSize,
-            )));
+            child: LoadingSpinner()
+        ),
+    );
   }
 }

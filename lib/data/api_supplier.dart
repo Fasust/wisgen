@@ -16,14 +16,14 @@ class ApiSupplier implements Supplier<List<Wisdom>> {
   ///That's why I think this is the best approach.
   static const _adviceURI = 'https://api.adviceslip.com/advice/search/%20';
   List<Wisdom> _cash;
-  final Random _random = new Random();
+  final Random _random = Random();
 
   @override
   Future<List<Wisdom>> fetch(int amount, BuildContext context) async {
     //if the Cash is empty, request data from the API
     if (_cash == null) _cash = await _loadData();
 
-    List<Wisdom> res = new List();
+    List<Wisdom> res = List();
     for (int i = 0; i < amount; i++) {
       res.add(_cash[_random.nextInt(_cash.length)]);
     }
@@ -35,7 +35,7 @@ class ApiSupplier implements Supplier<List<Wisdom>> {
     http.Response response = await http.get(_adviceURI);
     AdviceSlips adviceSlips = AdviceSlips.fromJson(json.decode(response.body));
 
-    List<Wisdom> wisdoms = new List();
+    List<Wisdom> wisdoms = List();
     adviceSlips.slips.forEach((slip) {
       wisdoms.add(slip.toWisdom());
     });

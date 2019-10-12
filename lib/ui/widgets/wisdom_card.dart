@@ -6,24 +6,19 @@ import 'package:share/share.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/blocs/favorite_event.dart';
 import 'package:wisgen/models/wisdom.dart';
-
-import '../ui_helper.dart';
-
+import 'package:wisgen/ui/widgets/loading_spinner.dart';
 
 ///Card View That displays a given Wisdom.
 ///Images are Loaded from the given URL once and then cashed.
 ///The Favorite Button Subscribes to the Global FavoriteBLoC to change it's appearance.
 ///The Button also Publishes Events to the FavoriteBLoC when it is pressed.
 class WisdomCard extends StatelessWidget {
-  static const double _smallPadding = 4;
-  static const double _largePadding = 8;
-  static const double _imageHeight = 300;
   static const double _cardElevation = 2;
   static const double _cardBorderRadius = 7;
 
-  final Wisdom wisdom;
+  final Wisdom _wisdom;
 
-  WisdomCard({Key key, this.wisdom}) : super(key: key);
+  WisdomCard(this._wisdom);
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +31,24 @@ class WisdomCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _image(context),
-          _content(context),
+          _Image(_wisdom.imgURL),
+          _Content(_wisdom),
         ],
       ),
     );
   }
+}
 
-  Widget _image(BuildContext context) {
+class _Image extends StatelessWidget {
+  static const double _imageHeight = 300;
+  const _Image(this._url);
+
+  final String _url;
+
+  @override
+  Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: wisdom.imgURL,
+      imageUrl: _url,
       fit: BoxFit.cover,
       height: _imageHeight,
       errorWidget: (context, url, error) => Container(
@@ -55,14 +58,21 @@ class WisdomCard extends StatelessWidget {
       placeholder: (context, url) => Container(
           alignment: Alignment(0.0, 0.0),
           height: _imageHeight,
-          child: new SpinKitCircle(
-            color: Theme.of(context).accentColor,
-            size: UiHelper.loadingAnimSize,
-          )),
+          child: LoadingSpinner(),
+      )
     );
   }
+}
 
-  Widget _content(BuildContext context) {
+class _Content extends StatelessWidget {
+  static const double _smallPadding = 4;
+  static const double _largePadding = 8;
+  final Wisdom _wisdom;
+
+  const _Content(this._wisdom);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: _largePadding, bottom: _largePadding),
       child: Row(
@@ -70,10 +80,10 @@ class WisdomCard extends StatelessWidget {
           Expanded(
               flex: 5,
               child: ListTile(
-                title: Text(wisdom.text),
+                title: Text(_wisdom.text),
                 subtitle: Container(
                     padding: EdgeInsets.only(top: _smallPadding),
-                    child: Text(wisdom.type + ' #' + '${wisdom.id}',
+                    child: Text(_wisdom.type + ' #' + '${_wisdom.id}',
                         textAlign: TextAlign.left)),
               )),
           Expanded(
@@ -82,25 +92,42 @@ class WisdomCard extends StatelessWidget {
               icon: Icon(Icons.share),
               color: Colors.grey,
               onPressed: () {
-                Share.share(wisdom.shareAsString());
+                Share.share(_wisdom.shareAsString());
               },
             ),
           ),
-          Expanded(
-            flex: 1,
-            //This is where we Subscribe to the FavoriteBLoC
-            child: BlocBuilder<FavoriteBloc, List<Wisdom>>(
-              builder: (context, favorites) => IconButton(
-                icon: Icon(favorites.contains(wisdom)
-                    ? Icons.favorite
-                    : Icons.favorite_border),
-                color: favorites.contains(wisdom) ? Colors.red : Colors.grey,
-                onPressed: () {_onLike(context,favorites);},
-                padding: EdgeInsets.only(right: _smallPadding),
-              ),
-            ),
-          )
+          _LikeButton(wisdom: _wisdom, smallPadding: _smallPadding)
         ],
+      ),
+    );
+  }
+
+}
+
+class _LikeButton extends StatelessWidget {
+  const _LikeButton({
+    Key key,
+    @required Wisdom wisdom,
+    @required double smallPadding,
+  }) : _wisdom = wisdom, _smallPadding = smallPadding, super(key: key);
+
+  final Wisdom _wisdom;
+  final double _smallPadding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      //This is where we Subscribe to the FavoriteBLoC
+      child: BlocBuilder<FavoriteBloc, List<Wisdom>>(
+        builder: (context, favorites) => IconButton(
+          icon: Icon(favorites.contains(_wisdom)
+              ? Icons.favorite
+              : Icons.favorite_border),
+          color: favorites.contains(_wisdom) ? Colors.red : Colors.grey,
+          onPressed: () {_onLike(context,favorites);},
+          padding: EdgeInsets.only(right: _smallPadding),
+        ),
       ),
     );
   }
@@ -110,10 +137,11 @@ class WisdomCard extends StatelessWidget {
   void _onLike(BuildContext context, List<Wisdom> favorites) {
     final FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
 
-    if (favorites.contains(wisdom)) {
-      favoriteBloc.dispatch(FavoriteEventRemove(wisdom));
+    if (favorites.contains(_wisdom)) {
+      favoriteBloc.dispatch(FavoriteEventRemove(_wisdom));
     } else {
-      favoriteBloc.dispatch(FavoriteEventAdd(wisdom));
+      favoriteBloc.dispatch(FavoriteEventAdd(_wisdom));
     }
   }
 }
+

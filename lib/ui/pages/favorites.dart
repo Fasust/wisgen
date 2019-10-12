@@ -16,11 +16,10 @@ class Favorites extends StatelessWidget {
           onHorizontalDragEnd: (DragEndDetails details) {
             _swipeNavigation(context, details);
           },
-          child: _listView(context),
+          child: _FavoriteList(),
         ));
   }
 
-  //UI-Elements ---
   AppBar _appBar(BuildContext context) {
     return AppBar(
       title: Text(
@@ -31,26 +30,41 @@ class Favorites extends StatelessWidget {
     );
   }
 
-  Widget _listView(BuildContext context) {
+  ///Navigation
+  void _swipeNavigation(BuildContext context, DragEndDetails details) {
+    if (details.primaryVelocity.compareTo(0) == 1) //left to right
+      Navigator.of(context).pop();
+  }
+}
+
+//Private Widgets -----------
+class _FavoriteList extends StatelessWidget {
+  const _FavoriteList({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     //Subscribing the ListView to the Favorite BLoC
     return BlocBuilder<FavoriteBloc, List<Wisdom>>(
         builder: (context, favorites) {
-      if (favorites.length == 0) return _emptyList(context);
+      if (favorites.length == 0) return _EmptyFavorites();
       return ListView.builder(
         padding: EdgeInsets.all(UiHelper.listPadding),
         itemBuilder: (context, i) {
           if (favorites.length > i) {
             Wisdom wisdom = favorites[i];
-            return WisdomCard(
-              wisdom: wisdom,
-            );
+            return WisdomCard(wisdom);
           }
         },
       );
     });
   }
-  
-  Widget _emptyList(BuildContext context) {
+}
+
+class _EmptyFavorites extends StatelessWidget {
+  const _EmptyFavorites({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Center(
           child: Text(
@@ -59,13 +73,7 @@ class Favorites extends StatelessWidget {
       )),
       //filling blank space with White background to register as dargable widget
       constraints: BoxConstraints.expand(),
-      color: Colors.white, 
+      color: Colors.white,
     );
-  }
-
-  ///Navigation
-  void _swipeNavigation(BuildContext context, DragEndDetails details) {
-    if (details.primaryVelocity.compareTo(0) == 1) //left to right
-      Navigator.of(context).pop();
   }
 }

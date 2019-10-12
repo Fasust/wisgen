@@ -24,7 +24,7 @@ enum StorageEvent {
 ///
 ///Used to keep a Persistent copy of the Favorite List on the Device
 class StorageBloc extends Bloc<StorageEvent, StorageState> {
-  Storage _storage = new SharedPreferenceStorage();
+  Storage _storage = SharedPreferenceStorage();
   FavoriteBloc _observedBloc;
 
   StorageBloc(this._observedBloc) {

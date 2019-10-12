@@ -16,7 +16,7 @@ class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
 
   //URI Generation
   static const int _minQueryWordLength = 4;
-  final RegExp _nonLetterPattern = new RegExp("[^a-zA-Z0-9]");
+  final RegExp _nonLetterPattern = RegExp("[^a-zA-Z0-9]");
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
   @override
