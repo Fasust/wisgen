@@ -1,18 +1,23 @@
 import 'package:flutter/widgets.dart';
 
-///Main Domain Class.
-///Can be converted into JSON & Generated from JSON.
+///Holds one pice of supreme [Wisdom].
+///
+///[Wisdom.id] is only unique in the scope of its [Wisdom.type].
+///[Wisdom.imgUrl] is not required ion creation, but can be injected later.
+///Can be converter to/ read from JSON.
+///Can generate a sharable String with [Wisdom.shareAsString()] to be send 
+///as a share intend.
 class Wisdom {
   final String text;
   final int id;
   final String type;
-  String imgURL;
+  String imgUrl;
 
   Wisdom({
     @required this.text,
     @required this.id,
     @required this.type,
-    this.imgURL,
+    this.imgUrl,
   });
 
   @override
@@ -24,14 +29,14 @@ class Wisdom {
         'text': text,
         'id': '$id',
         'type': type,
-        'imgURL': imgURL,
+        'imgURL': imgUrl,
       };
 
   Wisdom.fromJson(Map<String, dynamic> json)
       : id = int.parse(json['id']),
         text = json['text'],
         type = json['type'],
-        imgURL = json['imgURL'];
+        imgUrl = json['imgURL'];
 
   String shareAsString() {
     return
@@ -40,7 +45,7 @@ class Wisdom {
             text +
             "\"\n\n" +
             "Related Image: \n\n" +
-            imgURL +
+            imgUrl +
             "\n\n... Pretty Deep 🤔";
   }
 }

@@ -30,7 +30,7 @@ class WisdomCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _Image(_wisdom.imgURL),
+          _Image(_wisdom.imgUrl),
           _Content(_wisdom),
         ],
       ),

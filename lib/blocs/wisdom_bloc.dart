@@ -43,7 +43,7 @@ class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
 
     //Append the Img URLs
     wisdoms.forEach((w) {
-      w.imgURL = _generateImgURL(w);
+      w.imgUrl = _generateImgURL(w);
     });
 
     return wisdoms; //Appending the new Wisdoms to the current state
