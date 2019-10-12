@@ -6,7 +6,7 @@ import 'package:wisgen/repositories/supplier.dart';
 
 ///Repository that cashes a list of Wisdom form a local file in memory
 ///and then Provides a given amount of random entries.
-class LocalRepository implements Supplier<List<Wisdom>> {
+class LocalSupplier implements Supplier<List<Wisdom>> {
   static const _path = './assets/advice.txt';
   List<Wisdom> _cash;
   final Random _random = new Random();

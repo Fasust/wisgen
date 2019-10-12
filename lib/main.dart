@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context) => FavoriteBloc(),
       child: MaterialApp(
           routes: <String, WidgetBuilder>{
-            "/favorites": (context) => FavoriteList()
+            "/favorites": (context) => Favorites()
           },
           theme: ThemeData(
               primaryColor: Color.fromRGBO(56, 43, 115, 1),

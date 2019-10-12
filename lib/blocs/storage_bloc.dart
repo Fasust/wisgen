@@ -49,7 +49,7 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
     if (loaded == null || loaded.isEmpty) return;
 
     loaded.forEach((f) {
-      _observedBloc.dispatch(AddFavoriteEvent(f));
+      _observedBloc.dispatch(FavoriteEventAdd(f));
     });
   }
 

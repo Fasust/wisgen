@@ -9,10 +9,10 @@ import 'package:wisgen/data/local_supplier.dart';
 ///This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
 ///It then Generates an IMG URL and appends it to the Wisdom
 ///It Fetches Wisdoms in batches of 20 and Broadcasts the complete List
-class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
+class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
   //Fetching Wisdom
   static const int _fetchAmount = 20;
-  Supplier _repository = LocalRepository();
+  Supplier _repository = LocalSupplier();
 
   //URI Generation
   static const int _minQueryWordLength = 4;
@@ -20,21 +20,21 @@ class WisdomBloc extends Bloc<FetchEvent, WisdomState> {
   static const _imagesURI = 'https://source.unsplash.com/800x600/?';
 
   @override
-  WisdomState get initialState => IdleWisdomState(List());
+  WisdomState get initialState => WisdomStateIdle(List());
 
   @override
-  Stream<WisdomState> mapEventToState(FetchEvent event) async* {
+  Stream<WisdomState> mapEventToState(WisdomEventFetch event) async* {
     try {
 
-      if (currentState is IdleWisdomState)
-        yield IdleWisdomState((currentState as IdleWisdomState).wisdoms + await _getNewWisdoms(event));
+      if (currentState is WisdomStateIdle)
+        yield WisdomStateIdle((currentState as WisdomStateIdle).wisdoms + await _getNewWisdoms(event));
 
     } catch (e) {
-      yield ErrorWisdomState(e);
+      yield WisdomStateError(e);
     }
   }
 
-  Future<List<Wisdom>> _getNewWisdoms(FetchEvent event) async {
+  Future<List<Wisdom>> _getNewWisdoms(WisdomEventFetch event) async {
     final List<Wisdom> wisdoms =
         await _repository.fetch(_fetchAmount, event.context);
 

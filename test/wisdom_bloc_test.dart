@@ -45,12 +45,12 @@ void main() {
 
       List expectedStates = [
         //BLoC Library BLoCs emit their initial State on creation
-        IdleWisdomState(new List()), 
-        IdleWisdomState(fetchedWisdom)
+        WisdomStateIdle(new List()),
+        WisdomStateIdle(fetchedWisdom)
       ];
     
 			//Test
-			wisdomBloc.dispatch(FetchEvent(mockBuildContext));
+			wisdomBloc.dispatch(WisdomEventFetch(mockBuildContext));
 
 			//Result
       expect(wisdomBloc.state, emitsInOrder(expectedStates));

@@ -15,8 +15,8 @@ class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
   Stream<List<Wisdom>> mapEventToState(FavoriteEvent event) async* {
     List<Wisdom> newFavorites = new List()..addAll(currentState);
 
-    if (event is AddFavoriteEvent) newFavorites.add(event.favorite);
-    if (event is RemoveFavoriteEvent) newFavorites.remove(event.favorite);
+    if (event is FavoriteEventAdd) newFavorites.add(event.favorite);
+    if (event is FavoriteEventRemove) newFavorites.remove(event.favorite);
 
     yield newFavorites;
   }

@@ -18,7 +18,7 @@ class LoadingCard extends StatelessWidget {
             alignment: Alignment(0.0, 0.0),
             child: new SpinKitCircle(
               color: Theme.of(context).accentColor,
-              size: UIHelper.loadingAnimSize,
+              size: UiHelper.loadingAnimSize,
             )));
   }
 }

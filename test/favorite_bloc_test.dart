@@ -31,10 +31,10 @@ void main() {
       Wisdom wisdom3 = Wisdom(id: 3, text: "Travel while you're young", type: "Grandma's Advice");
 
       //Testing
-      favoriteBloc.dispatch(AddFavoriteEvent(wisdom1));
-      favoriteBloc.dispatch(AddFavoriteEvent(wisdom2));
-      favoriteBloc.dispatch(RemoveFavoriteEvent(wisdom1));
-      favoriteBloc.dispatch(AddFavoriteEvent(wisdom3));
+      favoriteBloc.dispatch(FavoriteEventAdd(wisdom1));
+      favoriteBloc.dispatch(FavoriteEventAdd(wisdom2));
+      favoriteBloc.dispatch(FavoriteEventRemove(wisdom1));
+      favoriteBloc.dispatch(FavoriteEventAdd(wisdom3));
 
       //Result
       expect( 

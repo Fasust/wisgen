@@ -57,7 +57,7 @@ class WisdomCard extends StatelessWidget {
           height: _imageHeight,
           child: new SpinKitCircle(
             color: Theme.of(context).accentColor,
-            size: UIHelper.loadingAnimSize,
+            size: UiHelper.loadingAnimSize,
           )),
     );
   }
@@ -111,9 +111,9 @@ class WisdomCard extends StatelessWidget {
     final FavoriteBloc favoriteBloc = BlocProvider.of<FavoriteBloc>(context);
 
     if (favorites.contains(wisdom)) {
-      favoriteBloc.dispatch(RemoveFavoriteEvent(wisdom));
+      favoriteBloc.dispatch(FavoriteEventRemove(wisdom));
     } else {
-      favoriteBloc.dispatch(AddFavoriteEvent(wisdom));
+      favoriteBloc.dispatch(FavoriteEventAdd(wisdom));
     }
   }
 }

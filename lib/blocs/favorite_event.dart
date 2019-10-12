@@ -11,10 +11,10 @@ abstract class FavoriteEvent {
   FavoriteEvent(this._favorite);
 }
 
-class AddFavoriteEvent extends FavoriteEvent {
-  AddFavoriteEvent(Wisdom favorite) : super(favorite);
+class FavoriteEventAdd extends FavoriteEvent {
+  FavoriteEventAdd(Wisdom favorite) : super(favorite);
 }
 
-class RemoveFavoriteEvent extends FavoriteEvent {
-  RemoveFavoriteEvent(Wisdom favorite) : super(favorite);
+class FavoriteEventRemove extends FavoriteEvent {
+  FavoriteEventRemove(Wisdom favorite) : super(favorite);
 }

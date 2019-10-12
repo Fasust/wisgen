@@ -38,7 +38,7 @@ class WisdomFeedState extends State<WisdomFeed>{
     _storageBloc = StorageBloc(BlocProvider.of<FavoriteBloc>(context));
 
     //Dispatch Initial Events
-    _wisdomBloc.dispatch(FetchEvent(context));
+    _wisdomBloc.dispatch(WisdomEventFetch(context));
     _storageBloc.dispatch(StorageEvent.load);
 
     _scrollController.addListener(_onScroll);
@@ -57,8 +57,8 @@ class WisdomFeedState extends State<WisdomFeed>{
           bloc: _wisdomBloc,
           builder: (context, WisdomState state) {
             //This is where we determine the State of the Wisdom BLoC
-            if (state is ErrorWisdomState) return _error(state);
-            if (state is IdleWisdomState) return _listView(context, state);
+            if (state is WisdomStateError) return _error(state);
+            if (state is WisdomStateIdle) return _listView(context, state);
 
             return _loading(context);
           },
@@ -87,30 +87,30 @@ class WisdomFeedState extends State<WisdomFeed>{
       backgroundColor: Theme.of(context).primaryColor,
       actions: <Widget>[
         IconButton(
-          iconSize: UIHelper.iconSize,
+          iconSize: UiHelper.iconSize,
           icon: Icon(
             Icons.list,
             color: Colors.white,
           ),
           onPressed: () {
             Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => FavoriteList()));
+                CupertinoPageRoute(builder: (context) => Favorites()));
           },
         )
       ],
     );
   }
 
-  Widget _error(ErrorWisdomState state) {
+  Widget _error(WisdomStateError state) {
     return Center(
       child: Text('We Got this Exception when trying to fetch our Wisdom:\n' +
           state.exception.toString()),
     );
   }
 
-  Widget _listView(BuildContext context, IdleWisdomState state) {
+  Widget _listView(BuildContext context, WisdomStateIdle state) {
     return ListView.builder(
-      padding: const EdgeInsets.all(UIHelper.listPadding),
+      padding: const EdgeInsets.all(UiHelper.listPadding),
       itemBuilder: (BuildContext context, int index) {
         return index >= state.wisdoms.length
             //This is where the Loading Inference is made.
@@ -127,7 +127,7 @@ class WisdomFeedState extends State<WisdomFeed>{
     return Center(
         child: SpinKitCircle(
       color: Theme.of(context).accentColor,
-      size: UIHelper.loadingAnimSize,
+      size: UiHelper.loadingAnimSize,
     ));
   }
 
@@ -135,7 +135,7 @@ class WisdomFeedState extends State<WisdomFeed>{
   void _swipeNavigation(BuildContext context, DragEndDetails details) {
     if (details.primaryVelocity.compareTo(0) == -1) //right to left
       Navigator.push(context,
-          CupertinoPageRoute(builder: (context) => FavoriteList()));
+          CupertinoPageRoute(builder: (context) => Favorites()));
   }
 
   ///Dispatching fetch events to the BLoC when we reach the end of the List
@@ -143,7 +143,7 @@ class WisdomFeedState extends State<WisdomFeed>{
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      _wisdomBloc.dispatch(FetchEvent(context));
+      _wisdomBloc.dispatch(WisdomEventFetch(context));
     }
   }
 }
