@@ -1,6 +1,6 @@
 # Wisgen 🔮
 
-A small Cross-Platform Wisdom Generato, built using [Flutter](https://flutter.dev/) and a combination of external APIs
+A small Cross-Platform Wisdom Generator, built using [Flutter](https://flutter.dev/) and a combination of external APIs
 
 This Wisdom Generator combines random advice from the the Internet with vaguely fitting and vaguely thought provoking stock images from the [Unsplash Source API](https://source.unsplash.com/). 
 You can also save bits of Wisdom you like in your _Favorites_ or share them with your friends.
