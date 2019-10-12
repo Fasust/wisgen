@@ -1,8 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:wisgen/models/wisdom.dart';
 
-///The Favorite BLoC can handle 2 types of Events: Add and Remove.
-///These events add and remove Wisdoms from the Favorite List respectively.
 @immutable
 abstract class FavoriteEvent {
   final Wisdom _favorite;
@@ -11,10 +9,12 @@ abstract class FavoriteEvent {
   FavoriteEvent(this._favorite);
 }
 
+///Adds a given [Wisdom] to the [FavoriteBloc] when dispatched
 class FavoriteEventAdd extends FavoriteEvent {
   FavoriteEventAdd(Wisdom favorite) : super(favorite);
 }
 
+///Removes a given [Wisdom] from the [FavoriteBloc] when dispatched
 class FavoriteEventRemove extends FavoriteEvent {
   FavoriteEventRemove(Wisdom favorite) : super(favorite);
 }

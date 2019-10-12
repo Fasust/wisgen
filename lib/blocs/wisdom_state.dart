@@ -2,12 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:wisgen/models/wisdom.dart';
 
-///The Wisdom BLoC has 2 States: Loaded and Error
-///We can infer it is loading when we are not reviving new items through the stream
 @immutable
 abstract class WisdomState extends Equatable {}
 
-///Broadcasted on Network Error
+///Broadcasted from [WisdomBloc] on Network Error.
 class WisdomStateError extends WisdomState {
   final Exception exception;
   WisdomStateError(this.exception);
@@ -16,10 +14,11 @@ class WisdomStateError extends WisdomState {
   List<Object> get props => [exception];
 }
 
-///Normal State that holds favorite list.
-///When BLoC receives a FetchEvent during this State, 
-///it fetched more wisdom and emits a new IdleSate 
-///with more wisdoms
+///Gives Access to current list of [Wisdom] s in the [WisdomBloc].
+///
+///When BLoC receives a [WisdomEventFetch] during this State, 
+///it fetches more [Wisdom] from it [Supplier]. 
+///When done it emits a new [IdleSate] with more [Wisdom].
 class WisdomStateIdle extends WisdomState {
   final List<Wisdom> wisdoms;
   WisdomStateIdle(this.wisdoms);

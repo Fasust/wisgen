@@ -4,9 +4,11 @@ import 'package:wisgen/models/wisdom.dart';
 
 import 'favorite_event.dart';
 
-///The FavoriteBLoC is Responsible for Keeping track of the
-///Favorite List. It receives Events to Add and remove Favorite
-///Wisdoms and Broadcasts the Complete List of Favorites.
+///Responsible for keeping track of the Favorite List. 
+///
+///Receives [FavoriteEvent] to add/remove favorite [Wisdom] objects 
+///from its list.
+///Broadcasts complete list of favorites every time it changes.
 class FavoriteBloc extends Bloc<FavoriteEvent, List<Wisdom>> {
   @override
   List<Wisdom> get initialState => List<Wisdom>();

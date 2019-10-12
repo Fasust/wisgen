@@ -7,23 +7,26 @@ import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/storage.dart';
 import 'package:wisgen/data/shared_preference_storage.dart';
 
-enum StorageState {
-  idle
-} //Because this BLoC doesn't need to emit Sate, I used a Single Enum
-enum StorageEvent {
-  load,
-  wipe
-} //Only 2 events that both don't need to carry additional data
+///Gives access to the 2 events the [StorageBloc] can receive.
+///
+///It is an enum, because the 2 events both don't need to carry additional data
+///[StorageEvent.load] tells the [StorageBloc] to load the 
+///favorite list from it [Storage]
+///[StorageEvent.wipe] tells the [StorageBloc] to wipe 
+///any favorites on the [Storage]
+enum StorageEvent { load, wipe }
 
-///The StorageBLoC is injected with a FavoriteBLoC on Creation.
-///It subscribes to the FavoriteBLoC and writes the Favorite List
-///to a given Storage device every time a new State is emitted by the FavoriteBLoC.
+///Responsible for keeping a persistent copy of the favorite list 
+///on it's [Storage].
 ///
-///When the StorageBLoC receives a load Event, it loads a list of Wisdoms from a given
-///Storage device and pipes it into the FavoriteBLoC
-///
-///Used to keep a Persistent copy of the Favorite List on the Device
-class StorageBloc extends Bloc<StorageEvent, StorageState> {
+///It is injected with a [FavoriteBLoC] on Creation.
+///It subscribes to the [FavoriteBLoC] and writes the favorite list to a 
+///its [Storage] device every time a new State is emitted by the [FavoriteBLoC].
+///When the [StorageBLoC] receives a StorageEvent.load, it loads a list of [Wisdom]s 
+///from a its [Storage] device and pipes it into the [FavoriteBLoC] though [FavoriteEventAdd]s
+///(This usually happens once on Start-up).
+///It's State is [dynamic] because it never needs to emit it.
+class StorageBloc extends Bloc<StorageEvent, dynamic> {
   Storage _storage = SharedPreferenceStorage();
   FavoriteBloc _observedBloc;
 
@@ -35,10 +38,10 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
   }
 
   @override
-  StorageState get initialState => StorageState.idle;
+  dynamic get initialState => dynamic;
 
   @override
-  Stream<StorageState> mapEventToState(StorageEvent event) async* {
+  Stream<dynamic> mapEventToState(StorageEvent event) async* {
     if (event == StorageEvent.load) await _load();
     if (event == StorageEvent.wipe) _storage.wipeStorage();
   }
@@ -53,7 +56,7 @@ class StorageBloc extends Bloc<StorageEvent, StorageState> {
     });
   }
 
-  //Injection
+  //Injection ---
   set storage(Storage storage) => _storage = storage;
   set observedBloc(FavoriteBloc observedBloc) => _observedBloc = observedBloc;
 }

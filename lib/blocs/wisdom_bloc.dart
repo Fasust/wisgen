@@ -6,9 +6,12 @@ import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/supplier.dart';
 import 'package:wisgen/data/local_supplier.dart';
 
-///This BLoC Is Responsible for Fetching Wisdoms from a given Source (Repository)
-///It then Generates an IMG URL and appends it to the Wisdom
-///It Fetches Wisdoms in batches of 20 and Broadcasts the complete List
+///Responsible for fetching [Wisdom]s from a given [Supplier].
+///
+///It fetches new [Wisdom]s (in batches of 20) when receiving a [WisdomFetchEvent].
+///It then Generates an IMG URL and appends it to the [Wisdom].
+///After the URL is appended, the entire list of [Wisdom] is broadcasted as
+///an [WisdomStateIdle].
 class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
   //Fetching Wisdom
   static const int _fetchAmount = 20;
@@ -25,10 +28,10 @@ class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
   @override
   Stream<WisdomState> mapEventToState(WisdomEventFetch event) async* {
     try {
-
-      if (currentState is WisdomStateIdle)
-        yield WisdomStateIdle((currentState as WisdomStateIdle).wisdoms + await _getNewWisdoms(event));
-
+      if (currentState is WisdomStateIdle) {
+        yield WisdomStateIdle((currentState as WisdomStateIdle).wisdoms +
+            await _getNewWisdoms(event));
+      }
     } catch (e) {
       yield WisdomStateError(e);
     }
@@ -41,8 +44,8 @@ class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
     //Append the Img URLs
     wisdoms.forEach((w) {
       w.imgURL = _generateImgURL(w);
-    }); 
-    
+    });
+
     return wisdoms; //Appending the new Wisdoms to the current state
   }
 
@@ -62,6 +65,6 @@ class WisdomBloc extends Bloc<WisdomEventFetch, WisdomState> {
     return query;
   }
 
-  //Injection
+  //Injection ---
   set repository(Supplier repository) => _repository = repository;
 }
