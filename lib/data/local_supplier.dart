@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/supplier.dart';
 
-///Repository that cashes a list of Wisdom form a local file in memory
+///[Supplier] that cashes a list of [Wisdom]s form a local file in memory
 ///and then Provides a given amount of random entries.
+///
+///[Wisdom]s Supplies do not have an Image URL
 class LocalSupplier implements Supplier<List<Wisdom>> {
   static const _path = './assets/advice.txt';
   List<Wisdom> _cash;

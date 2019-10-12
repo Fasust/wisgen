@@ -7,11 +7,13 @@ import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/repositories/supplier.dart';
 import 'package:http/http.dart' as http;
 
-///Repository that cashes data it fetches from an API and
-///then Provides a given amount of random entries.
+///[Supplier] that cashes [Wisdom]s it fetches from an API and
+///then provides a given amount of random entries.
+///
+///[Wisdom]s Supplies do not have an Image URL
 class ApiSupplier implements Supplier<List<Wisdom>> {
   ///Advice SLip API Query that requests all (~213) Text Entries from the API.
-  ///We fetch all entries ad once and cash them locally to minimize network traffic.
+  //////We fetch all entries at once and cash them locally to minimize network traffic.
   ///The Advice Slip API also does not provide the option to request a selected amount of entries.
   ///That's why I think this is the best approach.
   static const _adviceURI = 'https://api.adviceslip.com/advice/search/%20';
