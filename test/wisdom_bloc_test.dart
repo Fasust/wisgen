@@ -31,45 +31,29 @@ void main() {
     });
 
     test('Send Fetch Event and see if it emits correct wisdom', () {
+      //Set Up
       List<Wisdom> fetchedWisdom = [
-        Wisdom(id: 1, text: "This is a Wisdom", type: "any"),
-        Wisdom(id: 2, text: "This is a Wisdom", type: "any"),
-        Wisdom(id: 3, text: "This is a Wisdom", type: "any"),
+        Wisdom(id: 1, text: "Back up your Pictures", type: "tech"),
+        Wisdom(id: 2, text: "Wash your ears", type: "Mum's Advice"),
+        Wisdom(id: 3, text: "Travel while you're young", type: "Grandma's Advice")
       ];
 
+			when(mockRepository.fetch(20, mockBuildContext))
+				//Telling the Mock Repo how to behave
+				.thenAnswer((_) async => fetchedWisdom);
+
+
       List expectedStates = [
-        IdleWisdomState(new List()),
+        //BLoC Library BLoCs emit their initial State on creation
+        IdleWisdomState(new List()), 
         IdleWisdomState(fetchedWisdom)
       ];
+    
+			//Test
+			wisdomBloc.dispatch(FetchEvent(mockBuildContext));
 
-      when(mockRepository.fetch(20, mockBuildContext))
-          .thenAnswer((_) async => fetchedWisdom);
-
-      expectLater(wisdomBloc.state, emitsInOrder(expectedStates));
-
-      wisdomBloc.dispatch(FetchEvent(mockBuildContext));
-    });
-
-    test('Error on a null BuildContext', () {
-      List<Wisdom> fetchedWisdom = [
-        Wisdom(id: 1, text: "This is a Wisdom", type: "any"),
-        Wisdom(id: 2, text: "This is a Wisdom", type: "any"),
-        Wisdom(id: 3, text: "This is a Wisdom", type: "any"),
-      ];
-
-      Exception exception = NetworkImageLoadException(statusCode: 300, uri: Uri());
-
-      List expectedStates = [
-        IdleWisdomState(new List()),
-        ErrorWisdomState(exception)
-      ];
-
-      when(mockRepository.fetch(20, null))
-          .thenThrow(exception);
-
-      expectLater(wisdomBloc.state, emitsInOrder(expectedStates));
-
-      wisdomBloc.dispatch(FetchEvent(null));
+			//Result
+      expect(wisdomBloc.state, emitsInOrder(expectedStates));
     });
   });
 }
