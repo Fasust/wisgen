@@ -31,7 +31,7 @@ I used this project to understand how Flutter handles communication with the web
 ![Dependencies](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen_depencies.PNG)
 
 ## BLoC Architecture: Dataflow of Wisgen Components
-![Dependencies](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen_dataflow.png)
+![Data Flow](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen-dataflow.png)
 
 ## Used Packages 📦
 - flutter_bloc (for state handeling)
