@@ -5,7 +5,7 @@ import 'package:wisgen/repositories/storage.dart';
 
 ///[Storage] that gives access to Androids Shared Preferences 
 ///(a small, local, persistent key value store).
-class SharedPreferenceStorage implements Storage<Wisdom> {
+class SharedPreferenceStorage implements Storage<List<Wisdom>> {
   ///Key is used to access store
   static const String _sharedPrefKey = "wisgen_storage";
 

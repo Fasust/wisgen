@@ -1,7 +1,7 @@
-///Interface for a Generic List Provider
+///Generic Repository for read/write Storage device
 abstract class Storage<T>{
-  Future<List<T>> load();
-  save(List<T> data);
+  Future<T> load();
+  save(T data);
 
   ///Wipe the Storage Medium
   wipeStorage();
