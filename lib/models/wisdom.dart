@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 ///[Wisdom.id] is only unique in the scope of its [Wisdom.type].
 ///[Wisdom.imgUrl] is not required ion creation, but can be injected later.
 ///Can be converter to/ read from JSON.
-///Can generate a sharable String with [Wisdom.shareAsString()] to be send 
+///Can generate a sharable String with [Wisdom.shareAsString()] to be send
 ///as a share intend.
 class Wisdom {
   final String text;
@@ -38,14 +38,12 @@ class Wisdom {
         type = json['type'],
         imgUrl = json['imgURL'];
 
-  String shareAsString() {
-    return
-        "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" +
-            "\"" +
-            text +
-            "\"\n\n" +
-            "Related Image: \n\n" +
-            imgUrl +
-            "\n\n... Pretty Deep 🤔";
-  }
+  String shareAsString() =>
+      "Check out this peace of Wisdom I found using Wisgen 🔮:\n\n" 
+      "\"" +
+      text +
+      "\"\n\n" 
+      "Related Image: \n\n" +
+      imgUrl +
+      "\n\n... Pretty Deep 🤔";
 }
