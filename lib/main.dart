@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
-import 'package:wisgen/ui/page_favorites.dart';
-import 'package:wisgen/ui/page_wisdom_feed.dart';
+import 'package:wisgen/ui/pages/favorites.dart';
+import 'package:wisgen/ui/pages/wisdom_feed.dart';
 
 void main() => runApp(MyApp());
 

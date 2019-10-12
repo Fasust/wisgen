@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/ui/ui_helper.dart';
-import 'package:wisgen/ui/widgets/card_wisdom.dart';
+import 'package:wisgen/ui/widgets/wisdom_card.dart';
 
 ///Subscribes to Global FavoriteBLoC and Displays the Published
 ///Favorites as a ListView

@@ -7,10 +7,10 @@ import 'package:wisgen/blocs/storage_bloc.dart';
 import 'package:wisgen/blocs/wisdom_bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
-import 'package:wisgen/ui/pages/page_favorites.dart';
+import 'package:wisgen/ui/pages/favorites.dart';
 import 'package:wisgen/ui/ui_helper.dart';
-import 'package:wisgen/ui/widgets/card_loading.dart';
-import 'package:wisgen/ui/widgets/card_wisdom.dart';
+import 'package:wisgen/ui/widgets/loading_card.dart';
+import 'package:wisgen/ui/widgets/wisdom_card.dart';
 
 ///Subscribes to the WisdomBLoC to generate its ListView.
 ///Sets of the WisdomBLoC by dispatching an initial FetchEvent.

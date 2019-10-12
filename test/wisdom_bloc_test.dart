@@ -5,9 +5,9 @@ import 'package:wisgen/blocs/wisdom_bloc.dart';
 import 'package:wisgen/blocs/wisdom_event.dart';
 import 'package:wisgen/blocs/wisdom_state.dart';
 import 'package:wisgen/models/wisdom.dart';
-import 'package:wisgen/repositories/repository.dart';
+import 'package:wisgen/repositories/supplier.dart';
 
-class MockRepository extends Mock implements Repository<Wisdom> {}
+class MockRepository extends Mock implements Supplier<List<Wisdom>> {}
 
 class MockBuildContext extends Mock implements BuildContext {}
 
