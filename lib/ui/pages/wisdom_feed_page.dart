@@ -12,21 +12,25 @@ import 'package:wisgen/ui/widgets/error_text.dart';
 import 'package:wisgen/ui/widgets/loading_spinner.dart';
 import 'package:wisgen/ui/widgets/wisdom_list.dart';
 
-///Subscribes to the WisdomBLoC to generate its ListView.
-///Sets of the WisdomBLoC by dispatching an initial FetchEvent.
-///Sets up the StorageBLoC and links it to the Globally Provided FavoritesBLoC.
+///Displays an infinite list of [Wisdom]s.
+///
+///Subscribes to the [WisdomBLoC] to generate its ListView.
+///Sets of the [WisdomBLoC] by dispatching an initial [WisdomEventFetch].
+///Sends a new [WisdomEventFetch] whenever the user scrolls close to the
+///bottom of the list.
+///Sets up the [StorageBLoC] and links it to the Globally Provided [FavoritesBLoC].
 class WisdomFeedPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => WisdomFeedPageState();
 }
 
 class WisdomFeedPageState extends State<WisdomFeedPage> {
-  //Wisdom & Storage BLoC are Local because we only use
-  //them inside this View
+  //[WisdomBloc] & [StorageBloc] are Local because we only use
+  //them inside this widget.
   WisdomBloc _wisdomBloc;
   StorageBloc _storageBloc;
 
-  //We Tell the WisdomBLoC to fetch more data based on how far we have scrolled down
+  //We tell the [WisdomBLoC] to fetch more data based on how far we have scrolled down
   //the list. That is why we need this Controller
   final _scrollController = ScrollController();
   static const _scrollThreshold = 200.0;
@@ -107,7 +111,7 @@ class WisdomFeedPageState extends State<WisdomFeedPage> {
           context, CupertinoPageRoute(builder: (context) => FavoritesPage()));
   }
 
-  ///Dispatching fetch events to the BLoC when we reach the end of the List
+  ///Dispatching [WisdomEventFetch] to the [WisdomBloc] when we reach the end of the List
   void _onScroll() {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;

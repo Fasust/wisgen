@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:wisgen/ui/widgets/favorite_list.dart';
-///Subscribes to Global FavoriteBLoC and Displays the Published
-///Favorites as a ListView
+
+///Casing around the [FavoriteList].
+///
+///Handles [AppBar] & Swipe Navigation
 class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: _appBar(context),
         body: GestureDetector(
-          onHorizontalDragEnd: (DragEndDetails details) {
-            _swipeNavigation(context, details);
-          },
+          onHorizontalDragEnd: (DragEndDetails details) =>
+              _swipeNavigation(context, details),
           child: FavoriteList(),
         ));
   }
@@ -31,5 +32,3 @@ class FavoritesPage extends StatelessWidget {
       Navigator.of(context).pop();
   }
 }
-
-

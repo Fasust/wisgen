@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:wisgen/ui/widgets/loading_spinner.dart';
 
 
-///A Loading animation with (around) the same height as a 
-///WisdomCard that can be loaded into a list.
-///WisdomCards do not have a fixed height, so we have to approximate
+///A Loading animation on [Card]
+///
+///It is (around) the same height as a [WisdomCard], so a list of
+///[WisdomCard]s and [LoadingCard]s wont jump around 
+///when one is swapped for the other.
+///[WisdomCard]s do not have a fixed height, so we have to approximate
 class LoadingCard extends StatelessWidget {
   static const double _height = 350;
 

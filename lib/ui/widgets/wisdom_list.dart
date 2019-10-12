@@ -5,6 +5,7 @@ import 'package:wisgen/ui/widgets/wisdom_card.dart';
 import '../ui_helper.dart';
 import 'loading_card.dart';
 
+///Displays a given list of [Wisdom]s.
 class WisdomList extends StatelessWidget {
   final List<Wisdom> _wisdoms;
   final ScrollController _scrollController;

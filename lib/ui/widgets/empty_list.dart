@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///Page that informs the user, that there is nothing to see here
 class EmptyList extends StatelessWidget {
   const EmptyList({Key key}) : super(key: key);
 

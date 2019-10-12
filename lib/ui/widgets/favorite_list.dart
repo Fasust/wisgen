@@ -7,6 +7,10 @@ import 'package:wisgen/ui/widgets/wisdom_card.dart';
 import '../ui_helper.dart';
 import 'empty_list.dart';
 
+///Display a list of all favorite [Wisdom]s.
+///
+///Subscribes to global [FavoriteBLoC] and displays the published
+///Favorites as a ListView
 class FavoriteList extends StatelessWidget {
   const FavoriteList({Key key}) : super(key: key);
 

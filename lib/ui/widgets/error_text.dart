@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///Text Displaying the given [Exception].
 class ErrorText extends StatelessWidget {
   final Exception _exception;
   const ErrorText(this._exception);

@@ -7,10 +7,14 @@ import 'package:wisgen/blocs/favorite_event.dart';
 import 'package:wisgen/models/wisdom.dart';
 import 'package:wisgen/ui/widgets/loading_spinner.dart';
 
-///Card View That displays a given Wisdom.
-///Images are Loaded from the given URL once and then cashed.
-///The Favorite Button Subscribes to the Global FavoriteBLoC to change it's appearance.
-///The Button also Publishes Events to the FavoriteBLoC when it is pressed.
+///Displays a given [Wisdom].
+///
+///Images are Loaded from the given [Wisdom.imgUrl] once and then cashed.
+///All [Wisdom]s displayed in a [WisdomCard] *have* to contain an imgUrl.
+///The [_LikeButton] Subscribes to the Global [FavoriteBLoC] to change it's appearance
+///based on on its current state.
+///The Button also publishes [FavoriteEventAdd]/[FavoriteEventRemove] to 
+///the [FavoriteBLoC] when it is pressed.
 class WisdomCard extends StatelessWidget {
   static const double _cardElevation = 2;
   static const double _cardBorderRadius = 7;
@@ -38,6 +42,7 @@ class WisdomCard extends StatelessWidget {
   }
 }
 
+///[CachedNetworkImage] with formating and loading animation
 class _Image extends StatelessWidget {
   static const double _imageHeight = 300;
   const _Image(this._url);
@@ -63,6 +68,8 @@ class _Image extends StatelessWidget {
   }
 }
 
+///Displays [Wisdom.text], [Wisdom.type], [Wisdom.id] and
+///a [_LikeButton]
 class _Content extends StatelessWidget {
   static const double _smallPadding = 4;
   static const double _largePadding = 8;
@@ -103,6 +110,8 @@ class _Content extends StatelessWidget {
 
 }
 
+///Display if a given [Wisdom] is a favorite and gives the option 
+///to change that fact.
 class _LikeButton extends StatelessWidget {
   const _LikeButton({
     Key key,
