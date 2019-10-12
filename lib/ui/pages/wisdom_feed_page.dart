@@ -119,6 +119,7 @@ class WisdomFeedState extends State<WisdomFeed> {
     }
   }
 }
+
 //Private Widgets -----------
 class _WisdomList extends StatelessWidget {
   final List<Wisdom> _wisdoms;
