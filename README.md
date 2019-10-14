@@ -3,7 +3,7 @@
 A small Cross-Platform Wisdom Generator, built using [Flutter](https://flutter.dev/) and a combination of external APIs
 
 This Wisdom Generator combines random advice from the the Internet with vaguely fitting and vaguely thought provoking stock images from the [Unsplash Source API](https://source.unsplash.com/). 
-You can also save bits of Wisdom you like in your _Favorites_ or share them with your friends.
+You can also save bits of wisdom you like in your _favorites_ or share them with your friends.
 
 
 
@@ -41,6 +41,10 @@ I used this project to understand how Flutter handles communication with the web
 - shared_preferences (for accessing shared preferences as offline storage)
 - flutter_spinkit (loading animation)
 - share (for sending _share-intents_)
+
+## Used Tools 🛠
+- [Draw.io for the diagramms](https://www.draw.io/)
+- [JSON to Dart Generator to create POJO/DOJO classes](https://javiercbk.github.io/json_to_dart/)
  
 ## Some Sources I can recommend 📚
 - [The Origin of the BLoC Pattern](https://www.youtube.com/watch?v=PLHln7wHgPE)
