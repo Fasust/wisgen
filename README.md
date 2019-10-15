@@ -1,7 +1,6 @@
 # Wisgen 🔮
 ![last-commit badge](https://img.shields.io/github/last-commit/fasust/wisgen.svg?style=flat-square)
 ![contributors badge](https://img.shields.io/github/contributors/fasust/wisgen.svg?style=flat-square)
-![contributors badge](https://img.shields.io/github/commit-activity/m/fasust/wisgen?style=flat-square)
 ![contributors badge](https://img.shields.io/github/forks/fasust/wisgen?label=Fork&style=social)
 ![contributors badge](https://img.shields.io/github/stars/fasust/wisgen?style=social)
 
