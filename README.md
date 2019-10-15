@@ -1,4 +1,9 @@
 # Wisgen 🔮
+![last-commit badge](https://img.shields.io/github/last-commit/fasust/wisgen.svg?style=flat-square)
+![contributors badge](https://img.shields.io/github/contributors/fasust/wisgen.svg?style=flat-square)
+![contributors badge](https://img.shields.io/github/commit-activity/m/fasust/wisgen?style=flat-square)
+![contributors badge](https://img.shields.io/github/forks/fasust/wisgen?label=Fork&style=social)
+![contributors badge](https://img.shields.io/github/stars/fasust/wisgen?style=social)
 
 A small Cross-Platform Wisdom Generator, built using [Flutter](https://flutter.dev/) and a combination of external APIs
 
@@ -32,7 +37,6 @@ I used this project to understand how Flutter handles communication with the web
 
 ## BLoC Architecture: Dataflow of Wisgen Components
 ![Data Flow](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen-dataflow.png)
-
 ## Used Packages 📦
 - flutter_bloc (for state handeling)
 - http (for API calls)
