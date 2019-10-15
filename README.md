@@ -1,8 +1,9 @@
 # Wisgen 🔮
 ![last-commit badge](https://img.shields.io/github/last-commit/fasust/wisgen.svg?style=flat-square)
 ![contributors badge](https://img.shields.io/github/contributors/fasust/wisgen.svg?style=flat-square)
-![contributors badge](https://img.shields.io/github/forks/fasust/wisgen?label=Fork&style=social)
-![contributors badge](https://img.shields.io/github/stars/fasust/wisgen?style=social)
+![wisdom badge](https://img.shields.io/badge/wisdom%20contributions-welcome-blueviolet?style=flat-square)
+![fork badge](https://img.shields.io/github/forks/fasust/wisgen?label=Fork&style=social)
+![star badge](https://img.shields.io/github/stars/fasust/wisgen?style=social)
 
 A small Cross-Platform Wisdom Generator, built using [Flutter](https://flutter.dev/) and a combination of external APIs
 
