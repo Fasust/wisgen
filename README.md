@@ -38,7 +38,7 @@ I used this project to understand how Flutter handles communication with the web
 ## BLoC Architecture: Dataflow of Wisgen Components
 ![Data Flow](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen-dataflow.png)
 
- # Publications 🏆
+## Publications 🏆
 Wisgen has been published as a reference project by:
 - [Flutter Awesome](https://flutterawesome.com/a-cross-platform-wisdom-generator-built-with-flutter/)
 - [Biblioteca Flutter](http://bibliotecaflutter.com.br/um-gerador-de-sabedoria-de-plataforma-cruzada-construido-com-flutter/)
