@@ -10,9 +10,7 @@ A small Cross-Platform Wisdom Generator, built using [Flutter](https://flutter.d
 This Wisdom Generator combines random advice from the the Internet with vaguely fitting and vaguely thought provoking stock images from the [Unsplash Source API](https://source.unsplash.com/). 
 You can also save bits of wisdom you like in your _favorites_ or share them with your friends.
 
-
-
-| ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-1.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-2.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/mock-feed-3.png) |
+| ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/playstore/play-store-screen-1.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/playstore/play-store-screen-2.png) | ![Phone Mock of Wisdom Feed](https://github.com/Fasust/wisgen/blob/master/.additional_material/playstore/play-store-screen-3.png) |
 | -------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------: |
 
 ## Where do I get the Wisdoms from?
@@ -30,7 +28,8 @@ You can suggest your own pieces of Wisdom a through Pull Request if you want. Th
 I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handles _state_ and how to transfer that _state_ over multiple classes within the Widget Tree.
 
 ## Download
-[Android APK 📲](https://github.com/Fasust/wisgen/releases)
+- [Wisgen in the PlayStore 📲](https://play.google.com/store/apps/details?id=faust.freetime.wisgen)
+- [Android APK](https://github.com/Fasust/wisgen/releases) on GitHub
 
 ## BLoC Architecture: Dependencies of Wisgen Components
 ![Dependencies](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen_depencies.PNG)
