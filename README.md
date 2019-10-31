@@ -21,13 +21,13 @@ You can also save bits of wisdom you like in your _favorites_ or share them with
 - [InkTank](https://inktank.fi/28-of-the-best-pieces-of-advice-about-life-youll-ever-read/)
 - [Life Hacks](https://www.lifehack.org/articles/lifestyle/50-life-lessons-that-people-arent-told-about.html)
 - [Parent's Words of Wisdom](https://www.huffpost.com/entry/parents-words-of-wisdom_b_5598671)
-- And a few Bits of my own Wisdom
+- And a few bits of my own Wisdom
 
 ### Wanna Contribute? 👪
-You can suggest your own peaces of Wisdom a through Pull Request if you want. This is where all the [offline wisdoms](https://github.com/Fasust/wisgen/blob/master/assets/advice.txt) are saved. The "#" markes the beginning of new _type_ of Wisdom.
+You can suggest your own pieces of Wisdom a through Pull Request if you want. This is where all the [offline wisdoms](https://github.com/Fasust/wisgen/blob/master/assets/advice.txt) are saved. The "#" marks the beginning of a new _type_ of wisdom.
 
 ## Purpose of Wisgen
-I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handels _state_ and how to transfer that _state_ over multiple classes withing the Widget Tree.
+I used this project to understand how Flutter handles communication with the web and how it implements asynchronous calls. I also got the chance to better understand how Flutter handles _state_ and how to transfer that _state_ over multiple classes within the Widget Tree.
 
 ## Download
 [Android APK 📲](https://github.com/Fasust/wisgen/releases)
