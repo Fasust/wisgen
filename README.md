@@ -28,7 +28,7 @@ You can suggest your own pieces of Wisdom a through Pull Request if you want. Th
 
 ## Download
 - [Wisgen in the PlayStore 📲](https://play.google.com/store/apps/details?id=faust.freetime.wisgen)
-- [Android APK](https://github.com/Fasust/wisgen/releases) on GitHub
+- [Android APK on GitHub :octocat:](https://github.com/Fasust/wisgen/releases) 
 
 ## BLoC Architecture: Dependencies of Wisgen Components
 ![Dependencies](https://github.com/Fasust/wisgen/blob/master/.additional_material/architecture/wisgen_depencies.PNG)
