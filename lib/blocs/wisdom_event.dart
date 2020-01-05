@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 ///
 ///Some sources of [Wisdom] may need a [BuildContext] to be
 ///accessed, that's why it's a parameter.
+@immutable
 class WisdomEventFetch{
   final BuildContext context;
   WisdomEventFetch(this.context);

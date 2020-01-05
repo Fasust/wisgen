@@ -6,6 +6,7 @@ import 'package:wisgen/models/wisdom.dart';
 abstract class WisdomState extends Equatable {}
 
 ///Broadcasted from [WisdomBloc] on Network Error.
+@immutable
 class WisdomStateError extends WisdomState {
   final Exception exception;
   WisdomStateError(this.exception);
@@ -19,6 +20,7 @@ class WisdomStateError extends WisdomState {
 ///When BLoC receives a [WisdomEventFetch] during this State, 
 ///it fetches more [Wisdom] from it [Supplier]. 
 ///When done it emits a new [IdleSate] with more [Wisdom].
+@immutable
 class WisdomStateIdle extends WisdomState {
   final List<Wisdom> wisdoms;
   WisdomStateIdle(this.wisdoms);
