@@ -21,9 +21,7 @@ class Wisdom {
   });
 
   @override
-  String toString() {
-    return '$id' + ": " + text;
-  }
+  String toString() => '$type: $id';
 
   Map<String, dynamic> toJson() => {
         'text': text,

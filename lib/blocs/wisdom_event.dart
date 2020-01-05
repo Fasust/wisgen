@@ -8,4 +8,7 @@ import 'package:flutter/widgets.dart';
 class WisdomEventFetch{
   final BuildContext context;
   WisdomEventFetch(this.context);
+
+   @override
+  String toString() => 'Fetch';
 }

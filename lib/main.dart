@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wisgen/blocs/favorite_bloc.dart';
+import 'package:wisgen/blocs/loging_bloc_delegate.dart';
 import 'package:wisgen/ui/pages/favorites_page.dart';
 import 'package:wisgen/ui/pages/wisdom_feed_page.dart';
+import 'package:bloc/bloc.dart';
 
-void main() => runApp(MyApp());
+void main() {
+   //Logging
+  BlocSupervisor.delegate = LogingBlocDelegate();
+
+  runApp(Wisgen());
+}
 
 ///Sets Global Theme, Sets Navigation Routes,
 ///and Publishes the [FavoriteBloc] globally.
-class MyApp extends StatelessWidget {
+class Wisgen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Globally Providing the Favorite BLoC as it is needed on multiple pages

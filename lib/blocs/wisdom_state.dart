@@ -13,6 +13,9 @@ class WisdomStateError extends WisdomState {
 
   @override
   List<Object> get props => [exception];
+
+   @override
+  String toString() => 'Error/${exception.toString()}';
 }
 
 ///Gives Access to current list of [Wisdom] s in the [WisdomBloc].
@@ -27,6 +30,9 @@ class WisdomStateIdle extends WisdomState {
 
   @override
   List<Object> get props => wisdoms;
+
+   @override
+  String toString() => 'Idle/With ${wisdoms.length} wisdoms';
 }
 
 
